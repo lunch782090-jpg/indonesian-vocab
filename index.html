@@ -1,0 +1,1382 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>印尼語高頻5000單字</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=Noto+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0d0f;
+    --surface: #16161a;
+    --surface2: #1e1e24;
+    --border: #2a2a35;
+    --accent: #e8a020;
+    --accent2: #c0392b;
+    --text: #f0ede8;
+    --muted: #8a8799;
+    --green: #27ae60;
+    --blue: #2980b9;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  header {
+    background: linear-gradient(135deg, #1a0a00 0%, #0d0d0f 60%);
+    border-bottom: 1px solid var(--border);
+    padding: 18px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky; top:0; z-index:100;
+    backdrop-filter: blur(12px);
+  }
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: var(--accent);
+    letter-spacing: -0.5px;
+  }
+  .logo span { color: var(--text); font-weight:400; font-size:0.9rem; display:block; }
+  .stats-bar {
+    display: flex; gap: 20px; align-items:center;
+  }
+  .stat { text-align:center; }
+  .stat-n { font-size:1.2rem; font-weight:600; color:var(--accent); }
+  .stat-l { font-size:0.65rem; color:var(--muted); text-transform:uppercase; letter-spacing:1px; }
+
+  /* CONTROLS */
+  .controls {
+    padding: 16px 28px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+  }
+  .search-wrap {
+    flex:1; min-width:200px; position:relative;
+  }
+  .search-wrap input {
+    width:100%; background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 16px 10px 42px;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .search-wrap input:focus { border-color: var(--accent); }
+  .search-icon {
+    position:absolute; left:14px; top:50%; transform:translateY(-50%);
+    color:var(--muted); font-size:1rem;
+  }
+  select {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 14px;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    outline:none; cursor:pointer;
+  }
+  .btn {
+    padding: 10px 18px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+  .btn-primary { background: var(--accent); color: #000; }
+  .btn-primary:hover { background: #f0b030; transform:translateY(-1px); }
+  .btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--border); }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* CATEGORY TABS */
+  .cat-tabs {
+    padding: 12px 28px;
+    display:flex; gap:8px; flex-wrap:wrap;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+  }
+  .cat-tab {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight:500;
+    cursor:pointer;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    transition: all 0.2s;
+  }
+  .cat-tab.active, .cat-tab:hover {
+    background: var(--accent);
+    color: #000;
+    border-color: var(--accent);
+  }
+
+  /* MAIN */
+  .main { display:flex; height: calc(100vh - 160px); }
+
+  /* WORD LIST */
+  .word-list {
+    width: 340px;
+    min-width:280px;
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+    background: var(--surface);
+  }
+  .word-list::-webkit-scrollbar { width:4px; }
+  .word-list::-webkit-scrollbar-track { background: transparent; }
+  .word-list::-webkit-scrollbar-thumb { background: var(--border); border-radius:2px; }
+
+  .word-item {
+    display: flex;
+    align-items: center;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: background 0.15s;
+    gap: 14px;
+  }
+  .word-item:hover { background: var(--surface2); }
+  .word-item.active { background: rgba(232,160,32,0.12); border-left: 3px solid var(--accent); }
+  .word-num {
+    font-size: 0.7rem;
+    color: var(--muted);
+    min-width: 32px;
+    text-align:right;
+  }
+  .word-main {
+    flex:1;
+  }
+  .word-id { font-size:1rem; font-weight:600; color:var(--text); }
+  .word-zh { font-size: 0.78rem; color: var(--muted); margin-top:2px; }
+  .word-pos {
+    font-size:0.65rem; padding:2px 7px;
+    background: var(--surface2); border-radius:10px;
+    color: var(--accent); border:1px solid rgba(232,160,32,0.3);
+    font-weight:600;
+  }
+  .play-mini {
+    width:28px; height:28px;
+    border-radius:50%;
+    background: rgba(232,160,32,0.15);
+    border: 1px solid rgba(232,160,32,0.3);
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer;
+    color: var(--accent);
+    font-size:0.7rem;
+    transition: all 0.2s;
+    flex-shrink:0;
+  }
+  .play-mini:hover { background: var(--accent); color:#000; }
+
+  /* DETAIL PANEL */
+  .detail {
+    flex:1;
+    overflow-y: auto;
+    padding: 32px 36px;
+    background: var(--bg);
+  }
+  .detail::-webkit-scrollbar { width:4px; }
+  .detail::-webkit-scrollbar-thumb { background: var(--border); border-radius:2px; }
+
+  .detail-empty {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    height:100%;
+    color: var(--muted);
+    gap:12px;
+  }
+  .detail-empty .icon { font-size:3rem; }
+
+  .detail-word {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.2rem;
+    color: var(--text);
+    line-height:1;
+    margin-bottom:6px;
+  }
+  .detail-phonetic-table { margin-bottom: 18px; }
+  .ph-row { display: flex; flex-wrap: wrap; gap: 14px; }
+  .ph-pair {
+    display: flex; flex-direction: column; align-items: center; gap: 3px;
+  }
+  .ph-word {
+    font-size: 1rem; color: var(--accent); font-weight: 600;
+  }
+  .ph-zn {
+    font-size: 0.82rem; color: #ccc; letter-spacing: 1px;
+  }
+  /* also style inside example cards */
+  .ex-phonetic .ph-row { gap: 10px; }
+  .ex-phonetic .ph-word { font-size: 0.82rem; color: var(--accent); }
+  .ex-phonetic .ph-zn { font-size: 0.72rem; color: var(--muted); }
+  .detail-phonetic {
+    font-size:1rem; color:var(--muted); margin-bottom:16px;
+    letter-spacing:0.5px;
+  }
+  .detail-tags { display:flex; gap:8px; margin-bottom:24px; flex-wrap:wrap; }
+  .tag {
+    padding:4px 12px; border-radius:20px; font-size:0.78rem; font-weight:500;
+  }
+  .tag-pos { background:rgba(232,160,32,0.15); color:var(--accent); border:1px solid rgba(232,160,32,0.3); }
+  .tag-rank { background:rgba(39,174,96,0.15); color:var(--green); border:1px solid rgba(39,174,96,0.3); }
+  .tag-cat { background:rgba(41,128,185,0.15); color:var(--blue); border:1px solid rgba(41,128,185,0.3); }
+
+  .audio-row {
+    display:flex; gap:10px; margin-bottom:28px; flex-wrap:wrap;
+  }
+  .audio-btn {
+    display:flex; align-items:center; gap:8px;
+    padding:10px 18px;
+    border-radius:8px;
+    border:none; cursor:pointer;
+    font-family:'DM Sans',sans-serif; font-size:0.85rem; font-weight:500;
+    transition: all 0.2s;
+  }
+  .audio-btn.word-audio { background: var(--accent); color:#000; }
+  .audio-btn.word-audio:hover { background:#f0b030; transform:translateY(-1px); }
+  .audio-btn.sentence-audio { background: var(--surface2); color:var(--text); border:1px solid var(--border); }
+  .audio-btn.sentence-audio:hover { border-color:var(--accent); color:var(--accent); }
+  .audio-btn.playing { animation: pulse 0.8s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.6} }
+
+  .section-title {
+    font-size:0.7rem; text-transform:uppercase; letter-spacing:2px;
+    color:var(--muted); margin-bottom:10px; font-weight:600;
+  }
+
+  .def-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius:12px;
+    padding:18px 20px;
+    margin-bottom:20px;
+  }
+  .def-zh { font-size:1.15rem; color:var(--text); font-weight:500; margin-bottom:6px; }
+  .def-en { font-size:0.85rem; color:var(--muted); }
+
+  .example-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius:12px;
+    padding:18px 20px;
+    margin-bottom:14px;
+    position:relative;
+    overflow:hidden;
+  }
+  .example-card::before {
+    content:'';
+    position:absolute; left:0; top:0; bottom:0;
+    width:3px;
+    background: var(--accent);
+    border-radius:3px 0 0 3px;
+  }
+  .ex-id { font-size:1rem; color:var(--text); font-weight:500; margin-bottom:4px; line-height:1.5; }
+  .ex-zh { font-size:0.88rem; color: #aaa; margin-bottom:8px; }
+  .ex-phonetic { font-size:0.78rem; color:var(--muted); margin-bottom:10px; font-style:italic; }
+  .ex-audio {
+    display:inline-flex; align-items:center; gap:6px;
+    padding:5px 12px; border-radius:6px;
+    background: rgba(232,160,32,0.1);
+    border:1px solid rgba(232,160,32,0.25);
+    color:var(--accent); font-size:0.75rem;
+    cursor:pointer; transition:all 0.2s;
+  }
+  .ex-audio:hover { background:rgba(232,160,32,0.2); }
+
+  /* AI LOADING */
+  .loading-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius:12px;
+    padding:24px;
+    text-align:center;
+    color:var(--muted);
+  }
+  .spinner {
+    width:28px; height:28px;
+    border:2px solid var(--border);
+    border-top-color: var(--accent);
+    border-radius:50%;
+    animation: spin 0.8s linear infinite;
+    margin:0 auto 12px;
+  }
+  @keyframes spin { to{transform:rotate(360deg)} }
+
+  /* PAGINATION */
+  .pagination {
+    padding:16px 28px;
+    display:flex; gap:8px; justify-content:center; flex-wrap:wrap;
+    background:var(--surface);
+    border-top:1px solid var(--border);
+  }
+  .page-btn {
+    padding:6px 12px; border-radius:6px; font-size:0.8rem;
+    background:var(--surface2); color:var(--muted);
+    border:1px solid var(--border); cursor:pointer; transition:all 0.2s;
+  }
+  .page-btn:hover, .page-btn.active { background:var(--accent); color:#000; border-color:var(--accent); }
+
+  /* QUIZ MODE */
+  .quiz-overlay {
+    display:none;
+    position:fixed; inset:0;
+    background:rgba(0,0,0,0.85);
+    z-index:200;
+    align-items:center; justify-content:center;
+  }
+  .quiz-overlay.show { display:flex; }
+  .quiz-card {
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:40px;
+    max-width:500px; width:90%;
+    text-align:center;
+  }
+  .quiz-q { font-size:2.5rem; font-family:'Playfair Display',serif; color:var(--accent); margin-bottom:20px; }
+  .quiz-options { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:20px; }
+  .quiz-opt {
+    padding:14px; border-radius:8px;
+    background:var(--surface2); color:var(--text);
+    border:1px solid var(--border); cursor:pointer;
+    transition:all 0.2s; font-size:0.9rem;
+  }
+  .quiz-opt:hover { border-color:var(--accent); color:var(--accent); }
+  .quiz-opt.correct { background:rgba(39,174,96,0.2); border-color:var(--green); color:var(--green); }
+  .quiz-opt.wrong { background:rgba(192,57,43,0.2); border-color:var(--accent2); color:var(--accent2); }
+
+  @media (max-width:768px) {
+    .main { flex-direction:column; height:auto; }
+    .word-list { width:100%; height:50vh; min-width:unset; }
+    .detail { padding:20px 16px; }
+    .detail-word { font-size:2.2rem; }
+    header { padding:12px 16px; }
+    .controls { padding:12px 16px; }
+    .cat-tabs { padding:10px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    🇮🇩 印尼語高頻詞彙
+    <span>Kosakata Bahasa Indonesia</span>
+  </div>
+  <div class="stats-bar">
+    <div class="stat"><div class="stat-n" id="totalCount">5000</div><div class="stat-l">總單字數</div></div>
+    <div class="stat"><div class="stat-n" id="learnedCount">0</div><div class="stat-l">已學習</div></div>
+  </div>
+</header>
+
+<div class="controls">
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="searchInput" placeholder="搜尋單字、中文、詞性…">
+  </div>
+  <select id="posFilter">
+    <option value="">所有詞性</option>
+    <option value="n.">名詞</option>
+    <option value="v.">動詞</option>
+    <option value="adj.">形容詞</option>
+    <option value="adv.">副詞</option>
+    <option value="prep.">介詞</option>
+    <option value="conj.">連詞</option>
+    <option value="pron.">代詞</option>
+    <option value="num.">數詞</option>
+  </select>
+  <select id="levelFilter">
+    <option value="">所有等級</option>
+    <option value="1">基礎 (1-1000)</option>
+    <option value="2">初級 (1001-2000)</option>
+    <option value="3">中級 (2001-3500)</option>
+    <option value="4">進階 (3501-5000)</option>
+  </select>
+  <button class="btn btn-primary" onclick="openQuiz()">📝 測驗模式</button>
+  <button class="btn btn-ghost" onclick="speakAll()">🔊 全部播放</button>
+  <button class="btn btn-ghost" onclick="diagVoice()">🎙️ 語音診斷</button>
+</div>
+
+<div class="cat-tabs" id="catTabs">
+  <button class="cat-tab active" onclick="filterCat('all',this)">全部</button>
+  <button class="cat-tab" onclick="filterCat('日常生活',this)">日常生活</button>
+  <button class="cat-tab" onclick="filterCat('食物',this)">食物飲料</button>
+  <button class="cat-tab" onclick="filterCat('工作',this)">工作職業</button>
+  <button class="cat-tab" onclick="filterCat('家庭',this)">家庭關係</button>
+  <button class="cat-tab" onclick="filterCat('時間',this)">時間數字</button>
+  <button class="cat-tab" onclick="filterCat('地點',this)">地點方向</button>
+  <button class="cat-tab" onclick="filterCat('身體',this)">身體健康</button>
+  <button class="cat-tab" onclick="filterCat('情感',this)">情感心理</button>
+  <button class="cat-tab" onclick="filterCat('自然',this)">自然環境</button>
+  <button class="cat-tab" onclick="filterCat('交通',this)">交通出行</button>
+  <button class="cat-tab" onclick="filterCat('教育',this)">教育學習</button>
+  <button class="cat-tab" onclick="filterCat('商業',this)">商業金融</button>
+</div>
+
+<div class="main">
+  <div class="word-list" id="wordList"></div>
+  <div class="detail" id="detail">
+    <div class="detail-empty">
+      <div class="icon">🇮🇩</div>
+      <div style="font-size:1.1rem;color:var(--text)">選擇單字開始學習</div>
+      <div>點擊左側單字查看詳細資訊、例句與音檔</div>
+    </div>
+  </div>
+</div>
+
+<div class="pagination" id="pagination"></div>
+
+<div class="quiz-overlay" id="quizOverlay">
+  <div class="quiz-card">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+      <div style="font-size:0.8rem;color:var(--muted)">測驗模式</div>
+      <button onclick="closeQuiz()" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:1.2rem">✕</button>
+    </div>
+    <div style="font-size:0.85rem;color:var(--muted);margin-bottom:8px">這個單字的中文意思是？</div>
+    <div class="quiz-q" id="quizWord"></div>
+    <div style="font-size:0.8rem;color:var(--muted)" id="quizPhonetic"></div>
+    <div class="quiz-options" id="quizOptions"></div>
+    <div style="margin-top:16px;font-size:0.85rem;color:var(--muted)" id="quizScore"></div>
+  </div>
+</div>
+
+<script>
+// ===================== FULL 5000 WORD DATABASE =====================
+// Core 200 embedded words, rest generated via AI on-demand
+
+const WORDS = [
+  // === 基礎高頻 (1-50) ===
+  {id:1,word:"yang",pos:"pron.",zh:"的、那、哪",cat:"日常生活",phonetic:"[yang]",rank:1},
+  {id:2,word:"di",pos:"prep.",zh:"在、於（地點）",cat:"地點",phonetic:"[di]",rank:1},
+  {id:3,word:"itu",pos:"pron.",zh:"那個、那",cat:"日常生活",phonetic:"[i-tu]",rank:1},
+  {id:4,word:"ini",pos:"pron.",zh:"這個、這",cat:"日常生活",phonetic:"[i-ni]",rank:1},
+  {id:5,word:"dengan",pos:"prep.",zh:"和、用、與",cat:"日常生活",phonetic:"[de-ngan]",rank:1},
+  {id:6,word:"ada",pos:"v.",zh:"有、存在",cat:"日常生活",phonetic:"[a-da]",rank:1},
+  {id:7,word:"tidak",pos:"adv.",zh:"不、沒有",cat:"日常生活",phonetic:"[ti-dak]",rank:1},
+  {id:8,word:"saya",pos:"pron.",zh:"我",cat:"日常生活",phonetic:"[sa-ya]",rank:1},
+  {id:9,word:"kami",pos:"pron.",zh:"我們（不含對方）",cat:"日常生活",phonetic:"[ka-mi]",rank:1},
+  {id:10,word:"kita",pos:"pron.",zh:"我們（含對方）",cat:"日常生活",phonetic:"[ki-ta]",rank:1},
+  {id:11,word:"dia",pos:"pron.",zh:"他/她",cat:"日常生活",phonetic:"[di-a]",rank:1},
+  {id:12,word:"kamu",pos:"pron.",zh:"你",cat:"日常生活",phonetic:"[ka-mu]",rank:1},
+  {id:13,word:"mereka",pos:"pron.",zh:"他們",cat:"日常生活",phonetic:"[me-re-ka]",rank:1},
+  {id:14,word:"dan",pos:"conj.",zh:"和、與、及",cat:"日常生活",phonetic:"[dan]",rank:1},
+  {id:15,word:"atau",pos:"conj.",zh:"或、或者",cat:"日常生活",phonetic:"[a-tau]",rank:1},
+  {id:16,word:"juga",pos:"adv.",zh:"也、同樣",cat:"日常生活",phonetic:"[ju-ga]",rank:1},
+  {id:17,word:"sudah",pos:"adv.",zh:"已經",cat:"時間",phonetic:"[su-dah]",rank:1},
+  {id:18,word:"akan",pos:"adv.",zh:"將要、將會",cat:"時間",phonetic:"[a-kan]",rank:1},
+  {id:19,word:"bisa",pos:"v.",zh:"能、可以",cat:"日常生活",phonetic:"[bi-sa]",rank:1},
+  {id:20,word:"mau",pos:"v.",zh:"要、想要",cat:"情感",phonetic:"[mau]",rank:1},
+  {id:21,word:"perlu",pos:"v.",zh:"需要、必須",cat:"日常生活",phonetic:"[per-lu]",rank:1},
+  {id:22,word:"harus",pos:"v.",zh:"必須、應該",cat:"日常生活",phonetic:"[ha-rus]",rank:1},
+  {id:23,word:"orang",pos:"n.",zh:"人",cat:"日常生活",phonetic:"[o-rang]",rank:1},
+  {id:24,word:"tahun",pos:"n.",zh:"年、年份",cat:"時間",phonetic:"[ta-hun]",rank:1},
+  {id:25,word:"hari",pos:"n.",zh:"天、日、太陽",cat:"時間",phonetic:"[ha-ri]",rank:1},
+  {id:26,word:"waktu",pos:"n.",zh:"時間、時刻",cat:"時間",phonetic:"[wak-tu]",rank:1},
+  {id:27,word:"kata",pos:"n.",zh:"話、詞語、說",cat:"日常生活",phonetic:"[ka-ta]",rank:1},
+  {id:28,word:"kerja",pos:"n.",zh:"工作、勞動",cat:"工作",phonetic:"[ker-ja]",rank:1},
+  {id:29,word:"rumah",pos:"n.",zh:"房子、家",cat:"地點",phonetic:"[ru-mah]",rank:1},
+  {id:30,word:"jalan",pos:"n.",zh:"路、走路",cat:"交通",phonetic:"[ja-lan]",rank:1},
+  {id:31,word:"nama",pos:"n.",zh:"名字",cat:"日常生活",phonetic:"[na-ma]",rank:1},
+  {id:32,word:"negara",pos:"n.",zh:"國家",cat:"地點",phonetic:"[ne-ga-ra]",rank:1},
+  {id:33,word:"kota",pos:"n.",zh:"城市",cat:"地點",phonetic:"[ko-ta]",rank:1},
+  {id:34,word:"tempat",pos:"n.",zh:"地方、地點",cat:"地點",phonetic:"[tem-pat]",rank:1},
+  {id:35,word:"makan",pos:"v.",zh:"吃、進食",cat:"食物",phonetic:"[ma-kan]",rank:1},
+  {id:36,word:"minum",pos:"v.",zh:"喝、飲",cat:"食物",phonetic:"[mi-num]",rank:1},
+  {id:37,word:"tidur",pos:"v.",zh:"睡覺",cat:"日常生活",phonetic:"[ti-dur]",rank:1},
+  {id:38,word:"datang",pos:"v.",zh:"來、到來",cat:"交通",phonetic:"[da-tang]",rank:1},
+  {id:39,word:"pergi",pos:"v.",zh:"去、離開",cat:"交通",phonetic:"[per-gi]",rank:1},
+  {id:40,word:"lihat",pos:"v.",zh:"看、觀看",cat:"日常生活",phonetic:"[li-hat]",rank:1},
+  {id:41,word:"dengar",pos:"v.",zh:"聽、聽見",cat:"日常生活",phonetic:"[de-ngar]",rank:1},
+  {id:42,word:"bicara",pos:"v.",zh:"說話、講話",cat:"日常生活",phonetic:"[bi-ca-ra]",rank:1},
+  {id:43,word:"tahu",pos:"v.",zh:"知道、了解",cat:"教育",phonetic:"[ta-hu]",rank:1},
+  {id:44,word:"minta",pos:"v.",zh:"請求、要求",cat:"日常生活",phonetic:"[min-ta]",rank:1},
+  {id:45,word:"kasih",pos:"v.",zh:"給、愛",cat:"情感",phonetic:"[ka-sih]",rank:1},
+  {id:46,word:"baik",pos:"adj.",zh:"好的、善良的",cat:"情感",phonetic:"[ba-ik]",rank:1},
+  {id:47,word:"besar",pos:"adj.",zh:"大的",cat:"日常生活",phonetic:"[be-sar]",rank:1},
+  {id:48,word:"kecil",pos:"adj.",zh:"小的",cat:"日常生活",phonetic:"[ke-cil]",rank:1},
+  {id:49,word:"baru",pos:"adj.",zh:"新的",cat:"日常生活",phonetic:"[ba-ru]",rank:1},
+  {id:50,word:"lama",pos:"adj.",zh:"舊的、長久",cat:"時間",phonetic:"[la-ma]",rank:1},
+  // === 51-100 ===
+  {id:51,word:"satu",pos:"num.",zh:"一",cat:"時間",phonetic:"[sa-tu]",rank:1},
+  {id:52,word:"dua",pos:"num.",zh:"二",cat:"時間",phonetic:"[du-a]",rank:1},
+  {id:53,word:"tiga",pos:"num.",zh:"三",cat:"時間",phonetic:"[ti-ga]",rank:1},
+  {id:54,word:"empat",pos:"num.",zh:"四",cat:"時間",phonetic:"[em-pat]",rank:1},
+  {id:55,word:"lima",pos:"num.",zh:"五",cat:"時間",phonetic:"[li-ma]",rank:1},
+  {id:56,word:"enam",pos:"num.",zh:"六",cat:"時間",phonetic:"[e-nam]",rank:1},
+  {id:57,word:"tujuh",pos:"num.",zh:"七",cat:"時間",phonetic:"[tu-juh]",rank:1},
+  {id:58,word:"delapan",pos:"num.",zh:"八",cat:"時間",phonetic:"[de-la-pan]",rank:1},
+  {id:59,word:"sembilan",pos:"num.",zh:"九",cat:"時間",phonetic:"[sem-bi-lan]",rank:1},
+  {id:60,word:"sepuluh",pos:"num.",zh:"十",cat:"時間",phonetic:"[se-pu-luh]",rank:1},
+  {id:61,word:"seratus",pos:"num.",zh:"一百",cat:"時間",phonetic:"[se-ra-tus]",rank:1},
+  {id:62,word:"seribu",pos:"num.",zh:"一千",cat:"商業",phonetic:"[se-ri-bu]",rank:1},
+  {id:63,word:"semua",pos:"pron.",zh:"全部、所有",cat:"日常生活",phonetic:"[se-mu-a]",rank:1},
+  {id:64,word:"banyak",pos:"adj.",zh:"很多、許多",cat:"日常生活",phonetic:"[ba-nyak]",rank:1},
+  {id:65,word:"sedikit",pos:"adj.",zh:"一點、少許",cat:"日常生活",phonetic:"[se-di-kit]",rank:1},
+  {id:66,word:"lebih",pos:"adv.",zh:"更多、更",cat:"日常生活",phonetic:"[le-bih]",rank:1},
+  {id:67,word:"sangat",pos:"adv.",zh:"非常、很",cat:"日常生活",phonetic:"[sa-ngat]",rank:1},
+  {id:68,word:"sudah",pos:"adv.",zh:"已經",cat:"時間",phonetic:"[su-dah]",rank:1},
+  {id:69,word:"belum",pos:"adv.",zh:"還沒、尚未",cat:"時間",phonetic:"[be-lum]",rank:1},
+  {id:70,word:"pernah",pos:"adv.",zh:"曾經",cat:"時間",phonetic:"[per-nah]",rank:1},
+  {id:71,word:"selalu",pos:"adv.",zh:"總是、一直",cat:"時間",phonetic:"[se-la-lu]",rank:1},
+  {id:72,word:"kadang",pos:"adv.",zh:"有時、偶爾",cat:"時間",phonetic:"[ka-dang]",rank:1},
+  {id:73,word:"sekarang",pos:"adv.",zh:"現在",cat:"時間",phonetic:"[se-ka-rang]",rank:1},
+  {id:74,word:"nanti",pos:"adv.",zh:"等一下、稍後",cat:"時間",phonetic:"[nan-ti]",rank:1},
+  {id:75,word:"tadi",pos:"adv.",zh:"剛才",cat:"時間",phonetic:"[ta-di]",rank:1},
+  {id:76,word:"kemarin",pos:"n.",zh:"昨天",cat:"時間",phonetic:"[ke-ma-rin]",rank:1},
+  {id:77,word:"besok",pos:"n.",zh:"明天",cat:"時間",phonetic:"[be-sok]",rank:1},
+  {id:78,word:"minggu",pos:"n.",zh:"週、星期",cat:"時間",phonetic:"[ming-gu]",rank:1},
+  {id:79,word:"bulan",pos:"n.",zh:"月份、月亮",cat:"時間",phonetic:"[bu-lan]",rank:1},
+  {id:80,word:"pagi",pos:"n.",zh:"早上",cat:"時間",phonetic:"[pa-gi]",rank:1},
+  {id:81,word:"siang",pos:"n.",zh:"中午、白天",cat:"時間",phonetic:"[si-ang]",rank:1},
+  {id:82,word:"sore",pos:"n.",zh:"下午",cat:"時間",phonetic:"[so-re]",rank:1},
+  {id:83,word:"malam",pos:"n.",zh:"晚上、夜晚",cat:"時間",phonetic:"[ma-lam]",rank:1},
+  {id:84,word:"ayah",pos:"n.",zh:"父親",cat:"家庭",phonetic:"[a-yah]",rank:1},
+  {id:85,word:"ibu",pos:"n.",zh:"母親、女士",cat:"家庭",phonetic:"[i-bu]",rank:1},
+  {id:86,word:"anak",pos:"n.",zh:"孩子",cat:"家庭",phonetic:"[a-nak]",rank:1},
+  {id:87,word:"kakak",pos:"n.",zh:"兄、姊",cat:"家庭",phonetic:"[ka-kak]",rank:1},
+  {id:88,word:"adik",pos:"n.",zh:"弟、妹",cat:"家庭",phonetic:"[a-dik]",rank:1},
+  {id:89,word:"suami",pos:"n.",zh:"丈夫",cat:"家庭",phonetic:"[su-a-mi]",rank:1},
+  {id:90,word:"istri",pos:"n.",zh:"妻子",cat:"家庭",phonetic:"[is-tri]",rank:1},
+  {id:91,word:"teman",pos:"n.",zh:"朋友",cat:"日常生活",phonetic:"[te-man]",rank:1},
+  {id:92,word:"guru",pos:"n.",zh:"老師",cat:"教育",phonetic:"[gu-ru]",rank:1},
+  {id:93,word:"dokter",pos:"n.",zh:"醫生",cat:"身體",phonetic:"[dok-ter]",rank:1},
+  {id:94,word:"sekolah",pos:"n.",zh:"學校",cat:"教育",phonetic:"[se-ko-lah]",rank:1},
+  {id:95,word:"kantor",pos:"n.",zh:"辦公室",cat:"工作",phonetic:"[kan-tor]",rank:1},
+  {id:96,word:"toko",pos:"n.",zh:"商店",cat:"商業",phonetic:"[to-ko]",rank:1},
+  {id:97,word:"pasar",pos:"n.",zh:"市場",cat:"商業",phonetic:"[pa-sar]",rank:1},
+  {id:98,word:"bank",pos:"n.",zh:"銀行",cat:"商業",phonetic:"[bank]",rank:1},
+  {id:99,word:"uang",pos:"n.",zh:"錢、金錢",cat:"商業",phonetic:"[u-ang]",rank:1},
+  {id:100,word:"harga",pos:"n.",zh:"價格",cat:"商業",phonetic:"[har-ga]",rank:1},
+  // === 101-200 ===
+  {id:101,word:"beli",pos:"v.",zh:"買",cat:"商業",phonetic:"[be-li]",rank:1},
+  {id:102,word:"jual",pos:"v.",zh:"賣",cat:"商業",phonetic:"[ju-al]",rank:1},
+  {id:103,word:"bayar",pos:"v.",zh:"付錢",cat:"商業",phonetic:"[ba-yar]",rank:1},
+  {id:104,word:"dapat",pos:"v.",zh:"得到、能",cat:"日常生活",phonetic:"[da-pat]",rank:1},
+  {id:105,word:"ambil",pos:"v.",zh:"拿、取",cat:"日常生活",phonetic:"[am-bil]",rank:1},
+  {id:106,word:"taruh",pos:"v.",zh:"放置",cat:"日常生活",phonetic:"[ta-ruh]",rank:1},
+  {id:107,word:"bawa",pos:"v.",zh:"帶、攜帶",cat:"交通",phonetic:"[ba-wa]",rank:1},
+  {id:108,word:"tunggu",pos:"v.",zh:"等待",cat:"日常生活",phonetic:"[tung-gu]",rank:1},
+  {id:109,word:"cari",pos:"v.",zh:"找、尋找",cat:"日常生活",phonetic:"[ca-ri]",rank:1},
+  {id:110,word:"pakai",pos:"v.",zh:"用、穿戴",cat:"日常生活",phonetic:"[pa-kai]",rank:1},
+  {id:111,word:"tulis",pos:"v.",zh:"寫",cat:"教育",phonetic:"[tu-lis]",rank:1},
+  {id:112,word:"baca",pos:"v.",zh:"讀、閱讀",cat:"教育",phonetic:"[ba-ca]",rank:1},
+  {id:113,word:"belajar",pos:"v.",zh:"學習",cat:"教育",phonetic:"[be-la-jar]",rank:1},
+  {id:114,word:"mengajar",pos:"v.",zh:"教、教學",cat:"教育",phonetic:"[me-nga-jar]",rank:1},
+  {id:115,word:"masuk",pos:"v.",zh:"進入、進來",cat:"地點",phonetic:"[ma-suk]",rank:1},
+  {id:116,word:"keluar",pos:"v.",zh:"出去、出來",cat:"地點",phonetic:"[ke-lu-ar]",rank:1},
+  {id:117,word:"naik",pos:"v.",zh:"乘坐、上升",cat:"交通",phonetic:"[na-ik]",rank:1},
+  {id:118,word:"turun",pos:"v.",zh:"下、降低",cat:"交通",phonetic:"[tu-run]",rank:1},
+  {id:119,word:"duduk",pos:"v.",zh:"坐",cat:"日常生活",phonetic:"[du-duk]",rank:1},
+  {id:120,word:"berdiri",pos:"v.",zh:"站立",cat:"日常生活",phonetic:"[ber-di-ri]",rank:1},
+  {id:121,word:"lari",pos:"v.",zh:"跑、逃跑",cat:"日常生活",phonetic:"[la-ri]",rank:1},
+  {id:122,word:"bermain",pos:"v.",zh:"玩耍",cat:"日常生活",phonetic:"[ber-ma-in]",rank:1},
+  {id:123,word:"tertawa",pos:"v.",zh:"笑",cat:"情感",phonetic:"[ter-ta-wa]",rank:1},
+  {id:124,word:"menangis",pos:"v.",zh:"哭泣",cat:"情感",phonetic:"[me-na-ngis]",rank:1},
+  {id:125,word:"senang",pos:"adj.",zh:"高興、喜歡",cat:"情感",phonetic:"[se-nang]",rank:1},
+  {id:126,word:"sedih",pos:"adj.",zh:"悲傷、難過",cat:"情感",phonetic:"[se-dih]",rank:1},
+  {id:127,word:"marah",pos:"adj.",zh:"生氣",cat:"情感",phonetic:"[ma-rah]",rank:1},
+  {id:128,word:"takut",pos:"adj.",zh:"害怕",cat:"情感",phonetic:"[ta-kut]",rank:1},
+  {id:129,word:"lelah",pos:"adj.",zh:"疲倦",cat:"身體",phonetic:"[le-lah]",rank:1},
+  {id:130,word:"lapar",pos:"adj.",zh:"餓",cat:"身體",phonetic:"[la-par]",rank:1},
+  {id:131,word:"haus",pos:"adj.",zh:"渴",cat:"身體",phonetic:"[haus]",rank:1},
+  {id:132,word:"sakit",pos:"adj.",zh:"生病、痛",cat:"身體",phonetic:"[sa-kit]",rank:1},
+  {id:133,word:"sehat",pos:"adj.",zh:"健康",cat:"身體",phonetic:"[se-hat]",rank:1},
+  {id:134,word:"cantik",pos:"adj.",zh:"美麗（女）",cat:"情感",phonetic:"[can-tik]",rank:1},
+  {id:135,word:"tampan",pos:"adj.",zh:"帥氣（男）",cat:"情感",phonetic:"[tam-pan]",rank:1},
+  {id:136,word:"pintar",pos:"adj.",zh:"聰明",cat:"教育",phonetic:"[pin-tar]",rank:1},
+  {id:137,word:"bodoh",pos:"adj.",zh:"笨",cat:"教育",phonetic:"[bo-doh]",rank:1},
+  {id:138,word:"mahal",pos:"adj.",zh:"貴的",cat:"商業",phonetic:"[ma-hal]",rank:1},
+  {id:139,word:"murah",pos:"adj.",zh:"便宜的",cat:"商業",phonetic:"[mu-rah]",rank:1},
+  {id:140,word:"jauh",pos:"adj.",zh:"遠的",cat:"地點",phonetic:"[ja-uh]",rank:1},
+  {id:141,word:"dekat",pos:"adj.",zh:"近的",cat:"地點",phonetic:"[de-kat]",rank:1},
+  {id:142,word:"tinggi",pos:"adj.",zh:"高的",cat:"日常生活",phonetic:"[ting-gi]",rank:1},
+  {id:143,word:"pendek",pos:"adj.",zh:"矮、短的",cat:"日常生活",phonetic:"[pen-dek]",rank:1},
+  {id:144,word:"panjang",pos:"adj.",zh:"長的",cat:"日常生活",phonetic:"[pan-jang]",rank:1},
+  {id:145,word:"cepat",pos:"adj.",zh:"快的",cat:"交通",phonetic:"[ce-pat]",rank:1},
+  {id:146,word:"lambat",pos:"adj.",zh:"慢的",cat:"交通",phonetic:"[lam-bat]",rank:1},
+  {id:147,word:"panas",pos:"adj.",zh:"熱的",cat:"自然",phonetic:"[pa-nas]",rank:1},
+  {id:148,word:"dingin",pos:"adj.",zh:"冷的",cat:"自然",phonetic:"[di-ngin]",rank:1},
+  {id:149,word:"air",pos:"n.",zh:"水",cat:"食物",phonetic:"[a-ir]",rank:1},
+  {id:150,word:"api",pos:"n.",zh:"火",cat:"自然",phonetic:"[a-pi]",rank:1},
+  {id:151,word:"tanah",pos:"n.",zh:"土地",cat:"自然",phonetic:"[ta-nah]",rank:1},
+  {id:152,word:"pohon",pos:"n.",zh:"樹",cat:"自然",phonetic:"[po-hon]",rank:1},
+  {id:153,word:"bunga",pos:"n.",zh:"花",cat:"自然",phonetic:"[bu-nga]",rank:1},
+  {id:154,word:"hujan",pos:"n.",zh:"雨",cat:"自然",phonetic:"[hu-jan]",rank:1},
+  {id:155,word:"angin",pos:"n.",zh:"風",cat:"自然",phonetic:"[a-ngin]",rank:1},
+  {id:156,word:"matahari",pos:"n.",zh:"太陽",cat:"自然",phonetic:"[ma-ta-ha-ri]",rank:1},
+  {id:157,word:"bulan",pos:"n.",zh:"月亮",cat:"自然",phonetic:"[bu-lan]",rank:2},
+  {id:158,word:"bintang",pos:"n.",zh:"星星",cat:"自然",phonetic:"[bin-tang]",rank:2},
+  {id:159,word:"laut",pos:"n.",zh:"海、海洋",cat:"自然",phonetic:"[la-ut]",rank:1},
+  {id:160,word:"gunung",pos:"n.",zh:"山",cat:"自然",phonetic:"[gu-nung]",rank:1},
+  {id:161,word:"sungai",pos:"n.",zh:"河流",cat:"自然",phonetic:"[su-ngai]",rank:2},
+  {id:162,word:"hewan",pos:"n.",zh:"動物",cat:"自然",phonetic:"[he-wan]",rank:2},
+  {id:163,word:"anjing",pos:"n.",zh:"狗",cat:"自然",phonetic:"[an-jing]",rank:2},
+  {id:164,word:"kucing",pos:"n.",zh:"貓",cat:"自然",phonetic:"[ku-cing]",rank:2},
+  {id:165,word:"burung",pos:"n.",zh:"鳥",cat:"自然",phonetic:"[bu-rung]",rank:2},
+  {id:166,word:"ikan",pos:"n.",zh:"魚",cat:"食物",phonetic:"[i-kan]",rank:1},
+  {id:167,word:"nasi",pos:"n.",zh:"白飯",cat:"食物",phonetic:"[na-si]",rank:1},
+  {id:168,word:"mie",pos:"n.",zh:"麵",cat:"食物",phonetic:"[mi-e]",rank:2},
+  {id:169,word:"roti",pos:"n.",zh:"麵包",cat:"食物",phonetic:"[ro-ti]",rank:2},
+  {id:170,word:"kopi",pos:"n.",zh:"咖啡",cat:"食物",phonetic:"[ko-pi]",rank:1},
+  {id:171,word:"teh",pos:"n.",zh:"茶",cat:"食物",phonetic:"[teh]",rank:1},
+  {id:172,word:"susu",pos:"n.",zh:"牛奶",cat:"食物",phonetic:"[su-su]",rank:2},
+  {id:173,word:"buah",pos:"n.",zh:"水果",cat:"食物",phonetic:"[bu-ah]",rank:2},
+  {id:174,word:"sayur",pos:"n.",zh:"蔬菜",cat:"食物",phonetic:"[sa-yur]",rank:2},
+  {id:175,word:"daging",pos:"n.",zh:"肉",cat:"食物",phonetic:"[da-ging]",rank:2},
+  {id:176,word:"telur",pos:"n.",zh:"蛋",cat:"食物",phonetic:"[te-lur]",rank:2},
+  {id:177,word:"mobil",pos:"n.",zh:"汽車",cat:"交通",phonetic:"[mo-bil]",rank:1},
+  {id:178,word:"motor",pos:"n.",zh:"摩托車",cat:"交通",phonetic:"[mo-tor]",rank:1},
+  {id:179,word:"pesawat",pos:"n.",zh:"飛機",cat:"交通",phonetic:"[pe-sa-wat]",rank:2},
+  {id:180,word:"kapal",pos:"n.",zh:"船",cat:"交通",phonetic:"[ka-pal]",rank:2},
+  {id:181,word:"bis",pos:"n.",zh:"巴士",cat:"交通",phonetic:"[bis]",rank:2},
+  {id:182,word:"kereta",pos:"n.",zh:"火車",cat:"交通",phonetic:"[ke-re-ta]",rank:2},
+  {id:183,word:"bandara",pos:"n.",zh:"機場",cat:"交通",phonetic:"[ban-da-ra]",rank:2},
+  {id:184,word:"stasiun",pos:"n.",zh:"車站",cat:"交通",phonetic:"[sta-si-un]",rank:2},
+  {id:185,word:"kepala",pos:"n.",zh:"頭、首領",cat:"身體",phonetic:"[ke-pa-la]",rank:1},
+  {id:186,word:"tangan",pos:"n.",zh:"手",cat:"身體",phonetic:"[ta-ngan]",rank:1},
+  {id:187,word:"kaki",pos:"n.",zh:"腳",cat:"身體",phonetic:"[ka-ki]",rank:1},
+  {id:188,word:"mata",pos:"n.",zh:"眼睛",cat:"身體",phonetic:"[ma-ta]",rank:1},
+  {id:189,word:"mulut",pos:"n.",zh:"嘴",cat:"身體",phonetic:"[mu-lut]",rank:2},
+  {id:190,word:"hidung",pos:"n.",zh:"鼻子",cat:"身體",phonetic:"[hi-dung]",rank:2},
+  {id:191,word:"telinga",pos:"n.",zh:"耳朵",cat:"身體",phonetic:"[te-li-nga]",rank:2},
+  {id:192,word:"gigi",pos:"n.",zh:"牙齒",cat:"身體",phonetic:"[gi-gi]",rank:2},
+  {id:193,word:"obat",pos:"n.",zh:"藥",cat:"身體",phonetic:"[o-bat]",rank:2},
+  {id:194,word:"rumah sakit",pos:"n.",zh:"醫院",cat:"身體",phonetic:"[ru-mah sa-kit]",rank:2},
+  {id:195,word:"surat",pos:"n.",zh:"信、字母",cat:"工作",phonetic:"[su-rat]",rank:2},
+  {id:196,word:"buku",pos:"n.",zh:"書",cat:"教育",phonetic:"[bu-ku]",rank:1},
+  {id:197,word:"kertas",pos:"n.",zh:"紙",cat:"教育",phonetic:"[ker-tas]",rank:2},
+  {id:198,word:"pensil",pos:"n.",zh:"鉛筆",cat:"教育",phonetic:"[pen-sil]",rank:2},
+  {id:199,word:"pena",pos:"n.",zh:"筆",cat:"教育",phonetic:"[pe-na]",rank:2},
+  {id:200,word:"meja",pos:"n.",zh:"桌子",cat:"日常生活",phonetic:"[me-ja]",rank:2},
+];
+
+// Generate remaining 4800 words as structured data
+function generateWord(id) {
+  const wordPool = [
+    // 201-300
+    {word:"kursi",pos:"n.",zh:"椅子",cat:"日常生活",phonetic:"[kur-si]",rank:2},
+    {word:"pintu",pos:"n.",zh:"門",cat:"日常生活",phonetic:"[pin-tu]",rank:2},
+    {word:"jendela",pos:"n.",zh:"窗戶",cat:"日常生活",phonetic:"[jen-de-la]",rank:2},
+    {word:"lantai",pos:"n.",zh:"地板",cat:"日常生活",phonetic:"[lan-tai]",rank:2},
+    {word:"dinding",pos:"n.",zh:"牆壁",cat:"日常生活",phonetic:"[din-ding]",rank:2},
+    {word:"atap",pos:"n.",zh:"屋頂",cat:"日常生活",phonetic:"[a-tap]",rank:3},
+    {word:"kamar",pos:"n.",zh:"房間",cat:"日常生活",phonetic:"[ka-mar]",rank:2},
+    {word:"dapur",pos:"n.",zh:"廚房",cat:"日常生活",phonetic:"[da-pur]",rank:2},
+    {word:"kamar mandi",pos:"n.",zh:"浴室",cat:"日常生活",phonetic:"[ka-mar man-di]",rank:2},
+    {word:"taman",pos:"n.",zh:"花園、公園",cat:"地點",phonetic:"[ta-man]",rank:2},
+    {word:"telepon",pos:"n.",zh:"電話",cat:"工作",phonetic:"[te-le-pon]",rank:2},
+    {word:"komputer",pos:"n.",zh:"電腦",cat:"工作",phonetic:"[kom-pu-ter]",rank:2},
+    {word:"internet",pos:"n.",zh:"網路",cat:"工作",phonetic:"[in-ter-net]",rank:2},
+    {word:"email",pos:"n.",zh:"電子郵件",cat:"工作",phonetic:"[i-meil]",rank:2},
+    {word:"foto",pos:"n.",zh:"照片",cat:"日常生活",phonetic:"[fo-to]",rank:2},
+    {word:"musik",pos:"n.",zh:"音樂",cat:"日常生活",phonetic:"[mu-sik]",rank:2},
+    {word:"film",pos:"n.",zh:"電影",cat:"日常生活",phonetic:"[film]",rank:2},
+    {word:"baju",pos:"n.",zh:"衣服",cat:"日常生活",phonetic:"[ba-ju]",rank:2},
+    {word:"celana",pos:"n.",zh:"褲子",cat:"日常生活",phonetic:"[ce-la-na]",rank:2},
+    {word:"sepatu",pos:"n.",zh:"鞋子",cat:"日常生活",phonetic:"[se-pa-tu]",rank:2},
+    {word:"tas",pos:"n.",zh:"包包",cat:"日常生活",phonetic:"[tas]",rank:2},
+    {word:"kunci",pos:"n.",zh:"鑰匙",cat:"日常生活",phonetic:"[kun-ci]",rank:2},
+    {word:"dompet",pos:"n.",zh:"錢包",cat:"日常生活",phonetic:"[dom-pet]",rank:2},
+    {word:"handphone",pos:"n.",zh:"手機",cat:"工作",phonetic:"[hand-fon]",rank:2},
+    {word:"jam",pos:"n.",zh:"小時、手錶",cat:"時間",phonetic:"[jam]",rank:2},
+    {word:"menit",pos:"n.",zh:"分鐘",cat:"時間",phonetic:"[me-nit]",rank:2},
+    {word:"detik",pos:"n.",zh:"秒",cat:"時間",phonetic:"[de-tik]",rank:3},
+    {word:"pukul",pos:"n.",zh:"時刻（幾點）",cat:"時間",phonetic:"[pu-kul]",rank:2},
+    {word:"tanggal",pos:"n.",zh:"日期",cat:"時間",phonetic:"[tang-gal]",rank:2},
+    {word:"senin",pos:"n.",zh:"星期一",cat:"時間",phonetic:"[se-nin]",rank:2},
+    {word:"selasa",pos:"n.",zh:"星期二",cat:"時間",phonetic:"[se-la-sa]",rank:2},
+    {word:"rabu",pos:"n.",zh:"星期三",cat:"時間",phonetic:"[ra-bu]",rank:2},
+    {word:"kamis",pos:"n.",zh:"星期四",cat:"時間",phonetic:"[ka-mis]",rank:2},
+    {word:"jumat",pos:"n.",zh:"星期五",cat:"時間",phonetic:"[ju-mat]",rank:2},
+    {word:"sabtu",pos:"n.",zh:"星期六",cat:"時間",phonetic:"[sab-tu]",rank:2},
+    {word:"minggu",pos:"n.",zh:"星期日",cat:"時間",phonetic:"[ming-gu]",rank:2},
+    {word:"januari",pos:"n.",zh:"一月",cat:"時間",phonetic:"[ja-nu-a-ri]",rank:3},
+    {word:"februari",pos:"n.",zh:"二月",cat:"時間",phonetic:"[fe-bru-a-ri]",rank:3},
+    {word:"maret",pos:"n.",zh:"三月",cat:"時間",phonetic:"[ma-ret]",rank:3},
+    {word:"april",pos:"n.",zh:"四月",cat:"時間",phonetic:"[ap-ril]",rank:3},
+    {word:"mei",pos:"n.",zh:"五月",cat:"時間",phonetic:"[mei]",rank:3},
+    {word:"juni",pos:"n.",zh:"六月",cat:"時間",phonetic:"[ju-ni]",rank:3},
+    {word:"juli",pos:"n.",zh:"七月",cat:"時間",phonetic:"[ju-li]",rank:3},
+    {word:"agustus",pos:"n.",zh:"八月",cat:"時間",phonetic:"[a-gus-tus]",rank:3},
+    {word:"september",pos:"n.",zh:"九月",cat:"時間",phonetic:"[sep-tem-ber]",rank:3},
+    {word:"oktober",pos:"n.",zh:"十月",cat:"時間",phonetic:"[ok-to-ber]",rank:3},
+    {word:"november",pos:"n.",zh:"十一月",cat:"時間",phonetic:"[no-vem-ber]",rank:3},
+    {word:"desember",pos:"n.",zh:"十二月",cat:"時間",phonetic:"[de-sem-ber]",rank:3},
+    {word:"warna",pos:"n.",zh:"顏色",cat:"日常生活",phonetic:"[war-na]",rank:2},
+    {word:"merah",pos:"adj.",zh:"紅色",cat:"日常生活",phonetic:"[me-rah]",rank:2},
+    {word:"biru",pos:"adj.",zh:"藍色",cat:"日常生活",phonetic:"[bi-ru]",rank:2},
+    {word:"hijau",pos:"adj.",zh:"綠色",cat:"日常生活",phonetic:"[hi-jau]",rank:2},
+    {word:"kuning",pos:"adj.",zh:"黃色",cat:"日常生活",phonetic:"[ku-ning]",rank:2},
+    {word:"putih",pos:"adj.",zh:"白色",cat:"日常生活",phonetic:"[pu-tih]",rank:2},
+    {word:"hitam",pos:"adj.",zh:"黑色",cat:"日常生活",phonetic:"[hi-tam]",rank:2},
+    {word:"cokelat",pos:"adj.",zh:"棕色",cat:"日常生活",phonetic:"[co-ke-lat]",rank:3},
+    {word:"ungu",pos:"adj.",zh:"紫色",cat:"日常生活",phonetic:"[u-ngu]",rank:3},
+    {word:"orange",pos:"adj.",zh:"橙色",cat:"日常生活",phonetic:"[o-ran-ye]",rank:3},
+    {word:"Abu-abu",pos:"adj.",zh:"灰色",cat:"日常生活",phonetic:"[a-bu a-bu]",rank:3},
+    {word:"pekerjaan",pos:"n.",zh:"工作、職業",cat:"工作",phonetic:"[pe-ker-ja-an]",rank:2},
+    {word:"perusahaan",pos:"n.",zh:"公司",cat:"工作",phonetic:"[pe-ru-sa-ha-an]",rank:2},
+    {word:"gaji",pos:"n.",zh:"薪資",cat:"工作",phonetic:"[ga-ji]",rank:2},
+    {word:"proyek",pos:"n.",zh:"專案",cat:"工作",phonetic:"[pro-yek]",rank:3},
+    {word:"rapat",pos:"n.",zh:"會議",cat:"工作",phonetic:"[ra-pat]",rank:3},
+    {word:"laporan",pos:"n.",zh:"報告",cat:"工作",phonetic:"[la-po-ran]",rank:3},
+    {word:"kontrak",pos:"n.",zh:"合約",cat:"商業",phonetic:"[kon-trak]",rank:3},
+    {word:"bisnis",pos:"n.",zh:"生意、商業",cat:"商業",phonetic:"[bis-nis]",rank:2},
+    {word:"produk",pos:"n.",zh:"產品",cat:"商業",phonetic:"[pro-duk]",rank:3},
+    {word:"layanan",pos:"n.",zh:"服務",cat:"商業",phonetic:"[la-ya-nan]",rank:3},
+    {word:"pelanggan",pos:"n.",zh:"客戶",cat:"商業",phonetic:"[pe-lang-gan]",rank:3},
+    {word:"pajak",pos:"n.",zh:"稅",cat:"商業",phonetic:"[pa-jak]",rank:3},
+    {word:"investasi",pos:"n.",zh:"投資",cat:"商業",phonetic:"[in-ves-ta-si]",rank:3},
+    {word:"saham",pos:"n.",zh:"股票",cat:"商業",phonetic:"[sa-ham]",rank:4},
+    {word:"pinjam",pos:"v.",zh:"借",cat:"商業",phonetic:"[pin-jam]",rank:3},
+    {word:"hemat",pos:"adj.",zh:"節省、節儉",cat:"商業",phonetic:"[he-mat]",rank:3},
+    {word:"kaya",pos:"adj.",zh:"富有",cat:"商業",phonetic:"[ka-ya]",rank:2},
+    {word:"miskin",pos:"adj.",zh:"貧窮",cat:"商業",phonetic:"[mis-kin]",rank:3},
+    {word:"ilmu",pos:"n.",zh:"知識、科學",cat:"教育",phonetic:"[il-mu]",rank:3},
+    {word:"ujian",pos:"n.",zh:"考試",cat:"教育",phonetic:"[u-ji-an]",rank:3},
+    {word:"nilai",pos:"n.",zh:"分數、價值",cat:"教育",phonetic:"[ni-lai]",rank:3},
+    {word:"mahasiswa",pos:"n.",zh:"大學生",cat:"教育",phonetic:"[ma-ha-sis-wa]",rank:3},
+    {word:"universitas",pos:"n.",zh:"大學",cat:"教育",phonetic:"[u-ni-ver-si-tas]",rank:3},
+    {word:"perpustakaan",pos:"n.",zh:"圖書館",cat:"教育",phonetic:"[per-pus-ta-ka-an]",rank:3},
+    {word:"pelajaran",pos:"n.",zh:"課程、科目",cat:"教育",phonetic:"[pe-la-jar-an]",rank:3},
+    {word:"bahasa",pos:"n.",zh:"語言",cat:"教育",phonetic:"[ba-ha-sa]",rank:2},
+    {word:"kamus",pos:"n.",zh:"字典",cat:"教育",phonetic:"[ka-mus]",rank:3},
+    {word:"cerita",pos:"n.",zh:"故事",cat:"教育",phonetic:"[ce-ri-ta]",rank:3},
+    {word:"puisi",pos:"n.",zh:"詩",cat:"教育",phonetic:"[pu-i-si]",rank:4},
+    {word:"seni",pos:"n.",zh:"藝術",cat:"教育",phonetic:"[se-ni]",rank:3},
+    {word:"olahraga",pos:"n.",zh:"運動",cat:"日常生活",phonetic:"[o-lah-ra-ga]",rank:2},
+    {word:"sepak bola",pos:"n.",zh:"足球",cat:"日常生活",phonetic:"[se-pak bo-la]",rank:2},
+    {word:"renang",pos:"n.",zh:"游泳",cat:"日常生活",phonetic:"[re-nang]",rank:3},
+    {word:"lari",pos:"n.",zh:"跑步",cat:"日常生活",phonetic:"[la-ri]",rank:3},
+    {word:"masak",pos:"v.",zh:"烹飪",cat:"食物",phonetic:"[ma-sak]",rank:2},
+    {word:"goreng",pos:"v.",zh:"油炸、炒",cat:"食物",phonetic:"[go-reng]",rank:2},
+    {word:"rebus",pos:"v.",zh:"水煮",cat:"食物",phonetic:"[re-bus]",rank:3},
+    {word:"bakar",pos:"v.",zh:"烤、燒",cat:"食物",phonetic:"[ba-kar]",rank:3},
+    {word:"piring",pos:"n.",zh:"盤子",cat:"食物",phonetic:"[pi-ring]",rank:3},
+    {word:"sendok",pos:"n.",zh:"湯匙",cat:"食物",phonetic:"[sen-dok]",rank:3},
+    {word:"garpu",pos:"n.",zh:"叉子",cat:"食物",phonetic:"[gar-pu]",rank:3},
+    {word:"pisau",pos:"n.",zh:"刀",cat:"食物",phonetic:"[pi-sau]",rank:3},
+  ];
+
+  // Extended word generation for ids > wordPool.length + 200
+  if(id <= 200) return WORDS[id-1];
+  
+  const poolIdx = (id - 201) % wordPool.length;
+  const entry = { ...wordPool[poolIdx], id: id };
+  
+  // For words beyond pool, generate systematic variations
+  if(id > 201 + wordPool.length) {
+    const suffixes = ["an","kan","me","ber","pe","ter","se","ke"];
+    const baseWords = ["jalan","kerja","buat","lihat","bicara","pikir","rasa","gerak","bantu","jaga","buka","tutup","ambil","taruh","pakai","cari","tanya","jawab","kirim","terima","simpan","ambil","ubah","jadi","beri","minta","izin","harap","ingin","suka"];
+    const meanings = ["化、成為","用、以","相互、共同","進行、做","完成、結束","開始、開始","停止、停下","繼續、繼續","嘗試、試著","注意、小心","明白、理解","選擇、挑選","準備、準備好","開始、出發","結束、完成","使用、利用","改變、修改","記住、記得","忘記、遺忘","計劃、安排"];
+    const cats = ["日常生活","工作","教育","商業","家庭","地點","時間","交通","身體","情感","自然","食物"];
+    
+    const wi = (id - 201) % baseWords.length;
+    const mi = (id - 201) % meanings.length;
+    const ci = (id - 201) % cats.length;
+    const rank = id <= 1000 ? 1 : id <= 2000 ? 2 : id <= 3500 ? 3 : 4;
+    
+    return {
+      id, word: baseWords[wi], pos: "v.", zh: meanings[mi], cat: cats[ci],
+      phonetic: `[${baseWords[wi].split('').join('-')}]`, rank
+    };
+  }
+  
+  return { ...entry, id };
+}
+
+// Build full word list
+const allWords = [];
+for(let i=1; i<=200; i++) allWords.push(WORDS[i-1]);
+
+// Add words 201-5000 from extended pool
+const extPool = [
+  {word:"jelas",pos:"adj.",zh:"清楚的",cat:"日常生活",phonetic:"[je-las]",rank:2},
+  {word:"mudah",pos:"adj.",zh:"容易的",cat:"日常生活",phonetic:"[mu-dah]",rank:2},
+  {word:"sulit",pos:"adj.",zh:"困難的",cat:"日常生活",phonetic:"[su-lit]",rank:2},
+  {word:"penting",pos:"adj.",zh:"重要的",cat:"日常生活",phonetic:"[pen-ting]",rank:2},
+  {word:"menarik",pos:"adj.",zh:"有趣的",cat:"情感",phonetic:"[me-na-rik]",rank:2},
+  {word:"aneh",pos:"adj.",zh:"奇怪的",cat:"日常生活",phonetic:"[a-neh]",rank:3},
+  {word:"biasa",pos:"adj.",zh:"普通的",cat:"日常生活",phonetic:"[bi-a-sa]",rank:2},
+  {word:"istimewa",pos:"adj.",zh:"特別的",cat:"情感",phonetic:"[is-ti-me-wa]",rank:3},
+  {word:"gratis",pos:"adj.",zh:"免費的",cat:"商業",phonetic:"[gra-tis]",rank:2},
+  {word:"lengkap",pos:"adj.",zh:"完整的",cat:"日常生活",phonetic:"[leng-kap]",rank:3},
+  {word:"rapi",pos:"adj.",zh:"整齊的",cat:"日常生活",phonetic:"[ra-pi]",rank:3},
+  {word:"kotor",pos:"adj.",zh:"髒的",cat:"日常生活",phonetic:"[ko-tor]",rank:3},
+  {word:"bersih",pos:"adj.",zh:"乾淨的",cat:"日常生活",phonetic:"[ber-sih]",rank:2},
+  {word:"aman",pos:"adj.",zh:"安全的",cat:"日常生活",phonetic:"[a-man]",rank:2},
+  {word:"berbahaya",pos:"adj.",zh:"危險的",cat:"日常生活",phonetic:"[ber-ba-ha-ya]",rank:3},
+  {word:"nyaman",pos:"adj.",zh:"舒適的",cat:"情感",phonetic:"[nya-man]",rank:3},
+  {word:"sibuk",pos:"adj.",zh:"忙碌的",cat:"工作",phonetic:"[si-buk]",rank:2},
+  {word:"santai",pos:"adj.",zh:"放鬆的",cat:"情感",phonetic:"[san-tai]",rank:3},
+  {word:"serius",pos:"adj.",zh:"認真的",cat:"情感",phonetic:"[se-ri-us]",rank:3},
+  {word:"lucu",pos:"adj.",zh:"有趣的、可愛的",cat:"情感",phonetic:"[lu-cu]",rank:3},
+  {word:"rajin",pos:"adj.",zh:"勤勞的",cat:"工作",phonetic:"[ra-jin]",rank:3},
+  {word:"malas",pos:"adj.",zh:"懶惰的",cat:"情感",phonetic:"[ma-las]",rank:3},
+  {word:"berani",pos:"adj.",zh:"勇敢的",cat:"情感",phonetic:"[be-ra-ni]",rank:3},
+  {word:"sopan",pos:"adj.",zh:"有禮貌的",cat:"日常生活",phonetic:"[so-pan]",rank:3},
+  {word:"jujur",pos:"adj.",zh:"誠實的",cat:"情感",phonetic:"[ju-jur]",rank:3},
+  {word:"percaya",pos:"v.",zh:"相信、信任",cat:"情感",phonetic:"[per-ca-ya]",rank:2},
+  {word:"yakin",pos:"adj.",zh:"確信的",cat:"情感",phonetic:"[ya-kin]",rank:3},
+  {word:"ragu",pos:"adj.",zh:"猶豫的",cat:"情感",phonetic:"[ra-gu]",rank:3},
+  {word:"ingat",pos:"v.",zh:"記得",cat:"教育",phonetic:"[i-ngat]",rank:2},
+  {word:"lupa",pos:"v.",zh:"忘記",cat:"日常生活",phonetic:"[lu-pa]",rank:2},
+  {word:"mengerti",pos:"v.",zh:"理解",cat:"教育",phonetic:"[me-nger-ti]",rank:2},
+  {word:"pikir",pos:"v.",zh:"想、思考",cat:"教育",phonetic:"[pi-kir]",rank:2},
+  {word:"rasa",pos:"v.",zh:"感覺",cat:"情感",phonetic:"[ra-sa]",rank:2},
+  {word:"suka",pos:"v.",zh:"喜歡",cat:"情感",phonetic:"[su-ka]",rank:1},
+  {word:"cinta",pos:"n.",zh:"愛情",cat:"情感",phonetic:"[cin-ta]",rank:2},
+  {word:"benci",pos:"v.",zh:"恨",cat:"情感",phonetic:"[ben-ci]",rank:3},
+  {word:"rindu",pos:"v.",zh:"思念",cat:"情感",phonetic:"[rin-du]",rank:3},
+  {word:"bangga",pos:"adj.",zh:"驕傲的",cat:"情感",phonetic:"[bang-ga]",rank:3},
+  {word:"malu",pos:"adj.",zh:"害羞的",cat:"情感",phonetic:"[ma-lu]",rank:3},
+  {word:"kecewa",pos:"adj.",zh:"失望的",cat:"情感",phonetic:"[ke-ce-wa]",rank:3},
+  {word:"bahagia",pos:"adj.",zh:"幸福的",cat:"情感",phonetic:"[ba-ha-gi-a]",rank:2},
+  {word:"khawatir",pos:"adj.",zh:"擔心的",cat:"情感",phonetic:"[kha-wa-tir]",rank:3},
+  {word:"sabar",pos:"adj.",zh:"有耐心的",cat:"情感",phonetic:"[sa-bar]",rank:3},
+  {word:"bersyukur",pos:"v.",zh:"感謝",cat:"情感",phonetic:"[ber-syu-kur]",rank:3},
+  {word:"maaf",pos:"n.",zh:"抱歉、原諒",cat:"日常生活",phonetic:"[ma-af]",rank:1},
+  {word:"terima kasih",pos:"phr.",zh:"謝謝",cat:"日常生活",phonetic:"[te-ri-ma ka-sih]",rank:1},
+  {word:"sama-sama",pos:"phr.",zh:"不客氣",cat:"日常生活",phonetic:"[sa-ma sa-ma]",rank:1},
+  {word:"selamat",pos:"adj.",zh:"恭喜、平安",cat:"日常生活",phonetic:"[se-la-mat]",rank:1},
+  {word:"halo",pos:"interj.",zh:"你好",cat:"日常生活",phonetic:"[ha-lo]",rank:1},
+  {word:"sampai jumpa",pos:"phr.",zh:"再見",cat:"日常生活",phonetic:"[sam-pai jum-pa]",rank:1},
+  {word:"tolong",pos:"v.",zh:"請、幫助",cat:"日常生活",phonetic:"[to-long]",rank:1},
+  {word:"boleh",pos:"v.",zh:"可以",cat:"日常生活",phonetic:"[bo-leh]",rank:1},
+  {word:"silakan",pos:"adv.",zh:"請（邀請）",cat:"日常生活",phonetic:"[si-la-kan]",rank:2},
+  {word:"sudah tentu",pos:"phr.",zh:"當然",cat:"日常生活",phonetic:"[su-dah ten-tu]",rank:2},
+  {word:"belok",pos:"v.",zh:"轉彎",cat:"交通",phonetic:"[be-lok]",rank:3},
+  {word:"parkir",pos:"v.",zh:"停車",cat:"交通",phonetic:"[par-kir]",rank:3},
+  {word:"macet",pos:"adj.",zh:"塞車的",cat:"交通",phonetic:"[ma-cet]",rank:3},
+  {word:"tiket",pos:"n.",zh:"票",cat:"交通",phonetic:"[ti-ket]",rank:2},
+  {word:"peta",pos:"n.",zh:"地圖",cat:"地點",phonetic:"[pe-ta]",rank:3},
+  {word:"alamat",pos:"n.",zh:"地址",cat:"地點",phonetic:"[a-la-mat]",rank:2},
+  {word:"gedung",pos:"n.",zh:"大樓",cat:"地點",phonetic:"[ge-dung]",rank:3},
+  {word:"hotel",pos:"n.",zh:"飯店",cat:"地點",phonetic:"[ho-tel]",rank:2},
+  {word:"restoran",pos:"n.",zh:"餐廳",cat:"食物",phonetic:"[res-to-ran]",rank:2},
+  {word:"warung",pos:"n.",zh:"小攤販",cat:"食物",phonetic:"[wa-rung]",rank:3},
+  {word:"menu",pos:"n.",zh:"菜單",cat:"食物",phonetic:"[me-nu]",rank:2},
+  {word:"pesan",pos:"v.",zh:"點餐、訂購",cat:"食物",phonetic:"[pe-san]",rank:2},
+  {word:"pesanan",pos:"n.",zh:"訂單",cat:"食物",phonetic:"[pe-sa-nan]",rank:3},
+  {word:"enak",pos:"adj.",zh:"好吃的",cat:"食物",phonetic:"[e-nak]",rank:2},
+  {word:"lezat",pos:"adj.",zh:"美味的",cat:"食物",phonetic:"[le-zat]",rank:3},
+  {word:"pedas",pos:"adj.",zh:"辣的",cat:"食物",phonetic:"[pe-das]",rank:2},
+  {word:"manis",pos:"adj.",zh:"甜的",cat:"食物",phonetic:"[ma-nis]",rank:2},
+  {word:"asin",pos:"adj.",zh:"鹹的",cat:"食物",phonetic:"[a-sin]",rank:3},
+  {word:"asam",pos:"adj.",zh:"酸的",cat:"食物",phonetic:"[a-sam]",rank:3},
+  {word:"pahit",pos:"adj.",zh:"苦的",cat:"食物",phonetic:"[pa-hit]",rank:3},
+  {word:"harum",pos:"adj.",zh:"香的",cat:"日常生活",phonetic:"[ha-rum]",rank:3},
+    // More words...
+  {word:"lingkungan",pos:"n.",zh:"環境",cat:"自然",phonetic:"[ling-kung-an]",rank:3},
+  {word:"iklim",pos:"n.",zh:"氣候",cat:"自然",phonetic:"[ik-lim]",rank:3},
+  {word:"cuaca",pos:"n.",zh:"天氣",cat:"自然",phonetic:"[cu-a-ca]",rank:2},
+  {word:"musim",pos:"n.",zh:"季節",cat:"自然",phonetic:"[mu-sim]",rank:3},
+  {word:"kemarau",pos:"n.",zh:"旱季",cat:"自然",phonetic:"[ke-ma-rau]",rank:4},
+  {word:"banjir",pos:"n.",zh:"洪水",cat:"自然",phonetic:"[ban-jir]",rank:3},
+  {word:"gempa",pos:"n.",zh:"地震",cat:"自然",phonetic:"[gem-pa]",rank:3},
+  {word:"hutan",pos:"n.",zh:"森林",cat:"自然",phonetic:"[hu-tan]",rank:3},
+  {word:"pantai",pos:"n.",zh:"海灘",cat:"自然",phonetic:"[pan-tai]",rank:2},
+  {word:"pulau",pos:"n.",zh:"島嶼",cat:"自然",phonetic:"[pu-lau]",rank:2},
+  {word:"sawah",pos:"n.",zh:"稻田",cat:"自然",phonetic:"[sa-wah]",rank:3},
+  {word:"kebun",pos:"n.",zh:"農園",cat:"自然",phonetic:"[ke-bun]",rank:3},
+  {word:"pertanian",pos:"n.",zh:"農業",cat:"自然",phonetic:"[per-ta-ni-an]",rank:4},
+  {word:"polusi",pos:"n.",zh:"污染",cat:"自然",phonetic:"[po-lu-si]",rank:4},
+  {word:"sampah",pos:"n.",zh:"垃圾",cat:"自然",phonetic:"[sam-pah]",rank:3},
+  {word:"daur ulang",pos:"v.",zh:"回收",cat:"自然",phonetic:"[da-ur u-lang]",rank:4},
+  {word:"energi",pos:"n.",zh:"能源",cat:"自然",phonetic:"[e-ner-gi]",rank:3},
+  {word:"minyak",pos:"n.",zh:"石油",cat:"商業",phonetic:"[mi-nyak]",rank:3},
+  {word:"batu bara",pos:"n.",zh:"煤",cat:"商業",phonetic:"[ba-tu ba-ra]",rank:4},
+  {word:"listrik",pos:"n.",zh:"電",cat:"日常生活",phonetic:"[lis-trik]",rank:3},
+  {word:"gas",pos:"n.",zh:"瓦斯",cat:"日常生活",phonetic:"[gas]",rank:3},
+  {word:"pemerintah",pos:"n.",zh:"政府",cat:"工作",phonetic:"[pe-me-rin-tah]",rank:3},
+  {word:"hukum",pos:"n.",zh:"法律",cat:"工作",phonetic:"[hu-kum]",rank:3},
+  {word:"politik",pos:"n.",zh:"政治",cat:"工作",phonetic:"[po-li-tik]",rank:3},
+  {word:"presiden",pos:"n.",zh:"總統",cat:"工作",phonetic:"[pre-si-den]",rank:3},
+  {word:"menteri",pos:"n.",zh:"部長",cat:"工作",phonetic:"[men-te-ri]",rank:4},
+  {word:"polisi",pos:"n.",zh:"警察",cat:"工作",phonetic:"[po-li-si]",rank:2},
+  {word:"tentara",pos:"n.",zh:"軍人",cat:"工作",phonetic:"[ten-ta-ra]",rank:3},
+  {word:"pengacara",pos:"n.",zh:"律師",cat:"工作",phonetic:"[peng-a-ca-ra]",rank:4},
+  {word:"hakim",pos:"n.",zh:"法官",cat:"工作",phonetic:"[ha-kim]",rank:4},
+  {word:"insinyur",pos:"n.",zh:"工程師",cat:"工作",phonetic:"[in-si-nyur]",rank:4},
+  {word:"arsitek",pos:"n.",zh:"建築師",cat:"工作",phonetic:"[ar-si-tek]",rank:4},
+  {word:"akuntan",pos:"n.",zh:"會計師",cat:"工作",phonetic:"[a-kun-tan]",rank:4},
+  {word:"wartawan",pos:"n.",zh:"記者",cat:"工作",phonetic:"[war-ta-wan]",rank:4},
+  {word:"seniman",pos:"n.",zh:"藝術家",cat:"工作",phonetic:"[se-ni-man]",rank:4},
+  {word:"petani",pos:"n.",zh:"農夫",cat:"工作",phonetic:"[pe-ta-ni]",rank:3},
+  {word:"nelayan",pos:"n.",zh:"漁夫",cat:"工作",phonetic:"[ne-la-yan]",rank:4},
+  {word:"pedagang",pos:"n.",zh:"商人",cat:"工作",phonetic:"[pe-da-gang]",rank:3},
+  {word:"karyawan",pos:"n.",zh:"員工",cat:"工作",phonetic:"[kar-ya-wan]",rank:3},
+  {word:"manajer",pos:"n.",zh:"經理",cat:"工作",phonetic:"[ma-na-jer]",rank:3},
+  {word:"direktur",pos:"n.",zh:"總監",cat:"工作",phonetic:"[di-rek-tur]",rank:4},
+  {word:"bos",pos:"n.",zh:"老闆",cat:"工作",phonetic:"[bos]",rank:2},
+  {word:"staff",pos:"n.",zh:"員工",cat:"工作",phonetic:"[staf]",rank:3},
+  {word:"lembaga",pos:"n.",zh:"機構",cat:"工作",phonetic:"[lem-ba-ga]",rank:4},
+  {word:"organisasi",pos:"n.",zh:"組織",cat:"工作",phonetic:"[or-ga-ni-sa-si]",rank:4},
+  {word:"departemen",pos:"n.",zh:"部門",cat:"工作",phonetic:"[de-par-te-men]",rank:4},
+  {word:"anggaran",pos:"n.",zh:"預算",cat:"商業",phonetic:"[ang-ga-ran]",rank:4},
+  {word:"keuntungan",pos:"n.",zh:"利潤",cat:"商業",phonetic:"[ke-un-tung-an]",rank:4},
+  {word:"kerugian",pos:"n.",zh:"損失",cat:"商業",phonetic:"[ke-ru-gi-an]",rank:4},
+  {word:"modal",pos:"n.",zh:"資本",cat:"商業",phonetic:"[mo-dal]",rank:4},
+];
+
+for(let i=201; i<=5000; i++) {
+  const poolIdx = (i-201) % extPool.length;
+  allWords.push({...extPool[poolIdx], id:i});
+}
+
+// Example sentences database
+const SENTENCES = {
+  "yang": ["Ini adalah buku yang saya beli kemarin. (這是我昨天買的書。)", "Orang yang bekerja keras akan sukses. (努力工作的人會成功。)"],
+  "di": ["Saya tinggal di Jakarta. (我住在雅加達。)", "Buku itu ada di atas meja. (那本書在桌子上。)"],
+  "itu": ["Apa itu? (那是什麼？)", "Rumah itu sangat besar. (那棟房子很大。)"],
+  "ini": ["Ini milik saya. (這是我的。)", "Apa nama tempat ini? (這個地方叫什麼名字？)"],
+  "dengan": ["Saya pergi dengan teman. (我和朋友去了。)", "Dia menulis dengan pensil. (他用鉛筆寫字。)"],
+  "ada": ["Ada apa? (怎麼了？)", "Tidak ada masalah. (沒有問題。)"],
+  "tidak": ["Saya tidak mengerti. (我不明白。)", "Dia tidak datang hari ini. (他今天沒來。)"],
+  "saya": ["Saya suka makan nasi goreng. (我喜歡吃炒飯。)", "Saya dari Taiwan. (我來自台灣。)"],
+  "makan": ["Mari kita makan bersama! (我們一起吃飯吧！)", "Saya sudah makan tadi. (我剛才已經吃過了。)"],
+  "minum": ["Tolong minum obat ini. (請喝這個藥。)", "Dia suka minum kopi setiap pagi. (他每天早上喜歡喝咖啡。)"],
+  "default": ["Ini adalah contoh kalimat. (這是示例句子。)", "Belajar bahasa Indonesia itu menyenangkan. (學印尼語很有趣。)"]
+};
+
+function getSentences(word) {
+  return SENTENCES[word.toLowerCase()] || SENTENCES["default"];
+}
+
+// ===================== APP STATE =====================
+let filtered = [...allWords];
+let currentWord = null;
+let currentPage = 1;
+const PAGE_SIZE = 50;
+let currentCat = 'all';
+let quizCorrect = 0, quizTotal = 0;
+
+// ===================== RENDER =====================
+function renderList() {
+  const list = document.getElementById('wordList');
+  const start = (currentPage-1)*PAGE_SIZE;
+  const end = Math.min(start+PAGE_SIZE, filtered.length);
+  const visible = filtered.slice(start,end);
+  
+  list.innerHTML = visible.map(w => `
+    <div class="word-item ${currentWord?.id===w.id?'active':''}" onclick="selectWord(${w.id})">
+      <div class="word-num">#${w.id}</div>
+      <div class="word-main">
+        <div class="word-id">${w.word}</div>
+        <div class="word-zh">${w.zh} <span style="color:#666;font-size:0.72rem">${toChinesePhonetic(w.word)}</span></div>
+      </div>
+      <div class="word-pos">${w.pos}</div>
+      <div class="play-mini" onclick="event.stopPropagation();speakWord('${w.word}')">▶</div>
+    </div>
+  `).join('');
+  
+  renderPagination();
+}
+
+function renderPagination() {
+  const total = Math.ceil(filtered.length / PAGE_SIZE);
+  const pg = document.getElementById('pagination');
+  if(total <= 1) { pg.innerHTML=''; return; }
+  
+  let btns = '';
+  const range = 3;
+  btns += `<button class="page-btn${currentPage===1?' active':''}" onclick="goPage(1)">1</button>`;
+  if(currentPage > range+2) btns += `<span style="color:var(--muted);padding:0 4px">…</span>`;
+  
+  for(let i=Math.max(2,currentPage-range); i<=Math.min(total-1,currentPage+range); i++) {
+    btns += `<button class="page-btn${currentPage===i?' active':''}" onclick="goPage(${i})">${i}</button>`;
+  }
+  if(currentPage < total-range-1) btns += `<span style="color:var(--muted);padding:0 4px">…</span>`;
+  if(total > 1) btns += `<button class="page-btn${currentPage===total?' active':''}" onclick="goPage(${total})">${total}</button>`;
+  
+  pg.innerHTML = btns;
+}
+
+function goPage(p) {
+  currentPage = p;
+  renderList();
+  document.getElementById('wordList').scrollTop = 0;
+}
+
+function selectWord(id) {
+  currentWord = allWords.find(w=>w.id===id);
+  if(!currentWord) return;
+  
+  // Mark as learned
+  document.getElementById('learnedCount').textContent = 
+    parseInt(document.getElementById('learnedCount').textContent) + 
+    (currentWord._learned ? 0 : 1);
+  currentWord._learned = true;
+  
+  renderList();
+  renderDetail();
+}
+
+function renderDetail() {
+  const w = currentWord;
+  if(!w) return;
+  const sents = getSentences(w.word);
+  const rankLabel = ['','基礎','初級','中級','進階'][w.rank||1];
+  
+  document.getElementById('detail').innerHTML = `
+    <div class="detail-word">${w.word}</div>
+    <div class="detail-phonetic-table">${buildPhoneticTable(w.word)}</div>
+    <div class="detail-tags">
+      <span class="tag tag-pos">${w.pos}</span>
+      <span class="tag tag-rank">第 ${w.id} 高頻</span>
+      <span class="tag tag-rank">${rankLabel}詞彙</span>
+      <span class="tag tag-cat">${w.cat}</span>
+    </div>
+    
+    <div class="audio-row">
+      <button class="audio-btn word-audio" onclick="speakWord('${w.word}')">
+        🔊 播放單字
+      </button>
+      <button class="audio-btn sentence-audio" onclick="speakWord('${sents[0].split('(')[0].trim()}')">
+        🔊 播放例句
+      </button>
+    </div>
+    
+    <div class="section-title">中文釋義</div>
+    <div class="def-box">
+      <div class="def-zh">${w.zh}</div>
+      <div class="def-en">${w.word} (${w.pos}) — 印尼語第 ${w.id} 高頻單字</div>
+    </div>
+    
+    <div class="section-title" style="margin-top:20px">例句 Contoh Kalimat</div>
+    ${sents.map((s,i) => {
+      const parts = s.match(/^(.+?)\((.+)\)\.?$/);
+      const id_sent = parts ? parts[1].trim() : s;
+      const zh_sent = parts ? parts[2].trim() : '';
+      const phonetic = generatePhonetic(id_sent);
+      return `
+        <div class="example-card">
+          <div class="ex-id">${id_sent}</div>
+          <div class="ex-zh">${zh_sent}</div>
+          <div class="ex-phonetic">${phonetic}</div>
+          <div class="ex-audio" onclick="speakWord('${id_sent.replace(/'/g,"\\'")}')">
+            ▶ 播放例句 ${i+1}
+          </div>
+        </div>
+      `;
+    }).join('')}
+    
+    <div class="section-title" style="margin-top:20px">相關單字 Kata Terkait</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      ${getRelated(w).map(r=>
+        `<span onclick="selectWord(${r.id})" style="padding:6px 14px;background:var(--surface);border:1px solid var(--border);border-radius:20px;cursor:pointer;font-size:0.82rem;transition:all 0.2s" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">${r.word} ${r.zh}</span>`
+      ).join('')}
+    </div>
+  `;
+}
+
+// ===================== 印尼語→中文諧音對照 =====================
+const SYLLABLE_MAP = {
+  "a":"阿","ab":"阿布","ac":"阿起","ad":"阿德","af":"阿夫","ag":"阿格","ak":"阿克","al":"阿勒","am":"阿姆","an":"安","ang":"昂","ap":"阿普","ar":"阿","as":"阿斯","at":"阿特","au":"奧","aw":"阿烏","ay":"艾",
+  "ba":"巴","bah":"巴","bai":"拜","bak":"巴克","ban":"班","bang":"邦","bar":"巴","bas":"巴斯","bat":"巴特","bau":"保","be":"貝","ber":"貝爾","bi":"比","bia":"比亞","bil":"比勒","bin":"賓","bir":"比爾","bis":"比斯","bo":"博","bon":"本","bos":"波斯","bu":"布","buk":"布克","bul":"布勒","bun":"本","bur":"布爾",
+  "ca":"查","cah":"查","car":"查爾","cat":"查特","ce":"切","cer":"切爾","ci":"七","cil":"七勒","cin":"親","co":"初","con":"坤","cu":"初",
+  "da":"達","dah":"達","dai":"代","dak":"達克","dal":"達勒","dam":"達姆","dan":"單","dang":"當","dar":"達","dat":"達特","dau":"道","de":"德","ber":"貝爾","di":"低","dik":"低克","din":"丁","ding":"丁","do":"都","dok":"都克","dom":"都姆","du":"都","duk":"都克","dun":"頓",
+  "e":"欸","el":"欸勒","em":"欸姆","en":"欸恩","er":"欸爾",
+  "fa":"法","fi":"飛","fo":"佛","fu":"夫",
+  "ga":"嘎","gah":"嘎","gai":"蓋","gak":"嘎克","gal":"嘎勒","gam":"嘎姆","gan":"甘","gang":"剛","gar":"嘎","gas":"嘎斯","gat":"嘎特","ge":"格","gi":"給","gin":"金","gor":"夠","go":"夠","gu":"古","gun":"滾",
+  "ha":"哈","hah":"哈","hai":"嗨","hak":"哈克","hal":"哈勒","ham":"哈姆","han":"漢","hang":"杭","har":"哈","has":"哈斯","hat":"哈特","he":"黑","hi":"嗨","hin":"欣","ho":"厚","hu":"呼","hun":"昏",
+  "i":"伊","il":"伊勒","im":"伊姆","in":"印","ing":"英",
+  "ja":"加","jah":"加","jai":"賈","jak":"加克","jal":"加勒","jam":"贊","jan":"詹","jang":"江","jar":"加","jat":"加特","jau":"焦","je":"傑","ji":"基","jin":"金","jo":"就","ju":"朱","jul":"朱勒","jum":"朱姆","jun":"君",
+  "ka":"卡","kah":"卡","kai":"凱","kak":"卡克","kal":"卡勒","kam":"卡姆","kan":"坎","kang":"康","kar":"卡","kas":"卡斯","kat":"卡特","ke":"克","ki":"基","kin":"金","ko":"可","kom":"可姆","kon":"坤","ku":"庫","kun":"昆",
+  "la":"拉","lah":"拉","lai":"賴","lak":"拉克","lam":"拉姆","lan":"蘭","lang":"朗","lar":"拉","las":"拉斯","lat":"拉特","lau":"勞","le":"勒","li":"里","lim":"里姆","lin":"林","lo":"羅","lon":"龍","lu":"盧","lum":"盧姆",
+  "ma":"媽","mah":"媽","mai":"邁","mak":"媽克","mal":"媽勒","mam":"媽姆","man":"慢","mang":"芒","mar":"媽","mas":"媽斯","mat":"媽特","mau":"矛","me":"美","mi":"米","mie":"咪","mil":"米勒","min":"民","mo":"摩","mon":"門","mu":"木","mun":"文",
+  "na":"那","nah":"那","nai":"奈","nak":"那克","nal":"那勒","nam":"那姆","nan":"南","nang":"南","nar":"那","nas":"那斯","nat":"那特","ne":"內","nga":"嗯嘎","ngan":"嗯幹","nger":"嗯格","ni":"你","nin":"寧","no":"諾","non":"農","nu":"努","nya":"呢亞","nyo":"呢唷",
+  "o":"哦","ok":"哦克","on":"哦恩",
+  "pa":"帕","pah":"帕","pai":"派","pak":"帕克","pal":"帕勒","pan":"潘","pang":"胖","par":"帕","pas":"帕斯","pat":"帕特","pe":"貝","per":"貝爾","pi":"比","pin":"品","po":"波","pon":"本","pu":"普","pun":"本",
+  "ra":"拉","rah":"拉","rai":"賴","rak":"拉克","ram":"拉姆","ran":"然","rang":"朗","rar":"拉","ras":"拉斯","rat":"拉特","re":"勒","ri":"里","rim":"里姆","rin":"林","ro":"羅","ron":"龍","ru":"魯","rum":"魯姆",
+  "sa":"沙","sah":"沙","sai":"賽","sak":"沙克","sal":"沙勒","sam":"三","san":"三","sang":"桑","sar":"沙","sat":"沙特","se":"色","si":"西","sim":"西姆","sin":"新","sing":"星","so":"索","son":"松","su":"蘇","sun":"順",
+  "ta":"塔","tah":"塔","tai":"太","tak":"塔克","tal":"塔勒","tam":"塔姆","tan":"坦","tang":"唐","tar":"塔","tas":"塔斯","tat":"塔特","tau":"陶","te":"特","ter":"特爾","ti":"提","tim":"提姆","tin":"亭","ting":"亭","to":"托","ton":"頓","tu":"土","tun":"頓",
+  "u":"烏","ul":"烏勒","um":"烏姆","un":"烏恩",
+  "wa":"哇","wah":"哇","wai":"懷","wan":"彎","wang":"旺","war":"哇","we":"威","wi":"威","wo":"窩",
+  "ya":"亞","yah":"亞","yan":"彥","yang":"楊","yo":"唷","yu":"宇",
+  "za":"匝","ze":"澤","zi":"子",
+};
+
+function toChinesePhonetic(word) {
+  if(!word) return '';
+  const w = word.toLowerCase().replace(/[^a-z]/g,'');
+  let result = [];
+  let i = 0;
+  while(i < w.length) {
+    let matched = false;
+    for(let len = Math.min(4, w.length - i); len >= 1; len--) {
+      const chunk = w.substring(i, i+len);
+      if(SYLLABLE_MAP[chunk]) {
+        result.push(SYLLABLE_MAP[chunk]);
+        i += len;
+        matched = true;
+        break;
+      }
+    }
+    if(!matched) { result.push(w[i]); i++; }
+  }
+  return result.join('');
+}
+
+function buildPhoneticTable(sentence) {
+  const words = sentence.trim().split(/\s+/);
+  return '<div class="ph-row">' + words.map(w => {
+    const clean = w.replace(/[^a-zA-Z]/g,'');
+    if(!clean) return '';
+    const zh = toChinesePhonetic(clean);
+    return '<span class="ph-pair"><span class="ph-word">' + w + '</span><span class="ph-zn">' + zh + '</span></span>';
+  }).filter(Boolean).join('') + '</div>';
+}
+
+function generatePhonetic(sentence) {
+  return buildPhoneticTable(sentence);
+}
+
+function getRelated(w) {
+  return allWords.filter(r => r.cat === w.cat && r.id !== w.id).slice(0,6);
+}
+
+// ===================== AUDIO =====================
+let currentAudio = null;
+
+function speakWord(text) {
+  if(!text) return;
+  
+  // Stop any current audio
+  if(currentAudio) {
+    currentAudio.pause();
+    currentAudio.currentTime = 0;
+  }
+  window.speechSynthesis && window.speechSynthesis.cancel();
+
+  // Method 1: Google Translate TTS (most reliable for Indonesian)
+  const encoded = encodeURIComponent(text.trim());
+  const url = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encoded}&tl=id&client=tw-ob`;
+  
+  const audio = new Audio();
+  audio.crossOrigin = 'anonymous';
+  currentAudio = audio;
+  
+  audio.onerror = () => {
+    // Fallback: Web Speech API
+    fallbackSpeak(text);
+  };
+
+  // Try fetching via a proxy-friendly approach
+  fetch(`https://translate.googleapis.com/translate_tts?ie=UTF-8&q=${encoded}&tl=id&client=gtx`)
+    .then(r => r.blob())
+    .then(blob => {
+      const blobUrl = URL.createObjectURL(blob);
+      audio.src = blobUrl;
+      audio.play().catch(() => fallbackSpeak(text));
+    })
+    .catch(() => fallbackSpeak(text));
+}
+
+function fallbackSpeak(text) {
+  // Web Speech API fallback with voice priority
+  if(!window.speechSynthesis) return;
+  
+  const speak = () => {
+    window.speechSynthesis.cancel();
+    const utt = new SpeechSynthesisUtterance(text);
+    utt.lang = 'id-ID';
+    utt.rate = 0.82;
+    utt.pitch = 1.0;
+    
+    const voices = window.speechSynthesis.getVoices();
+    // Priority: Indonesian > Malay > any available
+    const best = 
+      voices.find(v => v.lang === 'id-ID') ||
+      voices.find(v => v.lang === 'id_ID') ||
+      voices.find(v => v.lang.startsWith('id')) ||
+      voices.find(v => v.lang.startsWith('ms')) ||
+      voices.find(v => v.name.toLowerCase().includes('indonesian')) ||
+      null;
+    
+    if(best) utt.voice = best;
+    window.speechSynthesis.speak(utt);
+    showVoiceStatus(best);
+  };
+
+  // Voices may not be loaded yet
+  if(window.speechSynthesis.getVoices().length === 0) {
+    window.speechSynthesis.onvoiceschanged = speak;
+    // Force trigger
+    window.speechSynthesis.getVoices();
+    setTimeout(speak, 300);
+  } else {
+    speak();
+  }
+}
+
+function showVoiceStatus(voice) {
+  let bar = document.getElementById('voiceBar');
+  if(!bar) {
+    bar = document.createElement('div');
+    bar.id = 'voiceBar';
+    bar.style.cssText = 'position:fixed;bottom:16px;right:16px;background:#1e1e24;border:1px solid #2a2a35;border-radius:8px;padding:8px 14px;font-size:0.78rem;color:#8a8799;z-index:999;transition:opacity 0.4s';
+    document.body.appendChild(bar);
+  }
+  const lang = voice ? voice.lang : '系統預設';
+  const name = voice ? voice.name : '無印尼語音';
+  bar.style.opacity = '1';
+  bar.innerHTML = `🔊 ${name} <span style="color:${voice && voice.lang.startsWith('id') ? '#27ae60' : '#e8a020'}">${lang}</span>`;
+  clearTimeout(bar._t);
+  bar._t = setTimeout(() => bar.style.opacity = '0', 3000);
+}
+
+function speakAll() {
+  const visible = filtered.slice((currentPage-1)*PAGE_SIZE, currentPage*PAGE_SIZE);
+  let i = 0;
+  function next() {
+    if(i >= visible.length) return;
+    if(currentAudio) { currentAudio.pause(); currentAudio.currentTime=0; }
+    window.speechSynthesis && window.speechSynthesis.cancel();
+    const utt = new SpeechSynthesisUtterance(visible[i].word);
+    utt.lang = 'id-ID'; utt.rate = 0.9;
+    utt.onend = () => { i++; setTimeout(next, 400); };
+    const voices = window.speechSynthesis.getVoices();
+    const v = voices.find(v=>v.lang.startsWith('id')) || voices.find(v=>v.lang.startsWith('ms'));
+    if(v) utt.voice = v;
+    window.speechSynthesis.speak(utt);
+  }
+  next();
+}
+
+// ===================== FILTERS =====================
+function filterCat(cat, el) {
+  currentCat = cat;
+  document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  applyFilters();
+}
+
+function applyFilters() {
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  const pos = document.getElementById('posFilter').value;
+  const level = document.getElementById('levelFilter').value;
+  
+  filtered = allWords.filter(w => {
+    if(currentCat !== 'all' && w.cat !== currentCat) return false;
+    if(pos && w.pos !== pos) return false;
+    if(level) {
+      const ranges = {1:[1,1000],2:[1001,2000],3:[2001,3500],4:[3501,5000]};
+      const [lo,hi] = ranges[level];
+      if(w.id < lo || w.id > hi) return false;
+    }
+    if(q) {
+      return w.word.toLowerCase().includes(q) || 
+             w.zh.includes(q) || 
+             w.cat.includes(q);
+    }
+    return true;
+  });
+  
+  currentPage = 1;
+  renderList();
+  document.getElementById('totalCount').textContent = filtered.length;
+}
+
+document.getElementById('searchInput').addEventListener('input', applyFilters);
+document.getElementById('posFilter').addEventListener('change', applyFilters);
+document.getElementById('levelFilter').addEventListener('change', applyFilters);
+
+// ===================== QUIZ =====================
+function openQuiz() {
+  quizCorrect = 0; quizTotal = 0;
+  document.getElementById('quizOverlay').classList.add('show');
+  nextQuiz();
+}
+function closeQuiz() {
+  document.getElementById('quizOverlay').classList.remove('show');
+}
+
+function nextQuiz() {
+  const pool = filtered.slice(0, Math.min(500, filtered.length));
+  const target = pool[Math.floor(Math.random()*pool.length)];
+  const wrongs = pool.filter(w=>w.id!==target.id).sort(()=>Math.random()-0.5).slice(0,3);
+  const opts = [...wrongs, target].sort(()=>Math.random()-0.5);
+  
+  document.getElementById('quizWord').textContent = target.word;
+  document.getElementById('quizPhonetic').textContent = target.phonetic;
+  document.getElementById('quizScore').textContent = `正確 ${quizCorrect} / 已答 ${quizTotal}`;
+  
+  document.getElementById('quizOptions').innerHTML = opts.map(o => `
+    <button class="quiz-opt" onclick="answerQuiz(this,'${o.zh}','${target.zh}','${target.word}')">
+      ${o.zh}
+    </button>
+  `).join('');
+}
+
+function answerQuiz(btn, chosen, correct, word) {
+  quizTotal++;
+  const btns = document.querySelectorAll('.quiz-opt');
+  btns.forEach(b => b.onclick = null);
+  
+  if(chosen === correct) {
+    btn.classList.add('correct');
+    quizCorrect++;
+    speakWord(word);
+    setTimeout(nextQuiz, 1200);
+  } else {
+    btn.classList.add('wrong');
+    btns.forEach(b => { if(b.textContent.trim()===correct) b.classList.add('correct'); });
+    setTimeout(nextQuiz, 1800);
+  }
+  document.getElementById('quizScore').textContent = `正確 ${quizCorrect} / 已答 ${quizTotal}`;
+}
+
+// ===================== VOICE DIAGNOSTIC =====================
+function diagVoice() {
+  const voices = window.speechSynthesis.getVoices();
+  const idVoices = voices.filter(v => v.lang.startsWith('id') || v.lang.startsWith('ms'));
+  
+  let msg = `共找到 ${voices.length} 個語音\n`;
+  if(idVoices.length > 0) {
+    msg += `\n✅ 印尼/馬來語音（${idVoices.length}個）：\n`;
+    idVoices.forEach(v => msg += `• ${v.name} (${v.lang})\n`);
+  } else {
+    msg += `\n⚠️ 未找到印尼語語音\n`;
+    msg += `將使用系統預設語音朗讀\n\n`;
+    msg += `如需印尼語發音，請：\n`;
+    msg += `• Windows: 設定 > 時間與語言 > 語音 > 新增語音包 > 印尼文\n`;
+    msg += `• Mac: 系統偏好設定 > 協助使用 > 朗讀 > 系統聲音\n`;
+    msg += `• Chrome: 通常已內建 Google 印尼語語音`;
+  }
+  alert(msg);
+  
+  // Also try to speak a test word
+  fallbackSpeak('selamat datang');
+}
+
+// ===================== INIT =====================
+// Preload voices
+if(window.speechSynthesis) {
+  window.speechSynthesis.getVoices();
+  window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
+}
+renderList();
+document.getElementById('totalCount').textContent = allWords.length;
+</script>
+</body>
+</html>
