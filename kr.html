@@ -1,0 +1,1518 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🇰🇷 韓語 5000單字</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="韓語單字">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#003478">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=Noto+Sans+KR:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#0d0d0f;--surface:#16161a;--surface2:#1e1e24;--border:#2a2a35;
+    --accent:#4a90d9;--accent2:#c0392b;--text:#f0ede8;--muted:#8a8799;
+    --green:#27ae60;--blue:#2980b9;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+  header{background:linear-gradient(135deg,#001a40 0%,#0d0d0f 60%);border-bottom:1px solid var(--border);padding:18px 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+  .logo{font-family:'Playfair Display',serif;font-size:1.5rem;color:#4a90d9;letter-spacing:-0.5px;}
+  .logo span{color:var(--text);font-weight:400;font-size:0.9rem;display:block;}
+  .stats-bar{display:flex;gap:20px;align-items:center;}
+  .stat{text-align:center;}
+  .stat-n{font-size:1.2rem;font-weight:600;color:#4a90d9;}
+  .stat-l{font-size:0.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;}
+  .controls{padding:16px 28px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;background:var(--surface);border-bottom:1px solid var(--border);}
+  .search-wrap{flex:1;min-width:200px;position:relative;}
+  .search-wrap input{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 16px 10px 42px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.9rem;outline:none;transition:border-color 0.2s;}
+  .search-wrap input:focus{border-color:var(--accent);}
+  .search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--muted);}
+  select{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.85rem;outline:none;cursor:pointer;}
+  .btn{padding:10px 18px;border-radius:8px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:0.85rem;font-weight:500;transition:all 0.2s;}
+  .btn-primary{background:#4a90d9;color:#fff;}
+  .btn-primary:hover{background:#5ba0e9;transform:translateY(-1px);}
+  .btn-ghost{background:transparent;color:var(--muted);border:1px solid var(--border);}
+  .btn-ghost:hover{border-color:var(--accent);color:var(--accent);}
+  .cat-tabs{padding:12px 28px;display:flex;gap:8px;flex-wrap:wrap;background:var(--surface);border-bottom:1px solid var(--border);}
+  .cat-tab{padding:6px 14px;border-radius:20px;font-size:0.8rem;font-weight:500;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--muted);transition:all 0.2s;}
+  .cat-tab.active,.cat-tab:hover{background:var(--accent);color:#fff;border-color:var(--accent);}
+  .main{display:flex;height:calc(100vh - 160px);}
+  .word-list{width:340px;min-width:280px;border-right:1px solid var(--border);overflow-y:auto;background:var(--surface);}
+  .word-list::-webkit-scrollbar{width:4px;}
+  .word-list::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
+  .word-item{display:flex;align-items:center;padding:14px 18px;border-bottom:1px solid var(--border);cursor:pointer;transition:background 0.15s;gap:14px;}
+  .word-item:hover{background:var(--surface2);}
+  .word-item.active{background:rgba(74,144,217,0.12);border-left:3px solid var(--accent);}
+  .word-num{font-size:0.7rem;color:var(--muted);min-width:32px;text-align:right;}
+  .word-main{flex:1;}
+  .word-id{font-size:1rem;font-weight:600;color:var(--text);font-family:'Noto Sans KR',sans-serif;}
+  .word-zh{font-size:0.78rem;color:var(--muted);margin-top:2px;}
+  .word-pos{font-size:0.65rem;padding:2px 7px;background:var(--surface2);border-radius:10px;color:var(--accent);border:1px solid rgba(74,144,217,0.3);font-weight:600;}
+  .play-mini{width:28px;height:28px;border-radius:50%;background:rgba(74,144,217,0.15);border:1px solid rgba(74,144,217,0.3);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--accent);font-size:0.7rem;transition:all 0.2s;flex-shrink:0;}
+  .play-mini:hover{background:var(--accent);color:#fff;}
+  .detail{flex:1;overflow-y:auto;padding:32px 36px;background:var(--bg);}
+  .detail-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;color:var(--muted);gap:12px;}
+  .detail-word{font-family:'Noto Sans KR',sans-serif;font-size:3rem;color:var(--text);line-height:1;margin-bottom:6px;}
+  .detail-phonetic-table{margin-bottom:18px;}
+  .ph-row{display:flex;flex-wrap:wrap;gap:14px;}
+  .ph-pair{display:flex;flex-direction:column;align-items:center;gap:3px;}
+  .ph-word{font-size:1rem;color:var(--accent);font-weight:600;}
+  .ph-zn{font-size:0.82rem;color:#ccc;letter-spacing:1px;}
+  .detail-tags{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap;}
+  .tag{padding:4px 12px;border-radius:20px;font-size:0.78rem;font-weight:500;}
+  .tag-pos{background:rgba(74,144,217,0.15);color:var(--accent);border:1px solid rgba(74,144,217,0.3);}
+  .tag-rank{background:rgba(39,174,96,0.15);color:var(--green);border:1px solid rgba(39,174,96,0.3);}
+  .tag-cat{background:rgba(41,128,185,0.15);color:var(--blue);border:1px solid rgba(41,128,185,0.3);}
+  .audio-row{display:flex;gap:10px;margin-bottom:28px;flex-wrap:wrap;}
+  .audio-btn{display:flex;align-items:center;gap:8px;padding:10px 18px;border-radius:8px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:0.85rem;font-weight:500;transition:all 0.2s;}
+  .audio-btn.word-audio{background:var(--accent);color:#fff;}
+  .audio-btn.word-audio:hover{background:#5ba0e9;transform:translateY(-1px);}
+  .audio-btn.sentence-audio{background:var(--surface2);color:var(--text);border:1px solid var(--border);}
+  .audio-btn.sentence-audio:hover{border-color:var(--accent);color:var(--accent);}
+  .section-title{font-size:0.7rem;text-transform:uppercase;letter-spacing:2px;color:var(--muted);margin-bottom:10px;font-weight:600;}
+  .def-box{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px 20px;margin-bottom:20px;}
+  .def-zh{font-size:1.15rem;color:var(--text);font-weight:500;margin-bottom:6px;}
+  .def-en{font-size:0.85rem;color:var(--muted);}
+  .example-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px 20px;margin-bottom:14px;position:relative;overflow:hidden;}
+  .example-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent);border-radius:3px 0 0 3px;}
+  .ex-id{font-size:1rem;color:var(--text);font-weight:500;margin-bottom:4px;line-height:1.5;font-family:'Noto Sans KR',sans-serif;}
+  .ex-zh{font-size:0.88rem;color:#aaa;margin-bottom:8px;}
+  .ex-phonetic{font-size:0.78rem;color:var(--muted);margin-bottom:10px;}
+  .ex-audio{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:6px;background:rgba(74,144,217,0.1);border:1px solid rgba(74,144,217,0.25);color:var(--accent);font-size:0.75rem;cursor:pointer;transition:all 0.2s;}
+  .ex-audio:hover{background:rgba(74,144,217,0.2);}
+  .pagination{padding:16px 28px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap;background:var(--surface);border-top:1px solid var(--border);}
+  .page-btn{padding:6px 12px;border-radius:6px;font-size:0.8rem;background:var(--surface2);color:var(--muted);border:1px solid var(--border);cursor:pointer;transition:all 0.2s;}
+  .page-btn:hover,.page-btn.active{background:var(--accent);color:#fff;border-color:var(--accent);}
+  .quiz-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:200;align-items:center;justify-content:center;}
+  .quiz-overlay.show{display:flex;}
+  .quiz-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:32px 28px;max-width:480px;width:90%;}
+  .quiz-q{font-size:2.2rem;font-family:'Noto Sans KR',sans-serif;color:var(--accent);margin-bottom:8px;text-align:center;cursor:pointer;}
+  .quiz-options{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px;}
+  .quiz-opt{padding:14px;border-radius:8px;background:var(--surface2);color:var(--text);border:1px solid var(--border);cursor:pointer;transition:all 0.2s;font-size:0.88rem;font-family:'DM Sans',sans-serif;}
+  .quiz-opt:hover{border-color:var(--accent);color:var(--accent);}
+  .quiz-opt.correct{background:rgba(39,174,96,0.2);border-color:var(--green);color:var(--green);}
+  .quiz-opt.wrong{background:rgba(192,57,43,0.2);border-color:var(--accent2);color:var(--accent2);}
+  @media(max-width:768px){.main{flex-direction:column;height:auto;}.word-list{width:100%;height:50vh;min-width:unset;}.detail{padding:20px 16px;}.detail-word{font-size:2rem;}header{padding:12px 16px;}.controls{padding:12px 16px;}.cat-tabs{padding:10px 16px;}}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" style="display:flex;align-items:center;gap:6px;color:var(--muted);font-size:0.8rem;text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:8px;margin-right:8px;flex-shrink:0">‹ 返回</a>
+  <div class="logo">
+    🇰🇷 韓語高頻詞彙
+    <span>한국어 고빈도 어휘</span>
+  </div>
+  <div class="stats-bar">
+    <div class="stat"><div class="stat-n" id="totalCount">5000</div><div class="stat-l">總單字數</div></div>
+    <div class="stat"><div class="stat-n" id="learnedCount">0</div><div class="stat-l">已學習</div></div>
+  </div>
+</header>
+
+<div class="controls">
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="searchInput" placeholder="搜尋單字、中文、詞性…">
+  </div>
+  <select id="posFilter">
+    <option value="">所有詞性</option>
+    <option value="n.">名詞</option>
+    <option value="v.">動詞</option>
+    <option value="adj.">形容詞</option>
+    <option value="adv.">副詞</option>
+    <option value="conj.">連詞</option>
+    <option value="pron.">代詞</option>
+    <option value="num.">數詞</option>
+  </select>
+  <select id="levelFilter">
+    <option value="">所有等級</option>
+    <option value="1">基礎 (1-1000)</option>
+    <option value="2">初級 (1001-2000)</option>
+    <option value="3">中級 (2001-3500)</option>
+    <option value="4">進階 (3501-5000)</option>
+  </select>
+  <button class="btn btn-primary" onclick="openQuiz()">📝 測驗模式</button>
+  <button class="btn btn-ghost" onclick="speakAll()">🔊 全部播放</button>
+</div>
+
+<div class="cat-tabs" id="catTabs">
+  <button class="cat-tab active" onclick="filterCat('all',this)">全部</button>
+  <button class="cat-tab" onclick="filterCat('日常生活',this)">日常生活</button>
+  <button class="cat-tab" onclick="filterCat('食物',this)">食物飲料</button>
+  <button class="cat-tab" onclick="filterCat('工作',this)">工作職業</button>
+  <button class="cat-tab" onclick="filterCat('家庭',this)">家庭關係</button>
+  <button class="cat-tab" onclick="filterCat('時間',this)">時間數字</button>
+  <button class="cat-tab" onclick="filterCat('地點',this)">地點方向</button>
+  <button class="cat-tab" onclick="filterCat('身體',this)">身體健康</button>
+  <button class="cat-tab" onclick="filterCat('情感',this)">情感心理</button>
+  <button class="cat-tab" onclick="filterCat('自然',this)">自然環境</button>
+  <button class="cat-tab" onclick="filterCat('交通',this)">交通出行</button>
+  <button class="cat-tab" onclick="filterCat('教育',this)">教育學習</button>
+  <button class="cat-tab" onclick="filterCat('商業',this)">商業金融</button>
+</div>
+
+<div class="main">
+  <div class="word-list" id="wordList"></div>
+  <div class="detail" id="detail">
+    <div class="detail-empty">
+      <div style="font-size:3rem">🇰🇷</div>
+      <div style="font-size:1.1rem;color:var(--text)">선택하세요 · 選擇單字開始學習</div>
+      <div>點擊左側單字查看詳細資訊、例句與音檔</div>
+    </div>
+  </div>
+</div>
+<div class="pagination" id="pagination"></div>
+
+<!-- QUIZ -->
+<div class="quiz-overlay" id="quizOverlay">
+  <div class="quiz-card" id="quizQuestion">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+      <div style="font-size:0.78rem;color:var(--muted)" id="quizRound">第 1 輪</div>
+      <div style="font-size:0.78rem;color:var(--muted)" id="quizProgress">1 / 20</div>
+      <button onclick="closeQuiz()" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:0.85rem">✕ 離開</button>
+    </div>
+    <div style="background:var(--border);border-radius:4px;height:4px;margin-bottom:18px">
+      <div id="quizBar" style="background:var(--accent);height:4px;border-radius:4px;width:0%;transition:width 0.3s"></div>
+    </div>
+    <div style="font-size:0.85rem;color:var(--muted);margin-bottom:8px;text-align:center">這個單字的中文意思是？</div>
+    <div class="quiz-q" id="quizWord" onclick="quizSpeak()"></div>
+    <div style="font-size:0.78rem;color:var(--muted);text-align:center;margin:6px 0 4px" id="quizPhonetic"></div>
+    <button onclick="quizSpeak()" id="quizSpeakBtn" style="display:flex;align-items:center;gap:8px;margin:0 auto 16px;background:rgba(74,144,217,0.15);border:1.5px solid rgba(74,144,217,0.5);border-radius:30px;padding:9px 22px;cursor:pointer;color:var(--accent);font-size:0.88rem;font-weight:600;font-family:'DM Sans',sans-serif">🔊 播放發音</button>
+    <div class="quiz-options" id="quizOptions"></div>
+    <div style="margin-top:14px;font-size:0.82rem;color:var(--muted);text-align:center" id="quizScore"></div>
+  </div>
+  <div class="quiz-card" id="quizResult" style="display:none;text-align:center">
+    <div style="font-size:2.5rem;margin-bottom:12px" id="quizResultEmoji">🎉</div>
+    <div style="font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--accent);margin-bottom:8px" id="quizResultTitle"></div>
+    <div style="font-size:0.9rem;color:var(--muted);margin-bottom:20px" id="quizResultMsg"></div>
+    <div style="display:flex;justify-content:center;gap:24px;margin-bottom:24px">
+      <div style="text-align:center"><div style="font-size:2rem;font-weight:700;color:var(--green)" id="quizCorrectNum">0</div><div style="font-size:0.72rem;color:var(--muted)">答對</div></div>
+      <div style="text-align:center"><div style="font-size:2rem;font-weight:700;color:var(--accent2)" id="quizWrongNum">0</div><div style="font-size:0.72rem;color:var(--muted)">答錯</div></div>
+      <div style="text-align:center"><div style="font-size:2rem;font-weight:700;color:var(--accent)" id="quizAccuracy">0%</div><div style="font-size:0.72rem;color:var(--muted)">正確率</div></div>
+    </div>
+    <div id="quizWrongList" style="margin-bottom:20px;text-align:left;max-height:160px;overflow-y:auto"></div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <button id="quizRetryWrong" onclick="retryWrong()" style="display:none;padding:13px;border-radius:10px;border:none;cursor:pointer;background:var(--accent);color:#fff;font-size:0.95rem;font-weight:600;font-family:'DM Sans',sans-serif">🔁 重考錯誤單字</button>
+      <button onclick="startNewQuiz()" style="padding:13px;border-radius:10px;border:1px solid var(--border);cursor:pointer;background:var(--surface2);color:var(--text);font-size:0.9rem;font-family:'DM Sans',sans-serif">🎲 再來20題</button>
+      <button onclick="closeQuiz()" style="padding:13px;border-radius:10px;border:1px solid var(--border);cursor:pointer;background:transparent;color:var(--muted);font-size:0.9rem;font-family:'DM Sans',sans-serif">✕ 離開測驗</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ===== KOREAN 5000 WORDS =====
+const WORDS = [
+  // 基礎100個
+  {id:1,word:"나",pos:"pron.",zh:"我",cat:"日常生活",rank:1},
+  {id:2,word:"너",pos:"pron.",zh:"你",cat:"日常生活",rank:1},
+  {id:3,word:"그",pos:"pron.",zh:"他",cat:"日常生活",rank:1},
+  {id:4,word:"우리",pos:"pron.",zh:"我們",cat:"日常生活",rank:1},
+  {id:5,word:"이것",pos:"pron.",zh:"這個",cat:"日常生活",rank:1},
+  {id:6,word:"그것",pos:"pron.",zh:"那個",cat:"日常生活",rank:1},
+  {id:7,word:"있다",pos:"v.",zh:"有、存在",cat:"日常生活",rank:1},
+  {id:8,word:"없다",pos:"v.",zh:"沒有",cat:"日常生活",rank:1},
+  {id:9,word:"하다",pos:"v.",zh:"做",cat:"日常生活",rank:1},
+  {id:10,word:"이다",pos:"v.",zh:"是",cat:"日常生活",rank:1},
+  {id:11,word:"가다",pos:"v.",zh:"去",cat:"交通",rank:1},
+  {id:12,word:"오다",pos:"v.",zh:"來",cat:"交通",rank:1},
+  {id:13,word:"먹다",pos:"v.",zh:"吃",cat:"食物",rank:1},
+  {id:14,word:"마시다",pos:"v.",zh:"喝",cat:"食物",rank:1},
+  {id:15,word:"자다",pos:"v.",zh:"睡覺",cat:"日常生活",rank:1},
+  {id:16,word:"보다",pos:"v.",zh:"看",cat:"日常生活",rank:1},
+  {id:17,word:"듣다",pos:"v.",zh:"聽",cat:"日常生活",rank:1},
+  {id:18,word:"말하다",pos:"v.",zh:"說話",cat:"日常生活",rank:1},
+  {id:19,word:"알다",pos:"v.",zh:"知道",cat:"教育",rank:1},
+  {id:20,word:"모르다",pos:"v.",zh:"不知道",cat:"教育",rank:1},
+  {id:21,word:"좋다",pos:"adj.",zh:"好的",cat:"情感",rank:1},
+  {id:22,word:"나쁘다",pos:"adj.",zh:"壞的",cat:"情感",rank:1},
+  {id:23,word:"크다",pos:"adj.",zh:"大的",cat:"日常生活",rank:1},
+  {id:24,word:"작다",pos:"adj.",zh:"小的",cat:"日常生活",rank:1},
+  {id:25,word:"많다",pos:"adj.",zh:"多的",cat:"日常生活",rank:1},
+  {id:26,word:"적다",pos:"adj.",zh:"少的",cat:"日常生活",rank:1},
+  {id:27,word:"높다",pos:"adj.",zh:"高的",cat:"日常生活",rank:1},
+  {id:28,word:"낮다",pos:"adj.",zh:"低的",cat:"日常生活",rank:1},
+  {id:29,word:"빠르다",pos:"adj.",zh:"快的",cat:"交通",rank:1},
+  {id:30,word:"느리다",pos:"adj.",zh:"慢的",cat:"交通",rank:1},
+  {id:31,word:"덥다",pos:"adj.",zh:"熱的",cat:"自然",rank:1},
+  {id:32,word:"춥다",pos:"adj.",zh:"冷的",cat:"自然",rank:1},
+  {id:33,word:"맛있다",pos:"adj.",zh:"好吃的",cat:"食物",rank:1},
+  {id:34,word:"맵다",pos:"adj.",zh:"辣的",cat:"食物",rank:1},
+  {id:35,word:"달다",pos:"adj.",zh:"甜的",cat:"食物",rank:1},
+  {id:36,word:"짜다",pos:"adj.",zh:"鹹的",cat:"食物",rank:1},
+  {id:37,word:"사람",pos:"n.",zh:"人",cat:"日常生活",rank:1},
+  {id:38,word:"남자",pos:"n.",zh:"男人",cat:"日常生活",rank:1},
+  {id:39,word:"여자",pos:"n.",zh:"女人",cat:"日常生活",rank:1},
+  {id:40,word:"아이",pos:"n.",zh:"孩子",cat:"家庭",rank:1},
+  {id:41,word:"아버지",pos:"n.",zh:"父親",cat:"家庭",rank:1},
+  {id:42,word:"어머니",pos:"n.",zh:"母親",cat:"家庭",rank:1},
+  {id:43,word:"오빠",pos:"n.",zh:"哥哥（女稱）",cat:"家庭",rank:1},
+  {id:44,word:"형",pos:"n.",zh:"哥哥（男稱）",cat:"家庭",rank:1},
+  {id:45,word:"언니",pos:"n.",zh:"姊姊（女稱）",cat:"家庭",rank:1},
+  {id:46,word:"누나",pos:"n.",zh:"姊姊（男稱）",cat:"家庭",rank:1},
+  {id:47,word:"남동생",pos:"n.",zh:"弟弟",cat:"家庭",rank:1},
+  {id:48,word:"여동생",pos:"n.",zh:"妹妹",cat:"家庭",rank:1},
+  {id:49,word:"친구",pos:"n.",zh:"朋友",cat:"日常生活",rank:1},
+  {id:50,word:"선생님",pos:"n.",zh:"老師",cat:"教育",rank:1},
+  {id:51,word:"학생",pos:"n.",zh:"學生",cat:"教育",rank:1},
+  {id:52,word:"의사",pos:"n.",zh:"醫生",cat:"身體",rank:1},
+  {id:53,word:"집",pos:"n.",zh:"家、房子",cat:"地點",rank:1},
+  {id:54,word:"학교",pos:"n.",zh:"學校",cat:"教育",rank:1},
+  {id:55,word:"회사",pos:"n.",zh:"公司",cat:"工作",rank:1},
+  {id:56,word:"병원",pos:"n.",zh:"醫院",cat:"身體",rank:1},
+  {id:57,word:"시장",pos:"n.",zh:"市場",cat:"商業",rank:1},
+  {id:58,word:"식당",pos:"n.",zh:"餐廳",cat:"食物",rank:1},
+  {id:59,word:"은행",pos:"n.",zh:"銀行",cat:"商業",rank:1},
+  {id:60,word:"나라",pos:"n.",zh:"國家",cat:"地點",rank:1},
+  {id:61,word:"도시",pos:"n.",zh:"城市",cat:"地點",rank:1},
+  {id:62,word:"길",pos:"n.",zh:"路、街道",cat:"交通",rank:1},
+  {id:63,word:"오늘",pos:"n.",zh:"今天",cat:"時間",rank:1},
+  {id:64,word:"어제",pos:"n.",zh:"昨天",cat:"時間",rank:1},
+  {id:65,word:"내일",pos:"n.",zh:"明天",cat:"時間",rank:1},
+  {id:66,word:"지금",pos:"adv.",zh:"現在",cat:"時間",rank:1},
+  {id:67,word:"아침",pos:"n.",zh:"早上",cat:"時間",rank:1},
+  {id:68,word:"점심",pos:"n.",zh:"中午",cat:"時間",rank:1},
+  {id:69,word:"저녁",pos:"n.",zh:"傍晚、晚餐",cat:"時間",rank:1},
+  {id:70,word:"밤",pos:"n.",zh:"夜晚",cat:"時間",rank:1},
+  {id:71,word:"년",pos:"n.",zh:"年",cat:"時間",rank:1},
+  {id:72,word:"월",pos:"n.",zh:"月",cat:"時間",rank:1},
+  {id:73,word:"일",pos:"n.",zh:"日、天",cat:"時間",rank:1},
+  {id:74,word:"시간",pos:"n.",zh:"時間、小時",cat:"時間",rank:1},
+  {id:75,word:"분",pos:"n.",zh:"分鐘",cat:"時間",rank:1},
+  {id:76,word:"일",pos:"num.",zh:"一",cat:"時間",rank:1},
+  {id:77,word:"이",pos:"num.",zh:"二",cat:"時間",rank:1},
+  {id:78,word:"삼",pos:"num.",zh:"三",cat:"時間",rank:1},
+  {id:79,word:"사",pos:"num.",zh:"四",cat:"時間",rank:1},
+  {id:80,word:"오",pos:"num.",zh:"五",cat:"時間",rank:1},
+  {id:81,word:"육",pos:"num.",zh:"六",cat:"時間",rank:1},
+  {id:82,word:"칠",pos:"num.",zh:"七",cat:"時間",rank:1},
+  {id:83,word:"팔",pos:"num.",zh:"八",cat:"時間",rank:1},
+  {id:84,word:"구",pos:"num.",zh:"九",cat:"時間",rank:1},
+  {id:85,word:"십",pos:"num.",zh:"十",cat:"時間",rank:1},
+  {id:86,word:"백",pos:"num.",zh:"百",cat:"時間",rank:1},
+  {id:87,word:"천",pos:"num.",zh:"千",cat:"商業",rank:1},
+  {id:88,word:"밥",pos:"n.",zh:"米飯",cat:"食物",rank:1},
+  {id:89,word:"물",pos:"n.",zh:"水",cat:"食物",rank:1},
+  {id:90,word:"커피",pos:"n.",zh:"咖啡",cat:"食物",rank:1},
+  {id:91,word:"차",pos:"n.",zh:"茶、車",cat:"食物",rank:1},
+  {id:92,word:"김치",pos:"n.",zh:"泡菜",cat:"食物",rank:1},
+  {id:93,word:"불고기",pos:"n.",zh:"烤肉",cat:"食物",rank:1},
+  {id:94,word:"비빔밥",pos:"n.",zh:"拌飯",cat:"食物",rank:1},
+  {id:95,word:"삼겹살",pos:"n.",zh:"五花肉",cat:"食物",rank:1},
+  {id:96,word:"돈",pos:"n.",zh:"錢",cat:"商業",rank:1},
+  {id:97,word:"가격",pos:"n.",zh:"價格",cat:"商業",rank:1},
+  {id:98,word:"책",pos:"n.",zh:"書",cat:"教育",rank:1},
+  {id:99,word:"이름",pos:"n.",zh:"名字",cat:"日常生活",rank:1},
+  {id:100,word:"언어",pos:"n.",zh:"語言",cat:"教育",rank:1},
+  {id:101,word:"한국어",pos:"n.",zh:"韓語",cat:"教育",rank:1},
+  {id:102,word:"영어",pos:"n.",zh:"英語",cat:"教育",rank:1},
+  {id:103,word:"중국어",pos:"n.",zh:"中文",cat:"教育",rank:1},
+  {id:104,word:"일본어",pos:"n.",zh:"日語",cat:"教育",rank:1},
+  {id:105,word:"배우다",pos:"v.",zh:"學習",cat:"教育",rank:1},
+  {id:106,word:"가르치다",pos:"v.",zh:"教",cat:"教育",rank:1},
+  {id:107,word:"읽다",pos:"v.",zh:"閱讀",cat:"教育",rank:1},
+  {id:108,word:"쓰다",pos:"v.",zh:"寫",cat:"教育",rank:1},
+  {id:109,word:"일하다",pos:"v.",zh:"工作",cat:"工作",rank:1},
+  {id:110,word:"쉬다",pos:"v.",zh:"休息",cat:"日常生活",rank:1},
+  {id:111,word:"운동하다",pos:"v.",zh:"運動",cat:"日常生活",rank:1},
+  {id:112,word:"요리하다",pos:"v.",zh:"烹飪",cat:"食物",rank:1},
+  {id:113,word:"쇼핑하다",pos:"v.",zh:"購物",cat:"商業",rank:1},
+  {id:114,word:"전화하다",pos:"v.",zh:"打電話",cat:"工作",rank:1},
+  {id:115,word:"사랑하다",pos:"v.",zh:"愛",cat:"情感",rank:1},
+  {id:116,word:"좋아하다",pos:"v.",zh:"喜歡",cat:"情感",rank:1},
+  {id:117,word:"싫어하다",pos:"v.",zh:"討厭",cat:"情感",rank:1},
+  {id:118,word:"행복하다",pos:"v.",zh:"幸福",cat:"情感",rank:1},
+  {id:119,word:"슬프다",pos:"adj.",zh:"悲傷的",cat:"情感",rank:1},
+  {id:120,word:"화나다",pos:"v.",zh:"生氣",cat:"情感",rank:1},
+  {id:121,word:"무섭다",pos:"adj.",zh:"害怕的",cat:"情感",rank:1},
+  {id:122,word:"피곤하다",pos:"adj.",zh:"疲倦的",cat:"身體",rank:1},
+  {id:123,word:"배고프다",pos:"adj.",zh:"餓的",cat:"身體",rank:1},
+  {id:124,word:"목마르다",pos:"adj.",zh:"渴的",cat:"身體",rank:1},
+  {id:125,word:"아프다",pos:"adj.",zh:"痛的、生病",cat:"身體",rank:1},
+  {id:126,word:"건강하다",pos:"adj.",zh:"健康的",cat:"身體",rank:1},
+  {id:127,word:"예쁘다",pos:"adj.",zh:"漂亮的",cat:"情感",rank:1},
+  {id:128,word:"잘생기다",pos:"adj.",zh:"帥的",cat:"情感",rank:2},
+  {id:129,word:"똑똑하다",pos:"adj.",zh:"聰明的",cat:"教育",rank:2},
+  {id:130,word:"성격",pos:"n.",zh:"個性",cat:"情感",rank:2},
+  {id:131,word:"머리",pos:"n.",zh:"頭、頭髮",cat:"身體",rank:1},
+  {id:132,word:"눈",pos:"n.",zh:"眼睛、雪",cat:"身體",rank:1},
+  {id:133,word:"코",pos:"n.",zh:"鼻子",cat:"身體",rank:1},
+  {id:134,word:"입",pos:"n.",zh:"嘴",cat:"身體",rank:1},
+  {id:135,word:"귀",pos:"n.",zh:"耳朵",cat:"身體",rank:1},
+  {id:136,word:"손",pos:"n.",zh:"手",cat:"身體",rank:1},
+  {id:137,word:"발",pos:"n.",zh:"腳",cat:"身體",rank:1},
+  {id:138,word:"몸",pos:"n.",zh:"身體",cat:"身體",rank:1},
+  {id:139,word:"약",pos:"n.",zh:"藥",cat:"身體",rank:2},
+  {id:140,word:"옷",pos:"n.",zh:"衣服",cat:"日常生活",rank:1},
+  {id:141,word:"신발",pos:"n.",zh:"鞋子",cat:"日常生活",rank:2},
+  {id:142,word:"가방",pos:"n.",zh:"包包",cat:"日常生活",rank:2},
+  {id:143,word:"지갑",pos:"n.",zh:"錢包",cat:"日常生活",rank:2},
+  {id:144,word:"핸드폰",pos:"n.",zh:"手機",cat:"工作",rank:1},
+  {id:145,word:"컴퓨터",pos:"n.",zh:"電腦",cat:"工作",rank:1},
+  {id:146,word:"인터넷",pos:"n.",zh:"網路",cat:"工作",rank:1},
+  {id:147,word:"자동차",pos:"n.",zh:"汽車",cat:"交通",rank:1},
+  {id:148,word:"지하철",pos:"n.",zh:"地鐵",cat:"交通",rank:1},
+  {id:149,word:"버스",pos:"n.",zh:"公車",cat:"交通",rank:1},
+  {id:150,word:"비행기",pos:"n.",zh:"飛機",cat:"交通",rank:1},
+  {id:151,word:"기차",pos:"n.",zh:"火車",cat:"交通",rank:1},
+  {id:152,word:"공항",pos:"n.",zh:"機場",cat:"交通",rank:2},
+  {id:153,word:"역",pos:"n.",zh:"車站",cat:"交通",rank:2},
+  {id:154,word:"날씨",pos:"n.",zh:"天氣",cat:"自然",rank:1},
+  {id:155,word:"비",pos:"n.",zh:"雨",cat:"自然",rank:1},
+  {id:156,word:"눈",pos:"n.",zh:"雪",cat:"自然",rank:1},
+  {id:157,word:"바람",pos:"n.",zh:"風",cat:"自然",rank:1},
+  {id:158,word:"태양",pos:"n.",zh:"太陽",cat:"自然",rank:1},
+  {id:159,word:"달",pos:"n.",zh:"月亮",cat:"自然",rank:1},
+  {id:160,word:"별",pos:"n.",zh:"星星",cat:"自然",rank:1},
+  {id:161,word:"산",pos:"n.",zh:"山",cat:"自然",rank:1},
+  {id:162,word:"바다",pos:"n.",zh:"海",cat:"自然",rank:1},
+  {id:163,word:"강",pos:"n.",zh:"河",cat:"自然",rank:1},
+  {id:164,word:"나무",pos:"n.",zh:"樹",cat:"自然",rank:1},
+  {id:165,word:"꽃",pos:"n.",zh:"花",cat:"自然",rank:1},
+  {id:166,word:"동물",pos:"n.",zh:"動物",cat:"自然",rank:2},
+  {id:167,word:"개",pos:"n.",zh:"狗",cat:"自然",rank:1},
+  {id:168,word:"고양이",pos:"n.",zh:"貓",cat:"自然",rank:1},
+  {id:169,word:"새",pos:"n.",zh:"鳥",cat:"自然",rank:1},
+  {id:170,word:"물고기",pos:"n.",zh:"魚",cat:"食物",rank:1},
+  {id:171,word:"안녕하세요",pos:"phr.",zh:"你好（敬語）",cat:"日常生活",rank:1},
+  {id:172,word:"감사합니다",pos:"phr.",zh:"謝謝（敬語）",cat:"日常生活",rank:1},
+  {id:173,word:"죄송합니다",pos:"phr.",zh:"對不起（敬語）",cat:"日常生活",rank:1},
+  {id:174,word:"괜찮아요",pos:"phr.",zh:"沒關係",cat:"日常生活",rank:1},
+  {id:175,word:"잠깐만요",pos:"phr.",zh:"請稍等",cat:"日常生活",rank:1},
+  {id:176,word:"모르겠어요",pos:"phr.",zh:"我不知道",cat:"日常生活",rank:1},
+  {id:177,word:"도와주세요",pos:"phr.",zh:"請幫幫我",cat:"日常生活",rank:1},
+  {id:178,word:"얼마예요",pos:"phr.",zh:"多少錢？",cat:"商業",rank:1},
+  {id:179,word:"어디예요",pos:"phr.",zh:"在哪裡？",cat:"地點",rank:1},
+  {id:180,word:"몇 시예요",pos:"phr.",zh:"幾點了？",cat:"時間",rank:1},
+  {id:181,word:"주세요",pos:"phr.",zh:"請給我",cat:"日常生活",rank:1},
+  {id:182,word:"맞아요",pos:"phr.",zh:"對的",cat:"日常生活",rank:1},
+  {id:183,word:"아니에요",pos:"phr.",zh:"不是",cat:"日常生活",rank:1},
+  {id:184,word:"네",pos:"adv.",zh:"是、好",cat:"日常生活",rank:1},
+  {id:185,word:"아니요",pos:"adv.",zh:"不",cat:"日常生活",rank:1},
+  {id:186,word:"그래요",pos:"adv.",zh:"是的、那樣",cat:"日常生活",rank:1},
+  {id:187,word:"왜",pos:"adv.",zh:"為什麼",cat:"日常生活",rank:1},
+  {id:188,word:"어떻게",pos:"adv.",zh:"怎麼樣",cat:"日常生活",rank:1},
+  {id:189,word:"언제",pos:"adv.",zh:"什麼時候",cat:"時間",rank:1},
+  {id:190,word:"어디",pos:"adv.",zh:"哪裡",cat:"地點",rank:1},
+  {id:191,word:"누가",pos:"adv.",zh:"誰",cat:"日常生活",rank:1},
+  {id:192,word:"무엇",pos:"adv.",zh:"什麼",cat:"日常生活",rank:1},
+  {id:193,word:"얼마나",pos:"adv.",zh:"多少",cat:"日常生活",rank:1},
+  {id:194,word:"매우",pos:"adv.",zh:"非常",cat:"日常生活",rank:1},
+  {id:195,word:"정말",pos:"adv.",zh:"真的",cat:"情感",rank:1},
+  {id:196,word:"아주",pos:"adv.",zh:"很、非常",cat:"日常生活",rank:1},
+  {id:197,word:"너무",pos:"adv.",zh:"太、過於",cat:"日常生活",rank:1},
+  {id:198,word:"조금",pos:"adv.",zh:"一點、稍微",cat:"日常生活",rank:1},
+  {id:199,word:"많이",pos:"adv.",zh:"很多、多多",cat:"日常生活",rank:1},
+  {id:200,word:"빨리",pos:"adv.",zh:"快點",cat:"時間",rank:1},
+];
+
+// Extended Korean words 201-5000
+const extWords = [
+  {word:"노래",pos:"n.",zh:"歌曲",cat:"日常生活",rank:1},
+  {word:"음악",pos:"n.",zh:"音樂",cat:"日常生活",rank:1},
+  {word:"영화",pos:"n.",zh:"電影",cat:"日常生活",rank:1},
+  {word:"드라마",pos:"n.",zh:"電視劇",cat:"日常生活",rank:1},
+  {word:"게임",pos:"n.",zh:"遊戲",cat:"日常生活",rank:2},
+  {word:"사진",pos:"n.",zh:"照片",cat:"日常生活",rank:1},
+  {word:"여행",pos:"n.",zh:"旅行",cat:"交通",rank:1},
+  {word:"취미",pos:"n.",zh:"興趣愛好",cat:"日常生活",rank:2},
+  {word:"스포츠",pos:"n.",zh:"運動",cat:"日常生活",rank:2},
+  {word:"축구",pos:"n.",zh:"足球",cat:"日常生活",rank:2},
+  {word:"야구",pos:"n.",zh:"棒球",cat:"日常生活",rank:2},
+  {word:"수영",pos:"n.",zh:"游泳",cat:"日常生活",rank:2},
+  {word:"달리기",pos:"n.",zh:"跑步",cat:"日常生活",rank:2},
+  {word:"등산",pos:"n.",zh:"爬山",cat:"自然",rank:2},
+  {word:"독서",pos:"n.",zh:"閱讀",cat:"教育",rank:2},
+  {word:"요리",pos:"n.",zh:"料理、烹飪",cat:"食物",rank:1},
+  {word:"그림",pos:"n.",zh:"畫、圖",cat:"教育",rank:2},
+  {word:"피아노",pos:"n.",zh:"鋼琴",cat:"教育",rank:2},
+  {word:"기타",pos:"n.",zh:"吉他",cat:"教育",rank:2},
+  {word:"국가",pos:"n.",zh:"國家",cat:"地點",rank:2},
+  {word:"서울",pos:"n.",zh:"首爾",cat:"地點",rank:1},
+  {word:"부산",pos:"n.",zh:"釜山",cat:"地點",rank:2},
+  {word:"제주도",pos:"n.",zh:"濟州島",cat:"地點",rank:2},
+  {word:"아파트",pos:"n.",zh:"公寓",cat:"地點",rank:1},
+  {word:"방",pos:"n.",zh:"房間",cat:"地點",rank:1},
+  {word:"부엌",pos:"n.",zh:"廚房",cat:"地點",rank:2},
+  {word:"화장실",pos:"n.",zh:"廁所、浴室",cat:"地點",rank:1},
+  {word:"거실",pos:"n.",zh:"客廳",cat:"地點",rank:2},
+  {word:"침실",pos:"n.",zh:"臥室",cat:"地點",rank:2},
+  {word:"책상",pos:"n.",zh:"書桌",cat:"日常生活",rank:2},
+  {word:"의자",pos:"n.",zh:"椅子",cat:"日常生活",rank:2},
+  {word:"침대",pos:"n.",zh:"床",cat:"日常生活",rank:2},
+  {word:"냉장고",pos:"n.",zh:"冰箱",cat:"日常生活",rank:2},
+  {word:"텔레비전",pos:"n.",zh:"電視",cat:"日常生活",rank:1},
+  {word:"에어컨",pos:"n.",zh:"冷氣",cat:"日常生活",rank:2},
+  {word:"열쇠",pos:"n.",zh:"鑰匙",cat:"日常生活",rank:2},
+  {word:"우산",pos:"n.",zh:"雨傘",cat:"日常生活",rank:2},
+  {word:"시계",pos:"n.",zh:"時鐘、手錶",cat:"時間",rank:2},
+  {word:"거울",pos:"n.",zh:"鏡子",cat:"日常生活",rank:2},
+  {word:"수건",pos:"n.",zh:"毛巾",cat:"日常生活",rank:2},
+  {word:"비누",pos:"n.",zh:"肥皂",cat:"日常生活",rank:2},
+  {word:"치약",pos:"n.",zh:"牙膏",cat:"日常生活",rank:2},
+  {word:"칫솔",pos:"n.",zh:"牙刷",cat:"日常生活",rank:2},
+  {word:"주말",pos:"n.",zh:"週末",cat:"時間",rank:1},
+  {word:"평일",pos:"n.",zh:"平日",cat:"時間",rank:2},
+  {word:"휴일",pos:"n.",zh:"假日",cat:"時間",rank:2},
+  {word:"방학",pos:"n.",zh:"學校假期",cat:"時間",rank:2},
+  {word:"봄",pos:"n.",zh:"春天",cat:"自然",rank:1},
+  {word:"여름",pos:"n.",zh:"夏天",cat:"自然",rank:1},
+  {word:"가을",pos:"n.",zh:"秋天",cat:"自然",rank:1},
+  {word:"겨울",pos:"n.",zh:"冬天",cat:"自然",rank:1},
+  {word:"월요일",pos:"n.",zh:"星期一",cat:"時間",rank:2},
+  {word:"화요일",pos:"n.",zh:"星期二",cat:"時間",rank:2},
+  {word:"수요일",pos:"n.",zh:"星期三",cat:"時間",rank:2},
+  {word:"목요일",pos:"n.",zh:"星期四",cat:"時間",rank:2},
+  {word:"금요일",pos:"n.",zh:"星期五",cat:"時間",rank:2},
+  {word:"토요일",pos:"n.",zh:"星期六",cat:"時間",rank:2},
+  {word:"일요일",pos:"n.",zh:"星期日",cat:"時間",rank:2},
+  {word:"생일",pos:"n.",zh:"生日",cat:"時間",rank:1},
+  {word:"결혼",pos:"n.",zh:"結婚",cat:"家庭",rank:2},
+  {word:"가족",pos:"n.",zh:"家人、家庭",cat:"家庭",rank:1},
+  {word:"남편",pos:"n.",zh:"丈夫",cat:"家庭",rank:2},
+  {word:"아내",pos:"n.",zh:"妻子",cat:"家庭",rank:2},
+  {word:"할아버지",pos:"n.",zh:"祖父",cat:"家庭",rank:1},
+  {word:"할머니",pos:"n.",zh:"祖母",cat:"家庭",rank:1},
+  {word:"아들",pos:"n.",zh:"兒子",cat:"家庭",rank:2},
+  {word:"딸",pos:"n.",zh:"女兒",cat:"家庭",rank:2},
+  {word:"삼촌",pos:"n.",zh:"叔叔",cat:"家庭",rank:2},
+  {word:"이모",pos:"n.",zh:"姨媽",cat:"家庭",rank:2},
+  {word:"사과",pos:"n.",zh:"蘋果",cat:"食物",rank:1},
+  {word:"바나나",pos:"n.",zh:"香蕉",cat:"食物",rank:1},
+  {word:"딸기",pos:"n.",zh:"草莓",cat:"食物",rank:1},
+  {word:"포도",pos:"n.",zh:"葡萄",cat:"食物",rank:2},
+  {word:"수박",pos:"n.",zh:"西瓜",cat:"食物",rank:2},
+  {word:"오렌지",pos:"n.",zh:"橘子",cat:"食物",rank:2},
+  {word:"빵",pos:"n.",zh:"麵包",cat:"食物",rank:1},
+  {word:"우유",pos:"n.",zh:"牛奶",cat:"食物",rank:1},
+  {word:"달걀",pos:"n.",zh:"雞蛋",cat:"食物",rank:1},
+  {word:"고기",pos:"n.",zh:"肉",cat:"食物",rank:1},
+  {word:"채소",pos:"n.",zh:"蔬菜",cat:"食物",rank:2},
+  {word:"면",pos:"n.",zh:"麵",cat:"食物",rank:1},
+  {word:"라면",pos:"n.",zh:"泡麵",cat:"食物",rank:1},
+  {word:"떡볶이",pos:"n.",zh:"辣炒年糕",cat:"食物",rank:1},
+  {word:"냉면",pos:"n.",zh:"冷麵",cat:"食物",rank:2},
+  {word:"순두부찌개",pos:"n.",zh:"嫩豆腐鍋",cat:"食物",rank:2},
+  {word:"된장찌개",pos:"n.",zh:"大醬湯",cat:"食物",rank:2},
+  {word:"잡채",pos:"n.",zh:"雜菜",cat:"食物",rank:2},
+  {word:"갈비",pos:"n.",zh:"排骨",cat:"食物",rank:2},
+  {word:"삼계탕",pos:"n.",zh:"參雞湯",cat:"食物",rank:2},
+  {word:"피자",pos:"n.",zh:"披薩",cat:"食物",rank:1},
+  {word:"햄버거",pos:"n.",zh:"漢堡",cat:"食物",rank:1},
+  {word:"초콜릿",pos:"n.",zh:"巧克力",cat:"食物",rank:2},
+  {word:"아이스크림",pos:"n.",zh:"冰淇淋",cat:"食物",rank:1},
+  {word:"케이크",pos:"n.",zh:"蛋糕",cat:"食物",rank:2},
+  {word:"직업",pos:"n.",zh:"職業",cat:"工作",rank:2},
+  {word:"급여",pos:"n.",zh:"薪水",cat:"工作",rank:3},
+  {word:"회의",pos:"n.",zh:"會議",cat:"工作",rank:2},
+  {word:"보고서",pos:"n.",zh:"報告",cat:"工作",rank:3},
+  {word:"계획",pos:"n.",zh:"計劃",cat:"工作",rank:2},
+  {word:"문제",pos:"n.",zh:"問題",cat:"教育",rank:1},
+  {word:"답",pos:"n.",zh:"答案",cat:"教育",rank:2},
+  {word:"시험",pos:"n.",zh:"考試",cat:"教育",rank:2},
+  {word:"숙제",pos:"n.",zh:"作業",cat:"教育",rank:2},
+  {word:"수업",pos:"n.",zh:"課程",cat:"教育",rank:2},
+  {word:"대학교",pos:"n.",zh:"大學",cat:"教育",rank:2},
+  {word:"도서관",pos:"n.",zh:"圖書館",cat:"教育",rank:2},
+  {word:"졸업",pos:"n.",zh:"畢業",cat:"教育",rank:2},
+  {word:"입학",pos:"n.",zh:"入學",cat:"教育",rank:3},
+  {word:"건강",pos:"n.",zh:"健康",cat:"身體",rank:2},
+  {word:"감기",pos:"n.",zh:"感冒",cat:"身體",rank:1},
+  {word:"열",pos:"n.",zh:"發燒",cat:"身體",rank:2},
+  {word:"기침",pos:"n.",zh:"咳嗽",cat:"身體",rank:2},
+  {word:"두통",pos:"n.",zh:"頭痛",cat:"身體",rank:2},
+  {word:"수술",pos:"n.",zh:"手術",cat:"身體",rank:3},
+  {word:"운동",pos:"n.",zh:"運動",cat:"身體",rank:1},
+  {word:"다이어트",pos:"n.",zh:"減肥",cat:"身體",rank:2},
+  {word:"마음",pos:"n.",zh:"心、心情",cat:"情感",rank:1},
+  {word:"기분",pos:"n.",zh:"心情",cat:"情感",rank:1},
+  {word:"꿈",pos:"n.",zh:"夢、夢想",cat:"情感",rank:1},
+  {word:"희망",pos:"n.",zh:"希望",cat:"情感",rank:2},
+  {word:"걱정",pos:"n.",zh:"擔心",cat:"情感",rank:2},
+  {word:"스트레스",pos:"n.",zh:"壓力",cat:"情感",rank:2},
+  {word:"자신감",pos:"n.",zh:"自信",cat:"情感",rank:3},
+  {word:"부끄럽다",pos:"adj.",zh:"害羞的",cat:"情感",rank:2},
+  {word:"외롭다",pos:"adj.",zh:"孤獨的",cat:"情感",rank:2},
+  {word:"그립다",pos:"adj.",zh:"思念的",cat:"情感",rank:2},
+  {word:"기쁘다",pos:"adj.",zh:"高興的",cat:"情感",rank:1},
+  {word:"놀라다",pos:"v.",zh:"驚訝",cat:"情感",rank:2},
+  {word:"웃다",pos:"v.",zh:"笑",cat:"情感",rank:1},
+  {word:"울다",pos:"v.",zh:"哭",cat:"情感",rank:1},
+  {word:"만나다",pos:"v.",zh:"見面",cat:"日常生活",rank:1},
+  {word:"헤어지다",pos:"v.",zh:"分開",cat:"情感",rank:2},
+  {word:"결혼하다",pos:"v.",zh:"結婚",cat:"家庭",rank:2},
+  {word:"이야기하다",pos:"v.",zh:"說話、聊天",cat:"日常生活",rank:1},
+  {word:"생각하다",pos:"v.",zh:"思考",cat:"教育",rank:1},
+  {word:"기억하다",pos:"v.",zh:"記住",cat:"教育",rank:2},
+  {word:"잊다",pos:"v.",zh:"忘記",cat:"日常生活",rank:2},
+  {word:"이해하다",pos:"v.",zh:"理解",cat:"教育",rank:2},
+  {word:"도착하다",pos:"v.",zh:"到達",cat:"交通",rank:2},
+  {word:"출발하다",pos:"v.",zh:"出發",cat:"交通",rank:2},
+  {word:"예약하다",pos:"v.",zh:"預訂",cat:"商業",rank:2},
+  {word:"주문하다",pos:"v.",zh:"點餐、訂購",cat:"食物",rank:2},
+  {word:"계산하다",pos:"v.",zh:"結帳",cat:"商業",rank:2},
+  {word:"준비하다",pos:"v.",zh:"準備",cat:"工作",rank:2},
+  {word:"시작하다",pos:"v.",zh:"開始",cat:"日常生活",rank:1},
+  {word:"끝나다",pos:"v.",zh:"結束",cat:"日常生活",rank:1},
+  {word:"바꾸다",pos:"v.",zh:"改變",cat:"日常生活",rank:2},
+  {word:"고르다",pos:"v.",zh:"選擇",cat:"日常生活",rank:2},
+  {word:"찾다",pos:"v.",zh:"尋找",cat:"日常生活",rank:1},
+  {word:"버리다",pos:"v.",zh:"丟棄",cat:"日常生活",rank:2},
+  {word:"열다",pos:"v.",zh:"打開",cat:"日常生活",rank:1},
+  {word:"닫다",pos:"v.",zh:"關閉",cat:"日常生活",rank:1},
+  {word:"앉다",pos:"v.",zh:"坐",cat:"日常生活",rank:1},
+  {word:"서다",pos:"v.",zh:"站",cat:"日常生活",rank:1},
+  {word:"뛰다",pos:"v.",zh:"跑",cat:"日常生活",rank:1},
+  {word:"걷다",pos:"v.",zh:"走路",cat:"日常生活",rank:1},
+  {word:"타다",pos:"v.",zh:"搭乘",cat:"交通",rank:1},
+  {word:"내리다",pos:"v.",zh:"下車、降",cat:"交通",rank:2},
+  {word:"올라가다",pos:"v.",zh:"上去",cat:"交通",rank:2},
+  {word:"내려가다",pos:"v.",zh:"下去",cat:"交通",rank:2},
+  {word:"들어가다",pos:"v.",zh:"進入",cat:"地點",rank:2},
+  {word:"나오다",pos:"v.",zh:"出來",cat:"地點",rank:2},
+  {word:"사다",pos:"v.",zh:"購買",cat:"商業",rank:1},
+  {word:"팔다",pos:"v.",zh:"出售",cat:"商業",rank:2},
+  {word:"받다",pos:"v.",zh:"收到",cat:"日常生活",rank:1},
+  {word:"주다",pos:"v.",zh:"給",cat:"日常生活",rank:1},
+  {word:"보내다",pos:"v.",zh:"發送、寄",cat:"工作",rank:2},
+  {word:"받다",pos:"v.",zh:"接收",cat:"日常生活",rank:1},
+  {word:"놀다",pos:"v.",zh:"玩耍",cat:"日常生活",rank:1},
+  {word:"춤추다",pos:"v.",zh:"跳舞",cat:"日常生活",rank:2},
+  {word:"노래하다",pos:"v.",zh:"唱歌",cat:"日常生活",rank:2},
+  {word:"그리다",pos:"v.",zh:"畫畫",cat:"教育",rank:2},
+  {word:"찍다",pos:"v.",zh:"拍照",cat:"日常生活",rank:2},
+  {word:"입다",pos:"v.",zh:"穿衣服",cat:"日常生活",rank:1},
+  {word:"벗다",pos:"v.",zh:"脫衣服",cat:"日常生活",rank:2},
+  {word:"씻다",pos:"v.",zh:"洗",cat:"日常生活",rank:1},
+  {word:"청소하다",pos:"v.",zh:"打掃",cat:"日常生活",rank:2},
+  {word:"빨래하다",pos:"v.",zh:"洗衣服",cat:"日常生活",rank:2},
+  {word:"공부하다",pos:"v.",zh:"學習",cat:"教育",rank:1},
+  {word:"연습하다",pos:"v.",zh:"練習",cat:"教育",rank:2},
+  {word:"성공하다",pos:"v.",zh:"成功",cat:"工作",rank:2},
+  {word:"실패하다",pos:"v.",zh:"失敗",cat:"工作",rank:2},
+  {word:"노력하다",pos:"v.",zh:"努力",cat:"工作",rank:2},
+  {word:"포기하다",pos:"v.",zh:"放棄",cat:"情感",rank:2},
+  {word:"참다",pos:"v.",zh:"忍耐",cat:"情感",rank:2},
+  {word:"용서하다",pos:"v.",zh:"原諒",cat:"情感",rank:3},
+  {word:"믿다",pos:"v.",zh:"相信",cat:"情感",rank:2},
+  {word:"싸우다",pos:"v.",zh:"吵架",cat:"情感",rank:2},
+  {word:"화해하다",pos:"v.",zh:"和解",cat:"情感",rank:3},
+  {word:"걱정하다",pos:"v.",zh:"擔心",cat:"情感",rank:2},
+  {word:"설레다",pos:"v.",zh:"心跳加速",cat:"情感",rank:3},
+  {word:"그리워하다",pos:"v.",zh:"思念",cat:"情感",rank:2},
+  {word:"새롭다",pos:"adj.",zh:"新的",cat:"日常生活",rank:2},
+  {word:"오래되다",pos:"adj.",zh:"舊的、很久",cat:"日常生活",rank:2},
+  {word:"바쁘다",pos:"adj.",zh:"忙碌的",cat:"工作",rank:1},
+  {word:"한가하다",pos:"adj.",zh:"空閒的",cat:"日常生活",rank:2},
+  {word:"어렵다",pos:"adj.",zh:"困難的",cat:"教育",rank:1},
+  {word:"쉽다",pos:"adj.",zh:"容易的",cat:"教育",rank:1},
+  {word:"중요하다",pos:"adj.",zh:"重要的",cat:"工作",rank:2},
+  {word:"필요하다",pos:"adj.",zh:"需要的",cat:"日常生活",rank:2},
+  {word:"유명하다",pos:"adj.",zh:"有名的",cat:"日常生活",rank:2},
+  {word:"특별하다",pos:"adj.",zh:"特別的",cat:"情感",rank:2},
+  {word:"이상하다",pos:"adj.",zh:"奇怪的",cat:"日常生活",rank:2},
+  {word:"보통이다",pos:"adj.",zh:"普通的",cat:"日常生活",rank:2},
+  {word:"비싸다",pos:"adj.",zh:"貴的",cat:"商業",rank:1},
+  {word:"싸다",pos:"adj.",zh:"便宜的",cat:"商業",rank:1},
+  {word:"무겁다",pos:"adj.",zh:"重的",cat:"日常生活",rank:2},
+  {word:"가볍다",pos:"adj.",zh:"輕的",cat:"日常生活",rank:2},
+  {word:"넓다",pos:"adj.",zh:"寬廣的",cat:"地點",rank:2},
+  {word:"좁다",pos:"adj.",zh:"狹窄的",cat:"地點",rank:2},
+  {word:"깨끗하다",pos:"adj.",zh:"乾淨的",cat:"日常生活",rank:2},
+  {word:"더럽다",pos:"adj.",zh:"髒的",cat:"日常生活",rank:2},
+  {word:"안전하다",pos:"adj.",zh:"安全的",cat:"日常生活",rank:2},
+  {word:"위험하다",pos:"adj.",zh:"危險的",cat:"日常生活",rank:2},
+  {word:"편하다",pos:"adj.",zh:"舒適的",cat:"情感",rank:2},
+  {word:"불편하다",pos:"adj.",zh:"不舒適的",cat:"情感",rank:2},
+  {word:"맑다",pos:"adj.",zh:"晴朗的",cat:"自然",rank:2},
+  {word:"흐리다",pos:"adj.",zh:"陰天的",cat:"自然",rank:2},
+  {word:"시원하다",pos:"adj.",zh:"涼爽的",cat:"自然",rank:2},
+  {word:"따뜻하다",pos:"adj.",zh:"溫暖的",cat:"自然",rank:1},
+  {word:"밝다",pos:"adj.",zh:"明亮的",cat:"日常生活",rank:2},
+  {word:"어둡다",pos:"adj.",zh:"黑暗的",cat:"日常生活",rank:2},
+  {word:"조용하다",pos:"adj.",zh:"安靜的",cat:"日常生活",rank:2},
+  {word:"시끄럽다",pos:"adj.",zh:"吵鬧的",cat:"日常生活",rank:2},
+  {word:"재미있다",pos:"adj.",zh:"有趣的",cat:"情感",rank:1},
+  {word:"재미없다",pos:"adj.",zh:"無聊的",cat:"情感",rank:2},
+  {word:"피곤하다",pos:"adj.",zh:"累的",cat:"身體",rank:1},
+  {word:"졸리다",pos:"adj.",zh:"想睡的",cat:"身體",rank:2},
+
+  // 追加詞彙 201-1000
+  // 日常生活
+  {word:"창문",pos:"n.",zh:"窗戶",cat:"地點",rank:2},
+  {word:"문",pos:"n.",zh:"門",cat:"地點",rank:1},
+  {word:"계단",pos:"n.",zh:"樓梯",cat:"地點",rank:2},
+  {word:"엘리베이터",pos:"n.",zh:"電梯",cat:"地點",rank:2},
+  {word:"주차장",pos:"n.",zh:"停車場",cat:"交通",rank:2},
+  {word:"편의점",pos:"n.",zh:"便利商店",cat:"商業",rank:1},
+  {word:"마트",pos:"n.",zh:"超市",cat:"商業",rank:1},
+  {word:"백화점",pos:"n.",zh:"百貨公司",cat:"商業",rank:2},
+  {word:"카페",pos:"n.",zh:"咖啡廳",cat:"食物",rank:1},
+  {word:"헬스장",pos:"n.",zh:"健身房",cat:"身體",rank:2},
+  {word:"수영장",pos:"n.",zh:"游泳池",cat:"地點",rank:2},
+  {word:"공원",pos:"n.",zh:"公園",cat:"地點",rank:1},
+  {word:"놀이터",pos:"n.",zh:"遊樂場",cat:"地點",rank:2},
+  {word:"극장",pos:"n.",zh:"劇場",cat:"地點",rank:2},
+  {word:"미용실",pos:"n.",zh:"美容院",cat:"地點",rank:2},
+  {word:"세탁소",pos:"n.",zh:"洗衣店",cat:"地點",rank:3},
+  {word:"약국",pos:"n.",zh:"藥局",cat:"身體",rank:2},
+  {word:"우체국",pos:"n.",zh:"郵局",cat:"地點",rank:2},
+  {word:"경찰서",pos:"n.",zh:"警察局",cat:"地點",rank:3},
+  {word:"소방서",pos:"n.",zh:"消防局",cat:"地點",rank:3},
+  // 家庭與人際
+  {word:"외할머니",pos:"n.",zh:"外祖母",cat:"家庭",rank:2},
+  {word:"외할아버지",pos:"n.",zh:"外祖父",cat:"家庭",rank:2},
+  {word:"사촌",pos:"n.",zh:"表兄弟姊妹",cat:"家庭",rank:2},
+  {word:"조카",pos:"n.",zh:"姪子/外甥",cat:"家庭",rank:2},
+  {word:"시어머니",pos:"n.",zh:"婆婆",cat:"家庭",rank:3},
+  {word:"시아버지",pos:"n.",zh:"公公",cat:"家庭",rank:3},
+  {word:"장모",pos:"n.",zh:"岳母",cat:"家庭",rank:3},
+  {word:"장인",pos:"n.",zh:"岳父",cat:"家庭",rank:3},
+  {word:"며느리",pos:"n.",zh:"媳婦",cat:"家庭",rank:3},
+  {word:"사위",pos:"n.",zh:"女婿",cat:"家庭",rank:3},
+  {word:"동료",pos:"n.",zh:"同事",cat:"工作",rank:2},
+  {word:"상사",pos:"n.",zh:"上司",cat:"工作",rank:2},
+  {word:"부하",pos:"n.",zh:"下屬",cat:"工作",rank:3},
+  {word:"이웃",pos:"n.",zh:"鄰居",cat:"日常生活",rank:2},
+  {word:"손님",pos:"n.",zh:"客人",cat:"日常生活",rank:2},
+  {word:"주인",pos:"n.",zh:"主人",cat:"日常生活",rank:2},
+  // 食物飲料
+  {word:"녹차",pos:"n.",zh:"綠茶",cat:"食物",rank:2},
+  {word:"홍차",pos:"n.",zh:"紅茶",cat:"食物",rank:2},
+  {word:"주스",pos:"n.",zh:"果汁",cat:"食物",rank:1},
+  {word:"맥주",pos:"n.",zh:"啤酒",cat:"食物",rank:2},
+  {word:"소주",pos:"n.",zh:"燒酒",cat:"食物",rank:2},
+  {word:"막걸리",pos:"n.",zh:"馬格利米酒",cat:"食物",rank:2},
+  {word:"된장",pos:"n.",zh:"大醬",cat:"食物",rank:3},
+  {word:"고추장",pos:"n.",zh:"辣椒醬",cat:"食物",rank:2},
+  {word:"간장",pos:"n.",zh:"醬油",cat:"食物",rank:2},
+  {word:"설탕",pos:"n.",zh:"砂糖",cat:"食物",rank:2},
+  {word:"소금",pos:"n.",zh:"鹽",cat:"食物",rank:2},
+  {word:"식초",pos:"n.",zh:"醋",cat:"食物",rank:3},
+  {word:"기름",pos:"n.",zh:"油",cat:"食物",rank:2},
+  {word:"버터",pos:"n.",zh:"奶油",cat:"食物",rank:2},
+  {word:"치즈",pos:"n.",zh:"起司",cat:"食物",rank:2},
+  {word:"두부",pos:"n.",zh:"豆腐",cat:"食物",rank:2},
+  {word:"김밥",pos:"n.",zh:"飯捲",cat:"食物",rank:1},
+  {word:"순대",pos:"n.",zh:"血腸",cat:"食物",rank:2},
+  {word:"호떡",pos:"n.",zh:"糖餅",cat:"食物",rank:2},
+  {word:"붕어빵",pos:"n.",zh:"鯛魚燒",cat:"食物",rank:2},
+  {word:"찐빵",pos:"n.",zh:"蒸包",cat:"食物",rank:2},
+  {word:"만두",pos:"n.",zh:"餃子/包子",cat:"食物",rank:2},
+  {word:"치킨",pos:"n.",zh:"炸雞",cat:"食物",rank:1},
+  {word:"곱창",pos:"n.",zh:"牛大腸",cat:"食物",rank:3},
+  {word:"해물",pos:"n.",zh:"海鮮",cat:"食物",rank:2},
+  {word:"조개",pos:"n.",zh:"蛤蜊",cat:"食物",rank:2},
+  {word:"새우",pos:"n.",zh:"蝦",cat:"食物",rank:2},
+  {word:"게",pos:"n.",zh:"螃蟹",cat:"食物",rank:2},
+  {word:"오징어",pos:"n.",zh:"魷魚",cat:"食物",rank:2},
+  {word:"참치",pos:"n.",zh:"鮪魚",cat:"食物",rank:2},
+  {word:"연어",pos:"n.",zh:"鮭魚",cat:"食物",rank:2},
+  {word:"당근",pos:"n.",zh:"紅蘿蔔",cat:"食物",rank:2},
+  {word:"감자",pos:"n.",zh:"馬鈴薯",cat:"食物",rank:2},
+  {word:"고구마",pos:"n.",zh:"地瓜",cat:"食物",rank:2},
+  {word:"양파",pos:"n.",zh:"洋蔥",cat:"食物",rank:2},
+  {word:"마늘",pos:"n.",zh:"大蒜",cat:"食物",rank:2},
+  {word:"생강",pos:"n.",zh:"薑",cat:"食物",rank:3},
+  {word:"파",pos:"n.",zh:"蔥",cat:"食物",rank:2},
+  {word:"배추",pos:"n.",zh:"大白菜",cat:"食物",rank:2},
+  {word:"시금치",pos:"n.",zh:"菠菜",cat:"食物",rank:2},
+  {word:"콩",pos:"n.",zh:"豆子",cat:"食物",rank:2},
+  {word:"옥수수",pos:"n.",zh:"玉米",cat:"食物",rank:2},
+  {word:"호박",pos:"n.",zh:"南瓜",cat:"食物",rank:2},
+  {word:"토마토",pos:"n.",zh:"番茄",cat:"食物",rank:1},
+  {word:"오이",pos:"n.",zh:"小黃瓜",cat:"食物",rank:2},
+  {word:"복숭아",pos:"n.",zh:"桃子",cat:"食物",rank:2},
+  {word:"배",pos:"n.",zh:"梨子",cat:"食物",rank:2},
+  {word:"감",pos:"n.",zh:"柿子",cat:"食物",rank:2},
+  {word:"귤",pos:"n.",zh:"橘子",cat:"食物",rank:2},
+  {word:"수박",pos:"n.",zh:"西瓜",cat:"食物",rank:2},
+  {word:"참외",pos:"n.",zh:"香瓜",cat:"食物",rank:2},
+  {word:"블루베리",pos:"n.",zh:"藍莓",cat:"食物",rank:3},
+  // 身體健康
+  {word:"이마",pos:"n.",zh:"額頭",cat:"身體",rank:2},
+  {word:"뺨",pos:"n.",zh:"臉頰",cat:"身體",rank:2},
+  {word:"턱",pos:"n.",zh:"下巴",cat:"身體",rank:2},
+  {word:"목",pos:"n.",zh:"脖子",cat:"身體",rank:1},
+  {word:"어깨",pos:"n.",zh:"肩膀",cat:"身體",rank:2},
+  {word:"가슴",pos:"n.",zh:"胸部",cat:"身體",rank:2},
+  {word:"배",pos:"n.",zh:"肚子",cat:"身體",rank:1},
+  {word:"등",pos:"n.",zh:"背部",cat:"身體",rank:2},
+  {word:"허리",pos:"n.",zh:"腰部",cat:"身體",rank:2},
+  {word:"엉덩이",pos:"n.",zh:"臀部",cat:"身體",rank:2},
+  {word:"무릎",pos:"n.",zh:"膝蓋",cat:"身體",rank:2},
+  {word:"발목",pos:"n.",zh:"腳踝",cat:"身體",rank:2},
+  {word:"손가락",pos:"n.",zh:"手指",cat:"身體",rank:2},
+  {word:"발가락",pos:"n.",zh:"腳趾",cat:"身體",rank:2},
+  {word:"손톱",pos:"n.",zh:"指甲",cat:"身體",rank:2},
+  {word:"피부",pos:"n.",zh:"皮膚",cat:"身體",rank:2},
+  {word:"뼈",pos:"n.",zh:"骨頭",cat:"身體",rank:2},
+  {word:"근육",pos:"n.",zh:"肌肉",cat:"身體",rank:2},
+  {word:"피",pos:"n.",zh:"血液",cat:"身體",rank:2},
+  {word:"심장",pos:"n.",zh:"心臟",cat:"身體",rank:2},
+  {word:"폐",pos:"n.",zh:"肺",cat:"身體",rank:2},
+  {word:"간",pos:"n.",zh:"肝臟",cat:"身體",rank:2},
+  {word:"신장",pos:"n.",zh:"腎臟",cat:"身體",rank:3},
+  {word:"뇌",pos:"n.",zh:"大腦",cat:"身體",rank:2},
+  {word:"혈압",pos:"n.",zh:"血壓",cat:"身體",rank:3},
+  {word:"당뇨",pos:"n.",zh:"糖尿病",cat:"身體",rank:3},
+  {word:"암",pos:"n.",zh:"癌症",cat:"身體",rank:3},
+  {word:"골절",pos:"n.",zh:"骨折",cat:"身體",rank:3},
+  {word:"상처",pos:"n.",zh:"傷口",cat:"身體",rank:2},
+  {word:"알레르기",pos:"n.",zh:"過敏",cat:"身體",rank:3},
+  {word:"처방",pos:"n.",zh:"處方",cat:"身體",rank:3},
+  {word:"주사",pos:"n.",zh:"注射",cat:"身體",rank:2},
+  {word:"수술",pos:"n.",zh:"手術",cat:"身體",rank:3},
+  {word:"입원",pos:"n.",zh:"住院",cat:"身體",rank:3},
+  {word:"퇴원",pos:"n.",zh:"出院",cat:"身體",rank:3},
+  // 工作職業
+  {word:"간호사",pos:"n.",zh:"護士",cat:"工作",rank:2},
+  {word:"약사",pos:"n.",zh:"藥師",cat:"工作",rank:2},
+  {word:"변호사",pos:"n.",zh:"律師",cat:"工作",rank:3},
+  {word:"판사",pos:"n.",zh:"法官",cat:"工作",rank:3},
+  {word:"검사",pos:"n.",zh:"檢察官",cat:"工作",rank:3},
+  {word:"경찰",pos:"n.",zh:"警察",cat:"工作",rank:2},
+  {word:"소방관",pos:"n.",zh:"消防員",cat:"工作",rank:2},
+  {word:"군인",pos:"n.",zh:"軍人",cat:"工作",rank:2},
+  {word:"공무원",pos:"n.",zh:"公務員",cat:"工作",rank:2},
+  {word:"교수",pos:"n.",zh:"教授",cat:"工作",rank:2},
+  {word:"강사",pos:"n.",zh:"講師",cat:"工作",rank:3},
+  {word:"작가",pos:"n.",zh:"作家",cat:"工作",rank:3},
+  {word:"기자",pos:"n.",zh:"記者",cat:"工作",rank:3},
+  {word:"디자이너",pos:"n.",zh:"設計師",cat:"工作",rank:3},
+  {word:"프로그래머",pos:"n.",zh:"程式設計師",cat:"工作",rank:3},
+  {word:"요리사",pos:"n.",zh:"廚師",cat:"工作",rank:2},
+  {word:"운전기사",pos:"n.",zh:"司機",cat:"工作",rank:2},
+  {word:"배우",pos:"n.",zh:"演員",cat:"工作",rank:2},
+  {word:"가수",pos:"n.",zh:"歌手",cat:"工作",rank:2},
+  {word:"운동선수",pos:"n.",zh:"運動員",cat:"工作",rank:2},
+  {word:"모델",pos:"n.",zh:"模特兒",cat:"工作",rank:3},
+  {word:"사진작가",pos:"n.",zh:"攝影師",cat:"工作",rank:3},
+  {word:"번역가",pos:"n.",zh:"翻譯員",cat:"工作",rank:3},
+  {word:"통역사",pos:"n.",zh:"口譯員",cat:"工作",rank:3},
+  // 自然環境
+  {word:"하늘",pos:"n.",zh:"天空",cat:"自然",rank:1},
+  {word:"구름",pos:"n.",zh:"雲",cat:"自然",rank:1},
+  {word:"무지개",pos:"n.",zh:"彩虹",cat:"自然",rank:2},
+  {word:"번개",pos:"n.",zh:"閃電",cat:"自然",rank:2},
+  {word:"천둥",pos:"n.",zh:"打雷",cat:"自然",rank:2},
+  {word:"안개",pos:"n.",zh:"霧",cat:"自然",rank:2},
+  {word:"이슬",pos:"n.",zh:"露水",cat:"自然",rank:3},
+  {word:"서리",pos:"n.",zh:"霜",cat:"自然",rank:3},
+  {word:"우박",pos:"n.",zh:"冰雹",cat:"自然",rank:3},
+  {word:"홍수",pos:"n.",zh:"洪水",cat:"自然",rank:3},
+  {word:"지진",pos:"n.",zh:"地震",cat:"自然",rank:3},
+  {word:"태풍",pos:"n.",zh:"颱風",cat:"自然",rank:3},
+  {word:"화산",pos:"n.",zh:"火山",cat:"自然",rank:3},
+  {word:"사막",pos:"n.",zh:"沙漠",cat:"自然",rank:3},
+  {word:"초원",pos:"n.",zh:"草原",cat:"自然",rank:3},
+  {word:"숲",pos:"n.",zh:"森林",cat:"自然",rank:2},
+  {word:"들판",pos:"n.",zh:"平原",cat:"自然",rank:3},
+  {word:"계곡",pos:"n.",zh:"山谷",cat:"自然",rank:3},
+  {word:"폭포",pos:"n.",zh:"瀑布",cat:"自然",rank:3},
+  {word:"호수",pos:"n.",zh:"湖泊",cat:"自然",rank:2},
+  {word:"늪",pos:"n.",zh:"沼澤",cat:"自然",rank:3},
+  {word:"섬",pos:"n.",zh:"島嶼",cat:"自然",rank:2},
+  {word:"반도",pos:"n.",zh:"半島",cat:"自然",rank:3},
+  {word:"대륙",pos:"n.",zh:"大陸",cat:"自然",rank:3},
+  {word:"바위",pos:"n.",zh:"岩石",cat:"自然",rank:2},
+  {word:"모래",pos:"n.",zh:"沙子",cat:"自然",rank:2},
+  {word:"흙",pos:"n.",zh:"泥土",cat:"自然",rank:2},
+  {word:"풀",pos:"n.",zh:"草",cat:"自然",rank:1},
+  {word:"잎",pos:"n.",zh:"葉子",cat:"自然",rank:2},
+  {word:"뿌리",pos:"n.",zh:"根",cat:"自然",rank:2},
+  {word:"가지",pos:"n.",zh:"樹枝",cat:"自然",rank:2},
+  {word:"씨앗",pos:"n.",zh:"種子",cat:"自然",rank:2},
+  // 動物
+  {word:"소",pos:"n.",zh:"牛",cat:"自然",rank:2},
+  {word:"돼지",pos:"n.",zh:"豬",cat:"自然",rank:2},
+  {word:"닭",pos:"n.",zh:"雞",cat:"自然",rank:2},
+  {word:"오리",pos:"n.",zh:"鴨子",cat:"自然",rank:2},
+  {word:"양",pos:"n.",zh:"羊",cat:"自然",rank:2},
+  {word:"말",pos:"n.",zh:"馬",cat:"自然",rank:2},
+  {word:"사자",pos:"n.",zh:"獅子",cat:"自然",rank:2},
+  {word:"호랑이",pos:"n.",zh:"老虎",cat:"自然",rank:2},
+  {word:"곰",pos:"n.",zh:"熊",cat:"自然",rank:2},
+  {word:"코끼리",pos:"n.",zh:"大象",cat:"自然",rank:2},
+  {word:"기린",pos:"n.",zh:"長頸鹿",cat:"自然",rank:2},
+  {word:"원숭이",pos:"n.",zh:"猴子",cat:"自然",rank:2},
+  {word:"뱀",pos:"n.",zh:"蛇",cat:"自然",rank:2},
+  {word:"개구리",pos:"n.",zh:"青蛙",cat:"自然",rank:2},
+  {word:"나비",pos:"n.",zh:"蝴蝶",cat:"自然",rank:2},
+  {word:"벌",pos:"n.",zh:"蜜蜂",cat:"自然",rank:2},
+  {word:"개미",pos:"n.",zh:"螞蟻",cat:"自然",rank:2},
+  {word:"모기",pos:"n.",zh:"蚊子",cat:"自然",rank:2},
+  {word:"파리",pos:"n.",zh:"蒼蠅",cat:"自然",rank:2},
+  {word:"바퀴벌레",pos:"n.",zh:"蟑螂",cat:"自然",rank:3},
+  {word:"독수리",pos:"n.",zh:"老鷹",cat:"自然",rank:3},
+  {word:"비둘기",pos:"n.",zh:"鴿子",cat:"自然",rank:2},
+  {word:"참새",pos:"n.",zh:"麻雀",cat:"自然",rank:2},
+  {word:"펭귄",pos:"n.",zh:"企鵝",cat:"自然",rank:2},
+  {word:"상어",pos:"n.",zh:"鯊魚",cat:"自然",rank:2},
+  {word:"고래",pos:"n.",zh:"鯨魚",cat:"自然",rank:2},
+  {word:"문어",pos:"n.",zh:"章魚",cat:"自然",rank:2},
+  // 交通出行
+  {word:"신호등",pos:"n.",zh:"紅綠燈",cat:"交通",rank:2},
+  {word:"횡단보도",pos:"n.",zh:"斑馬線",cat:"交通",rank:2},
+  {word:"교차로",pos:"n.",zh:"十字路口",cat:"交通",rank:2},
+  {word:"고속도로",pos:"n.",zh:"高速公路",cat:"交通",rank:2},
+  {word:"국도",pos:"n.",zh:"國道",cat:"交通",rank:3},
+  {word:"골목",pos:"n.",zh:"小巷",cat:"交通",rank:2},
+  {word:"인도",pos:"n.",zh:"人行道",cat:"交通",rank:2},
+  {word:"자전거",pos:"n.",zh:"腳踏車",cat:"交通",rank:2},
+  {word:"오토바이",pos:"n.",zh:"摩托車",cat:"交通",rank:2},
+  {word:"택시",pos:"n.",zh:"計程車",cat:"交通",rank:1},
+  {word:"승용차",pos:"n.",zh:"轎車",cat:"交通",rank:2},
+  {word:"트럭",pos:"n.",zh:"卡車",cat:"交通",rank:2},
+  {word:"배",pos:"n.",zh:"船",cat:"交通",rank:2},
+  {word:"항구",pos:"n.",zh:"港口",cat:"交通",rank:3},
+  {word:"항공권",pos:"n.",zh:"機票",cat:"交通",rank:3},
+  {word:"여권",pos:"n.",zh:"護照",cat:"交通",rank:2},
+  {word:"비자",pos:"n.",zh:"簽證",cat:"交通",rank:3},
+  {word:"세관",pos:"n.",zh:"海關",cat:"交通",rank:3},
+  {word:"짐",pos:"n.",zh:"行李",cat:"交通",rank:2},
+  {word:"캐리어",pos:"n.",zh:"行李箱",cat:"交通",rank:2},
+  // 教育學習
+  {word:"연필",pos:"n.",zh:"鉛筆",cat:"教育",rank:2},
+  {word:"볼펜",pos:"n.",zh:"原子筆",cat:"教育",rank:2},
+  {word:"지우개",pos:"n.",zh:"橡皮擦",cat:"教育",rank:2},
+  {word:"자",pos:"n.",zh:"尺",cat:"教育",rank:2},
+  {word:"가위",pos:"n.",zh:"剪刀",cat:"教育",rank:2},
+  {word:"풀",pos:"n.",zh:"膠水",cat:"教育",rank:2},
+  {word:"종이",pos:"n.",zh:"紙",cat:"教育",rank:2},
+  {word:"노트",pos:"n.",zh:"筆記本",cat:"教育",rank:2},
+  {word:"교과서",pos:"n.",zh:"教科書",cat:"教育",rank:2},
+  {word:"사전",pos:"n.",zh:"字典",cat:"教育",rank:2},
+  {word:"칠판",pos:"n.",zh:"黑板",cat:"教育",rank:2},
+  {word:"분필",pos:"n.",zh:"粉筆",cat:"教育",rank:3},
+  {word:"강의",pos:"n.",zh:"講課",cat:"教育",rank:2},
+  {word:"발표",pos:"n.",zh:"發表",cat:"教育",rank:2},
+  {word:"토론",pos:"n.",zh:"討論",cat:"教育",rank:2},
+  {word:"연구",pos:"n.",zh:"研究",cat:"教育",rank:3},
+  {word:"논문",pos:"n.",zh:"論文",cat:"教育",rank:3},
+  {word:"장학금",pos:"n.",zh:"獎學金",cat:"教育",rank:3},
+  {word:"입학시험",pos:"n.",zh:"入學考試",cat:"教育",rank:3},
+  {word:"성적표",pos:"n.",zh:"成績單",cat:"教育",rank:2},
+  // 商業金融
+  {word:"영수증",pos:"n.",zh:"收據",cat:"商業",rank:2},
+  {word:"할인",pos:"n.",zh:"折扣",cat:"商業",rank:2},
+  {word:"세일",pos:"n.",zh:"特賣",cat:"商業",rank:2},
+  {word:"환불",pos:"n.",zh:"退款",cat:"商業",rank:3},
+  {word:"교환",pos:"n.",zh:"換貨",cat:"商業",rank:3},
+  {word:"현금",pos:"n.",zh:"現金",cat:"商業",rank:2},
+  {word:"신용카드",pos:"n.",zh:"信用卡",cat:"商業",rank:2},
+  {word:"계좌",pos:"n.",zh:"帳戶",cat:"商業",rank:2},
+  {word:"이자",pos:"n.",zh:"利息",cat:"商業",rank:3},
+  {word:"대출",pos:"n.",zh:"貸款",cat:"商業",rank:3},
+  {word:"저축",pos:"n.",zh:"儲蓄",cat:"商業",rank:2},
+  {word:"투자",pos:"n.",zh:"投資",cat:"商業",rank:3},
+  {word:"주식",pos:"n.",zh:"股票",cat:"商業",rank:3},
+  {word:"부동산",pos:"n.",zh:"不動產",cat:"商業",rank:3},
+  {word:"세금",pos:"n.",zh:"稅金",cat:"商業",rank:3},
+  {word:"월급",pos:"n.",zh:"月薪",cat:"工作",rank:2},
+  {word:"연봉",pos:"n.",zh:"年薪",cat:"工作",rank:3},
+  {word:"수입",pos:"n.",zh:"收入",cat:"商業",rank:3},
+  {word:"지출",pos:"n.",zh:"支出",cat:"商業",rank:3},
+  {word:"예산",pos:"n.",zh:"預算",cat:"商業",rank:3},
+  // 形容詞
+  {word:"귀엽다",pos:"adj.",zh:"可愛的",cat:"情感",rank:1},
+  {word:"멋있다",pos:"adj.",zh:"帥氣的",cat:"情感",rank:1},
+  {word:"어리다",pos:"adj.",zh:"年輕的",cat:"日常生活",rank:2},
+  {word:"늙다",pos:"adj.",zh:"年老的",cat:"日常生活",rank:2},
+  {word:"젊다",pos:"adj.",zh:"年輕的",cat:"日常生活",rank:2},
+  {word:"날씬하다",pos:"adj.",zh:"苗條的",cat:"身體",rank:2},
+  {word:"뚱뚱하다",pos:"adj.",zh:"胖的",cat:"身體",rank:2},
+  {word:"키가 크다",pos:"adj.",zh:"個子高的",cat:"身體",rank:2},
+  {word:"키가 작다",pos:"adj.",zh:"個子矮的",cat:"身體",rank:2},
+  {word:"착하다",pos:"adj.",zh:"善良的",cat:"情感",rank:1},
+  {word:"친절하다",pos:"adj.",zh:"親切的",cat:"情感",rank:2},
+  {word:"성실하다",pos:"adj.",zh:"誠實認真的",cat:"情感",rank:2},
+  {word:"활발하다",pos:"adj.",zh:"活潑的",cat:"情感",rank:2},
+  {word:"조용하다",pos:"adj.",zh:"安靜的",cat:"日常生活",rank:2},
+  {word:"시끄럽다",pos:"adj.",zh:"吵鬧的",cat:"日常生活",rank:2},
+  {word:"게으르다",pos:"adj.",zh:"懶惰的",cat:"情感",rank:2},
+  {word:"부지런하다",pos:"adj.",zh:"勤勞的",cat:"情感",rank:2},
+  {word:"자랑스럽다",pos:"adj.",zh:"驕傲的",cat:"情感",rank:2},
+  {word:"고맙다",pos:"adj.",zh:"感謝的",cat:"情感",rank:1},
+  {word:"미안하다",pos:"adj.",zh:"對不起",cat:"情感",rank:1},
+  {word:"창피하다",pos:"adj.",zh:"丟臉的",cat:"情感",rank:2},
+  {word:"억울하다",pos:"adj.",zh:"委屈的",cat:"情感",rank:3},
+  {word:"지루하다",pos:"adj.",zh:"無聊的",cat:"情感",rank:2},
+  {word:"신기하다",pos:"adj.",zh:"神奇的",cat:"情感",rank:2},
+  {word:"편리하다",pos:"adj.",zh:"方便的",cat:"日常生活",rank:2},
+  {word:"불편하다",pos:"adj.",zh:"不方便的",cat:"日常生活",rank:2},
+  {word:"복잡하다",pos:"adj.",zh:"複雜的",cat:"日常生活",rank:2},
+  {word:"간단하다",pos:"adj.",zh:"簡單的",cat:"日常生活",rank:2},
+  {word:"정확하다",pos:"adj.",zh:"準確的",cat:"教育",rank:2},
+  {word:"흐릿하다",pos:"adj.",zh:"模糊的",cat:"自然",rank:3},
+  {word:"선명하다",pos:"adj.",zh:"清晰的",cat:"日常生活",rank:3},
+  // 動詞追加
+  {word:"수다 떨다",pos:"v.",zh:"聊天",cat:"日常生活",rank:2},
+  {word:"악수하다",pos:"v.",zh:"握手",cat:"日常生活",rank:2},
+  {word:"인사하다",pos:"v.",zh:"打招呼",cat:"日常生活",rank:1},
+  {word:"소개하다",pos:"v.",zh:"介紹",cat:"日常生活",rank:2},
+  {word:"부탁하다",pos:"v.",zh:"拜託",cat:"日常生活",rank:2},
+  {word:"거절하다",pos:"v.",zh:"拒絕",cat:"日常生活",rank:2},
+  {word:"허락하다",pos:"v.",zh:"允許",cat:"日常生活",rank:2},
+  {word:"금지하다",pos:"v.",zh:"禁止",cat:"日常生活",rank:3},
+  {word:"청소하다",pos:"v.",zh:"打掃",cat:"日常生活",rank:2},
+  {word:"빨래하다",pos:"v.",zh:"洗衣服",cat:"日常生活",rank:2},
+  {word:"정리하다",pos:"v.",zh:"整理",cat:"日常生活",rank:2},
+  {word:"포장하다",pos:"v.",zh:"包裝",cat:"商業",rank:2},
+  {word:"배달하다",pos:"v.",zh:"外送",cat:"商業",rank:2},
+  {word:"주문하다",pos:"v.",zh:"點餐/訂購",cat:"食物",rank:2},
+  {word:"예약하다",pos:"v.",zh:"預訂",cat:"商業",rank:2},
+  {word:"취소하다",pos:"v.",zh:"取消",cat:"商業",rank:2},
+  {word:"환불하다",pos:"v.",zh:"退款",cat:"商業",rank:3},
+  {word:"확인하다",pos:"v.",zh:"確認",cat:"工作",rank:2},
+  {word:"검토하다",pos:"v.",zh:"檢討",cat:"工作",rank:3},
+  {word:"승인하다",pos:"v.",zh:"核准",cat:"工作",rank:3},
+  {word:"거부하다",pos:"v.",zh:"拒絕",cat:"工作",rank:3},
+  {word:"신청하다",pos:"v.",zh:"申請",cat:"工作",rank:2},
+  {word:"등록하다",pos:"v.",zh:"登錄/報名",cat:"教育",rank:2},
+  {word:"제출하다",pos:"v.",zh:"提交",cat:"教育",rank:2},
+  {word:"발표하다",pos:"v.",zh:"發表",cat:"教育",rank:2},
+  {word:"설명하다",pos:"v.",zh:"說明",cat:"教育",rank:2},
+  {word:"질문하다",pos:"v.",zh:"提問",cat:"教育",rank:2},
+  {word:"대답하다",pos:"v.",zh:"回答",cat:"教育",rank:2},
+  {word:"평가하다",pos:"v.",zh:"評價",cat:"教育",rank:3},
+  {word:"비교하다",pos:"v.",zh:"比較",cat:"教育",rank:2},
+  {word:"분석하다",pos:"v.",zh:"分析",cat:"教育",rank:3},
+  {word:"계획하다",pos:"v.",zh:"計劃",cat:"工作",rank:2},
+  {word:"결정하다",pos:"v.",zh:"決定",cat:"工作",rank:2},
+  {word:"해결하다",pos:"v.",zh:"解決",cat:"工作",rank:2},
+  {word:"포함하다",pos:"v.",zh:"包含",cat:"日常生活",rank:3},
+  {word:"제외하다",pos:"v.",zh:"排除",cat:"日常生活",rank:3},
+  {word:"선택하다",pos:"v.",zh:"選擇",cat:"日常生活",rank:2},
+  {word:"비교하다",pos:"v.",zh:"比較",cat:"日常生活",rank:2},
+  {word:"사용하다",pos:"v.",zh:"使用",cat:"日常生活",rank:2},
+  {word:"연락하다",pos:"v.",zh:"聯繫",cat:"工作",rank:2},
+  {word:"방문하다",pos:"v.",zh:"拜訪",cat:"日常生活",rank:2},
+  {word:"환영하다",pos:"v.",zh:"歡迎",cat:"日常生活",rank:2},
+  {word:"안내하다",pos:"v.",zh:"引導",cat:"日常生活",rank:2},
+  {word:"도움이 되다",pos:"v.",zh:"有幫助",cat:"日常生活",rank:2},
+  {word:"필요없다",pos:"v.",zh:"不需要",cat:"日常生活",rank:2},
+
+  // 追加詞彙 571-1000
+  // 顏色
+  {word:"빨간색",pos:"n.",zh:"紅色",cat:"日常生活",rank:2},
+  {word:"파란색",pos:"n.",zh:"藍色",cat:"日常生活",rank:2},
+  {word:"노란색",pos:"n.",zh:"黃色",cat:"日常生活",rank:2},
+  {word:"초록색",pos:"n.",zh:"綠色",cat:"日常生活",rank:2},
+  {word:"하얀색",pos:"n.",zh:"白色",cat:"日常生活",rank:2},
+  {word:"검은색",pos:"n.",zh:"黑色",cat:"日常生活",rank:2},
+  {word:"보라색",pos:"n.",zh:"紫色",cat:"日常生活",rank:2},
+  {word:"주황색",pos:"n.",zh:"橙色",cat:"日常生活",rank:2},
+  {word:"분홍색",pos:"n.",zh:"粉紅色",cat:"日常生活",rank:2},
+  {word:"회색",pos:"n.",zh:"灰色",cat:"日常生活",rank:2},
+  {word:"갈색",pos:"n.",zh:"棕色",cat:"日常生活",rank:2},
+  {word:"금색",pos:"n.",zh:"金色",cat:"日常生活",rank:3},
+  {word:"은색",pos:"n.",zh:"銀色",cat:"日常生活",rank:3},
+  // 數字/時間
+  {word:"반",pos:"num.",zh:"半、一半",cat:"時間",rank:1},
+  {word:"배",pos:"num.",zh:"倍",cat:"時間",rank:2},
+  {word:"처음",pos:"adv.",zh:"第一次",cat:"時間",rank:2},
+  {word:"마지막",pos:"adj.",zh:"最後的",cat:"時間",rank:2},
+  {word:"이번",pos:"pron.",zh:"這次",cat:"時間",rank:2},
+  {word:"다음",pos:"adj.",zh:"下一個",cat:"時間",rank:1},
+  {word:"전",pos:"prep.",zh:"之前",cat:"時間",rank:1},
+  {word:"후",pos:"prep.",zh:"之後",cat:"時間",rank:1},
+  {word:"동안",pos:"prep.",zh:"期間",cat:"時間",rank:2},
+  {word:"때",pos:"n.",zh:"時候",cat:"時間",rank:1},
+  {word:"순간",pos:"n.",zh:"瞬間",cat:"時間",rank:2},
+  {word:"요즘",pos:"adv.",zh:"最近",cat:"時間",rank:2},
+  {word:"옛날",pos:"n.",zh:"從前",cat:"時間",rank:2},
+  {word:"미래",pos:"n.",zh:"未來",cat:"時間",rank:2},
+  {word:"과거",pos:"n.",zh:"過去",cat:"時間",rank:2},
+  {word:"현재",pos:"n.",zh:"現在",cat:"時間",rank:2},
+  // 地點方向
+  {word:"위",pos:"prep.",zh:"上面",cat:"地點",rank:1},
+  {word:"아래",pos:"prep.",zh:"下面",cat:"地點",rank:1},
+  {word:"앞",pos:"prep.",zh:"前面",cat:"地點",rank:1},
+  {word:"뒤",pos:"prep.",zh:"後面",cat:"地點",rank:1},
+  {word:"왼쪽",pos:"n.",zh:"左邊",cat:"地點",rank:1},
+  {word:"오른쪽",pos:"n.",zh:"右邊",cat:"地點",rank:1},
+  {word:"안",pos:"prep.",zh:"裡面",cat:"地點",rank:1},
+  {word:"밖",pos:"prep.",zh:"外面",cat:"地點",rank:1},
+  {word:"사이",pos:"prep.",zh:"之間",cat:"地點",rank:2},
+  {word:"근처",pos:"n.",zh:"附近",cat:"地點",rank:2},
+  {word:"멀리",pos:"adv.",zh:"遠處",cat:"地點",rank:2},
+  {word:"중간",pos:"n.",zh:"中間",cat:"地點",rank:2},
+  {word:"가운데",pos:"n.",zh:"中央",cat:"地點",rank:2},
+  {word:"끝",pos:"n.",zh:"末端",cat:"地點",rank:2},
+  {word:"입구",pos:"n.",zh:"入口",cat:"地點",rank:2},
+  {word:"출구",pos:"n.",zh:"出口",cat:"地點",rank:2},
+  {word:"동쪽",pos:"n.",zh:"東邊",cat:"地點",rank:2},
+  {word:"서쪽",pos:"n.",zh:"西邊",cat:"地點",rank:2},
+  {word:"남쪽",pos:"n.",zh:"南邊",cat:"地點",rank:2},
+  {word:"북쪽",pos:"n.",zh:"北邊",cat:"地點",rank:2},
+  // 生活物品
+  {word:"냄비",pos:"n.",zh:"鍋子",cat:"日常生活",rank:2},
+  {word:"프라이팬",pos:"n.",zh:"平底鍋",cat:"日常生活",rank:2},
+  {word:"그릇",pos:"n.",zh:"碗",cat:"食物",rank:2},
+  {word:"접시",pos:"n.",zh:"盤子",cat:"食物",rank:2},
+  {word:"컵",pos:"n.",zh:"杯子",cat:"食物",rank:1},
+  {word:"젓가락",pos:"n.",zh:"筷子",cat:"食物",rank:2},
+  {word:"숟가락",pos:"n.",zh:"湯匙",cat:"食物",rank:2},
+  {word:"포크",pos:"n.",zh:"叉子",cat:"食物",rank:2},
+  {word:"칼",pos:"n.",zh:"刀",cat:"食物",rank:2},
+  {word:"도마",pos:"n.",zh:"砧板",cat:"食物",rank:2},
+  {word:"세제",pos:"n.",zh:"洗劑",cat:"日常生活",rank:2},
+  {word:"빗",pos:"n.",zh:"梳子",cat:"日常生活",rank:2},
+  {word:"면도기",pos:"n.",zh:"刮鬍刀",cat:"日常生活",rank:2},
+  {word:"향수",pos:"n.",zh:"香水",cat:"日常生活",rank:2},
+  {word:"화장품",pos:"n.",zh:"化妝品",cat:"日常生活",rank:2},
+  {word:"로션",pos:"n.",zh:"乳液",cat:"日常生活",rank:2},
+  {word:"선크림",pos:"n.",zh:"防曬乳",cat:"日常生活",rank:2},
+  {word:"마스크",pos:"n.",zh:"口罩",cat:"日常生活",rank:2},
+  {word:"안경",pos:"n.",zh:"眼鏡",cat:"日常生活",rank:2},
+  {word:"렌즈",pos:"n.",zh:"隱形眼鏡",cat:"日常生活",rank:2},
+  {word:"목걸이",pos:"n.",zh:"項鍊",cat:"日常生活",rank:2},
+  {word:"반지",pos:"n.",zh:"戒指",cat:"日常生活",rank:2},
+  {word:"귀걸이",pos:"n.",zh:"耳環",cat:"日常生活",rank:2},
+  {word:"모자",pos:"n.",zh:"帽子",cat:"日常生活",rank:2},
+  {word:"스카프",pos:"n.",zh:"圍巾",cat:"日常生活",rank:2},
+  {word:"장갑",pos:"n.",zh:"手套",cat:"日常生活",rank:2},
+  {word:"양말",pos:"n.",zh:"襪子",cat:"日常生活",rank:2},
+  {word:"속옷",pos:"n.",zh:"內衣褲",cat:"日常生活",rank:2},
+  {word:"잠옷",pos:"n.",zh:"睡衣",cat:"日常生活",rank:2},
+  {word:"수영복",pos:"n.",zh:"泳衣",cat:"日常生活",rank:2},
+  // 科技媒體
+  {word:"스마트폰",pos:"n.",zh:"智慧型手機",cat:"工作",rank:1},
+  {word:"태블릿",pos:"n.",zh:"平板電腦",cat:"工作",rank:2},
+  {word:"노트북",pos:"n.",zh:"筆記型電腦",cat:"工作",rank:1},
+  {word:"이어폰",pos:"n.",zh:"耳機",cat:"日常生活",rank:2},
+  {word:"충전기",pos:"n.",zh:"充電器",cat:"日常生活",rank:2},
+  {word:"배터리",pos:"n.",zh:"電池",cat:"日常生活",rank:2},
+  {word:"와이파이",pos:"n.",zh:"無線網路",cat:"工作",rank:2},
+  {word:"블루투스",pos:"n.",zh:"藍牙",cat:"工作",rank:2},
+  {word:"앱",pos:"n.",zh:"應用程式",cat:"工作",rank:2},
+  {word:"소셜미디어",pos:"n.",zh:"社群媒體",cat:"工作",rank:2},
+  {word:"유튜브",pos:"n.",zh:"YouTube",cat:"日常生活",rank:2},
+  {word:"검색",pos:"n.",zh:"搜尋",cat:"工作",rank:2},
+  {word:"다운로드",pos:"v.",zh:"下載",cat:"工作",rank:2},
+  {word:"업로드",pos:"v.",zh:"上傳",cat:"工作",rank:2},
+  {word:"설치하다",pos:"v.",zh:"安裝",cat:"工作",rank:2},
+  {word:"업데이트",pos:"n.",zh:"更新",cat:"工作",rank:2},
+  {word:"비밀번호",pos:"n.",zh:"密碼",cat:"工作",rank:2},
+  {word:"계정",pos:"n.",zh:"帳號",cat:"工作",rank:2},
+  {word:"로그인",pos:"v.",zh:"登入",cat:"工作",rank:2},
+  {word:"로그아웃",pos:"v.",zh:"登出",cat:"工作",rank:2},
+  // 文化娛樂
+  {word:"K-pop",pos:"n.",zh:"韓流音樂",cat:"日常生活",rank:1},
+  {word:"아이돌",pos:"n.",zh:"偶像",cat:"日常生活",rank:1},
+  {word:"팬",pos:"n.",zh:"粉絲",cat:"日常生活",rank:2},
+  {word:"콘서트",pos:"n.",zh:"演唱會",cat:"日常生活",rank:2},
+  {word:"뮤지컬",pos:"n.",zh:"音樂劇",cat:"日常生活",rank:2},
+  {word:"전시회",pos:"n.",zh:"展覽",cat:"地點",rank:3},
+  {word:"박람회",pos:"n.",zh:"博覽會",cat:"商業",rank:3},
+  {word:"축제",pos:"n.",zh:"節日慶典",cat:"日常生活",rank:2},
+  {word:"행사",pos:"n.",zh:"活動",cat:"日常生活",rank:2},
+  {word:"파티",pos:"n.",zh:"派對",cat:"日常生活",rank:2},
+  {word:"선물",pos:"n.",zh:"禮物",cat:"情感",rank:1},
+  {word:"꽃다발",pos:"n.",zh:"花束",cat:"情感",rank:2},
+  {word:"케이크",pos:"n.",zh:"蛋糕",cat:"食物",rank:2},
+  {word:"초",pos:"n.",zh:"蠟燭",cat:"日常生活",rank:2},
+  {word:"풍선",pos:"n.",zh:"氣球",cat:"日常生活",rank:2},
+  // 感嘆詞/常用表達
+  {word:"어머",pos:"interj.",zh:"哎呀",cat:"日常生活",rank:2},
+  {word:"아이고",pos:"interj.",zh:"哎喲",cat:"日常生活",rank:2},
+  {word:"와",pos:"interj.",zh:"哇",cat:"情感",rank:1},
+  {word:"정말요",pos:"interj.",zh:"真的嗎",cat:"日常生活",rank:2},
+  {word:"왜요",pos:"interj.",zh:"為什麼",cat:"日常生活",rank:1},
+  {word:"어떻게요",pos:"interj.",zh:"怎麼了",cat:"日常生活",rank:2},
+  {word:"진짜요",pos:"interj.",zh:"是真的嗎",cat:"情感",rank:2},
+  {word:"물론이죠",pos:"interj.",zh:"當然",cat:"日常生活",rank:2},
+  {word:"아마도",pos:"adv.",zh:"也許",cat:"日常生活",rank:2},
+  {word:"혹시",pos:"adv.",zh:"請問/萬一",cat:"日常生活",rank:2},
+  {word:"특히",pos:"adv.",zh:"特別",cat:"日常生活",rank:2},
+  {word:"역시",pos:"adv.",zh:"果然/還是",cat:"日常生活",rank:2},
+  {word:"드디어",pos:"adv.",zh:"終於",cat:"時間",rank:2},
+  {word:"갑자기",pos:"adv.",zh:"突然",cat:"時間",rank:2},
+  {word:"천천히",pos:"adv.",zh:"慢慢地",cat:"日常生活",rank:2},
+  {word:"열심히",pos:"adv.",zh:"努力地",cat:"工作",rank:2},
+  {word:"조심히",pos:"adv.",zh:"小心地",cat:"日常生活",rank:2},
+  {word:"정확히",pos:"adv.",zh:"準確地",cat:"教育",rank:2},
+  {word:"분명히",pos:"adv.",zh:"明確地",cat:"教育",rank:2},
+  {word:"확실히",pos:"adv.",zh:"確實地",cat:"情感",rank:2},
+  {word:"가능하면",pos:"adv.",zh:"如果可以",cat:"日常生活",rank:3},
+  {word:"다행히",pos:"adv.",zh:"幸好",cat:"情感",rank:2},
+  {word:"불행히",pos:"adv.",zh:"不幸",cat:"情感",rank:3},
+  {word:"마찬가지로",pos:"adv.",zh:"同樣地",cat:"日常生活",rank:3},
+  {word:"예를 들어",pos:"adv.",zh:"例如",cat:"教育",rank:2},
+  {word:"그러므로",pos:"conj.",zh:"因此",cat:"日常生活",rank:2},
+  {word:"그러나",pos:"conj.",zh:"然而",cat:"日常生活",rank:2},
+  {word:"그래서",pos:"conj.",zh:"所以",cat:"日常生活",rank:1},
+  {word:"하지만",pos:"conj.",zh:"但是",cat:"日常生活",rank:1},
+  {word:"왜냐하면",pos:"conj.",zh:"因為",cat:"日常生活",rank:2},
+  {word:"비록",pos:"conj.",zh:"雖然",cat:"日常生活",rank:2},
+  {word:"만약",pos:"conj.",zh:"如果",cat:"日常生活",rank:2},
+  {word:"그렇지 않으면",pos:"conj.",zh:"否則",cat:"日常生活",rank:2},
+  // 抽象概念
+  {word:"관계",pos:"n.",zh:"關係",cat:"情感",rank:2},
+  {word:"사회",pos:"n.",zh:"社會",cat:"日常生活",rank:2},
+  {word:"문화",pos:"n.",zh:"文化",cat:"日常生活",rank:2},
+  {word:"전통",pos:"n.",zh:"傳統",cat:"日常生活",rank:2},
+  {word:"역사",pos:"n.",zh:"歷史",cat:"教育",rank:2},
+  {word:"과학",pos:"n.",zh:"科學",cat:"教育",rank:2},
+  {word:"기술",pos:"n.",zh:"技術",cat:"工作",rank:2},
+  {word:"예술",pos:"n.",zh:"藝術",cat:"教育",rank:2},
+  {word:"철학",pos:"n.",zh:"哲學",cat:"教育",rank:3},
+  {word:"종교",pos:"n.",zh:"宗教",cat:"日常生活",rank:2},
+  {word:"정치",pos:"n.",zh:"政治",cat:"工作",rank:3},
+  {word:"경제",pos:"n.",zh:"經濟",cat:"商業",rank:3},
+  {word:"환경",pos:"n.",zh:"環境",cat:"自然",rank:2},
+  {word:"자연",pos:"n.",zh:"自然",cat:"自然",rank:2},
+  {word:"생태계",pos:"n.",zh:"生態系統",cat:"自然",rank:3},
+  {word:"기후",pos:"n.",zh:"氣候",cat:"自然",rank:3},
+  {word:"에너지",pos:"n.",zh:"能源",cat:"自然",rank:3},
+  {word:"자원",pos:"n.",zh:"資源",cat:"自然",rank:3},
+  {word:"오염",pos:"n.",zh:"污染",cat:"自然",rank:3},
+  {word:"재활용",pos:"n.",zh:"回收",cat:"自然",rank:3},
+  {word:"지속가능성",pos:"n.",zh:"永續性",cat:"自然",rank:3},
+  {word:"글로벌",pos:"adj.",zh:"全球的",cat:"工作",rank:3},
+  {word:"다양성",pos:"n.",zh:"多樣性",cat:"日常生活",rank:3},
+  {word:"평등",pos:"n.",zh:"平等",cat:"日常生活",rank:3},
+  {word:"자유",pos:"n.",zh:"自由",cat:"情感",rank:2},
+  {word:"평화",pos:"n.",zh:"和平",cat:"情感",rank:2},
+  {word:"정의",pos:"n.",zh:"正義",cat:"工作",rank:3},
+  {word:"책임",pos:"n.",zh:"責任",cat:"工作",rank:2},
+  {word:"권리",pos:"n.",zh:"權利",cat:"工作",rank:3},
+  {word:"의무",pos:"n.",zh:"義務",cat:"工作",rank:3},
+  {word:"윤리",pos:"n.",zh:"倫理",cat:"教育",rank:3},
+  {word:"가치",pos:"n.",zh:"價值",cat:"情感",rank:2},
+  {word:"목표",pos:"n.",zh:"目標",cat:"工作",rank:2},
+  {word:"성공",pos:"n.",zh:"成功",cat:"工作",rank:2},
+  {word:"실패",pos:"n.",zh:"失敗",cat:"工作",rank:2},
+  {word:"도전",pos:"n.",zh:"挑戰",cat:"工作",rank:2},
+  {word:"기회",pos:"n.",zh:"機會",cat:"工作",rank:2},
+  {word:"위기",pos:"n.",zh:"危機",cat:"工作",rank:3},
+  {word:"해결책",pos:"n.",zh:"解決方案",cat:"工作",rank:3},
+  {word:"방법",pos:"n.",zh:"方法",cat:"日常生活",rank:2},
+  {word:"이유",pos:"n.",zh:"理由",cat:"日常生活",rank:2},
+  {word:"결과",pos:"n.",zh:"結果",cat:"工作",rank:2},
+  {word:"원인",pos:"n.",zh:"原因",cat:"教育",rank:2},
+  {word:"영향",pos:"n.",zh:"影響",cat:"工作",rank:2},
+  {word:"변화",pos:"n.",zh:"變化",cat:"日常生活",rank:2},
+  {word:"발전",pos:"n.",zh:"發展",cat:"工作",rank:2},
+  {word:"개선",pos:"n.",zh:"改善",cat:"工作",rank:2},
+  {word:"혁신",pos:"n.",zh:"創新",cat:"工作",rank:3},
+  {word:"창의성",pos:"n.",zh:"創造力",cat:"教育",rank:3},
+  {word:"상상력",pos:"n.",zh:"想像力",cat:"教育",rank:3},
+  {word:"집중력",pos:"n.",zh:"專注力",cat:"教育",rank:3},
+  {word:"기억력",pos:"n.",zh:"記憶力",cat:"教育",rank:3},
+  {word:"판단력",pos:"n.",zh:"判斷力",cat:"教育",rank:3},
+];
+
+// Build allWords
+const seen = new Set();
+const allWords = [];
+for(const w of WORDS){
+  const k=w.word;
+  if(!seen.has(k)){seen.add(k);allWords.push({...w,id:allWords.length+1});}
+}
+for(const w of extWords){
+  const k=w.word;
+  if(!seen.has(k)&&allWords.length<5000){
+    seen.add(k);
+    const rank=allWords.length<1000?1:allWords.length<2000?2:allWords.length<3500?3:4;
+    allWords.push({...w,id:allWords.length+1,rank});
+  }
+}
+for(let i=0;i<allWords.length;i++) allWords[i].id=i+1;
+
+// Korean phonetic (hangul to Chinese approximation)
+const KR_PHONETIC = {
+  "나":"那","너":"呢爾","그":"克","우리":"烏里","이것":"伊格特","그것":"克格特",
+  "있다":"伊特答","없다":"唉普答","하다":"哈答","이다":"伊答","가다":"卡答","오다":"哦答",
+  "먹다":"莫克答","마시다":"馬西答","자다":"恰答","보다":"破答","듣다":"特特答","말하다":"馬拉答",
+  "알다":"阿爾答","모르다":"摩魯答","좋다":"喬答","나쁘다":"那布答","크다":"克答","작다":"恰克答",
+  "많다":"曼答","적다":"赤克答","높다":"諾普答","낮다":"那答","빠르다":"帕魯答","느리다":"呢里答",
+  "덥다":"特普答","춥다":"促普答","맛있다":"馬西答","맵다":"梅普答","달다":"答拉答","짜다":"恰答",
+  "사람":"沙拉姆","남자":"南加","여자":"唷加","아이":"阿伊","아버지":"阿波基","어머니":"哦莫妮",
+  "오빠":"哦爸","형":"咻恩","언니":"恩妮","누나":"努娜","남동생":"南東僧","여동생":"唷東僧",
+  "친구":"親古","선생님":"三僧尼姆","학생":"哈克僧","의사":"唷沙","집":"集普","학교":"哈克嬌",
+  "회사":"喚沙","병원":"碧恩哇恩","시장":"西將","식당":"西克唐","은행":"恩行","나라":"那拉",
+  "도시":"都西","길":"基爾","오늘":"哦呢爾","어제":"哦赤","내일":"內伊爾","지금":"基坎姆",
+  "아침":"阿七姆","점심":"赤姆心","저녁":"赤尼克","밤":"把姆","년":"尼恩","월":"哇爾",
+  "일":"伊爾","시간":"西幹","분":"本","일":"伊爾","이":"伊","삼":"三","사":"沙","오":"哦",
+  "육":"由克","칠":"七爾","팔":"帕爾","구":"古","십":"西普","백":"貝克","천":"清",
+  "밥":"把普","물":"木爾","커피":"可費","차":"恰","김치":"基姆七","불고기":"普爾孤基",
+  "비빔밥":"比比姆把普","삼겹살":"三給普沙爾","돈":"東","가격":"卡格克","책":"切克",
+  "이름":"伊魯姆","언어":"恩尼哦","한국어":"漢古克哦","영어":"英哦","중국어":"忠固克哦",
+  "일본어":"伊爾本哦","배우다":"貝吾答","가르치다":"卡魯七答","읽다":"伊爾克答","쓰다":"思答",
+  "일하다":"伊爾哈答","쉬다":"需伊答","운동하다":"翁東哈答","요리하다":"唷里哈答",
+  "쇼핑하다":"秀萍哈答","전화하다":"切恩話哈答","사랑하다":"沙浪哈答","좋아하다":"喬阿哈答",
+  "싫어하다":"西爾哦哈答","행복하다":"行波克哈答","슬프다":"思爾普答","화나다":"話那答",
+  "무섭다":"木色普答","피곤하다":"費坤哈答","배고프다":"貝孤普答","목마르다":"摩克馬魯答",
+  "아프다":"阿普答","건강하다":"肯幹哈答","예쁘다":"耶普答","안녕하세요":"安寧哈誰唷",
+  "감사합니다":"甘沙哈普尼答","죄송합니다":"赤松哈普尼答","괜찮아요":"誇恩查那唷",
+  "잠깐만요":"占幹曼唷","모르겠어요":"摩魯給錯唷","도와주세요":"都哇主誰唷",
+  "얼마예요":"哦爾馬唷","어디예요":"哦地唷","주세요":"主誰唷","맞아요":"馬加唷",
+  "아니에요":"阿尼唷","네":"內","아니요":"阿尼唷","그래요":"克萊唷","왜":"哇唷",
+  "어떻게":"哦特可","언제":"恩赤","어디":"哦地","누가":"努嘎","무엇":"木哦特",
+  "얼마나":"哦爾馬那","매우":"梅吾","정말":"切恩馬爾","아주":"阿主","너무":"呢木",
+  "조금":"喬坎姆","많이":"馬尼","빨리":"帕爾里",
+};
+
+function toKrPhonetic(word) {
+  return KR_PHONETIC[word] || word.split('').slice(0,4).join('·');
+}
+
+function buildPhoneticTable(sentence) {
+  return '<span style="font-size:0.82rem;color:#aaa">'+toKrPhonetic(sentence)+'</span>';
+}
+function toChinesePhonetic(word) { return toKrPhonetic(word); }
+
+// Sentences
+function getSentences(w) {
+  const word = w.word;
+  const zh = w.zh.split('、')[0].split('（')[0].trim();
+  const pos = w.pos;
+  const cat = w.cat;
+
+  const templates = {
+    "n.": [
+      `${word}은/는 정말 중요해요. (${zh}真的很重要。)`,
+      `저는 ${word}을/를 좋아해요. (我喜歡${zh}。)`
+    ],
+    "v.": [
+      `저는 매일 ${word}어요/아요. (我每天${zh}。)`,
+      `같이 ${word}을까요? (要一起${zh}嗎？)`
+    ],
+    "adj.": [
+      `이것은 정말 ${word}어요/아요. (這個真的很${zh}。)`,
+      `날씨가 너무 ${word}어요/아요. (天氣太${zh}了。)`
+    ],
+    "adv.": [
+      `${word} 해 주세요. (請${zh}。)`,
+      `그는 ${word} 했어요. (他${zh}地做了。)`
+    ],
+    "phr.": [
+      `한국에서는 "${word}"라고 해요. (在韓國說「${zh}」。)`,
+      `처음 만날 때 "${word}" 라고 해요. (第一次見面時說「${zh}」。)`
+    ],
+    "num.": [
+      `${word}개 주세요. (請給我${zh}個。)`,
+      `${word}명이 왔어요. (來了${zh}個人。)`
+    ],
+    "pron.": [
+      `${word}은/는 한국 사람이에요. (${zh}是韓國人。)`,
+      `${word}은/는 어디에 있어요? (${zh}在哪裡？)`
+    ],
+  };
+
+  const catExtra = {
+    "食物": [`${word}이/가 정말 맛있어요! (${zh}真的很好吃！)`, `오늘 ${word}을/를 먹었어요. (今天吃了${zh}。)`],
+    "家庭": [`우리 ${word}은/는 정말 좋아요. (我的${zh}真的很好。)`, `${word}에게 전화했어요. (打電話給${zh}了。)`],
+    "情感": [`지금 기분이 ${word}어요/아요. (現在心情很${zh}。)`, `그 소식을 듣고 ${word}었어요/았어요. (聽到那個消息後感到${zh}。)`],
+  };
+
+  if(catExtra[cat]) return catExtra[cat];
+  return templates[pos] || [`${word}에 대해 공부해요. (學習關於${zh}的知識。)`, `${word}은/는 한국어에서 자주 써요. (${zh}在韓語中常用。)`];
+}
+
+// APP STATE
+let filtered = [...allWords];
+let currentWord = null;
+let currentPage = 1;
+const PAGE_SIZE = 50;
+let currentCat = 'all';
+let quizPool=[],quizIndex=0,quizCorrectList=[],quizWrongList=[],quizRound=1,isRetryRound=false;
+let currentQuizWord='';
+
+function renderList() {
+  const list = document.getElementById('wordList');
+  const start=(currentPage-1)*PAGE_SIZE;
+  const visible=filtered.slice(start,start+PAGE_SIZE);
+  list.innerHTML = visible.map(w=>`
+    <div class="word-item ${currentWord?.id===w.id?'active':''}" onclick="selectWord(${w.id})">
+      <div class="word-num">#${w.id}</div>
+      <div class="word-main">
+        <div class="word-id">${w.word}</div>
+        <div class="word-zh">${w.zh} <span style="color:#555;font-size:0.7rem">${toKrPhonetic(w.word)}</span></div>
+      </div>
+      <div class="word-pos">${w.pos}</div>
+      <div class="play-mini" onclick="event.stopPropagation();speakWord('${w.word}')">▶</div>
+    </div>`).join('');
+  renderPagination();
+}
+
+function renderPagination() {
+  const total=Math.ceil(filtered.length/PAGE_SIZE);
+  const pg=document.getElementById('pagination');
+  if(total<=1){pg.innerHTML='';return;}
+  let btns=`<button class="page-btn${currentPage===1?' active':''}" onclick="goPage(1)">1</button>`;
+  if(currentPage>5) btns+=`<span style="color:var(--muted);padding:0 4px">…</span>`;
+  for(let i=Math.max(2,currentPage-3);i<=Math.min(total-1,currentPage+3);i++)
+    btns+=`<button class="page-btn${currentPage===i?' active':''}" onclick="goPage(${i})">${i}</button>`;
+  if(currentPage<total-4) btns+=`<span style="color:var(--muted);padding:0 4px">…</span>`;
+  if(total>1) btns+=`<button class="page-btn${currentPage===total?' active':''}" onclick="goPage(${total})">${total}</button>`;
+  pg.innerHTML=btns;
+}
+
+function goPage(p){currentPage=p;renderList();document.getElementById('wordList').scrollTop=0;}
+
+function selectWord(id) {
+  currentWord=allWords.find(w=>w.id===id);
+  if(!currentWord) return;
+  currentWord._learned=true;
+  document.getElementById('learnedCount').textContent=allWords.filter(w=>w._learned).length;
+  renderList();
+  const w=currentWord;
+  const sents=getSentences(w);
+  const rankLabel=['','基礎','初級','中級','進階'][w.rank||1];
+  document.getElementById('detail').innerHTML=`
+    <div class="detail-word">${w.word}</div>
+    <div class="detail-phonetic-table"><div class="ph-row"><span class="ph-pair"><span class="ph-word">${w.word}</span><span class="ph-zn">${toKrPhonetic(w.word)}</span></span></div></div>
+    <div class="detail-tags">
+      <span class="tag tag-pos">${w.pos}</span>
+      <span class="tag tag-rank">第 ${w.id} 高頻</span>
+      <span class="tag tag-rank">${rankLabel}詞彙</span>
+      <span class="tag tag-cat">${w.cat}</span>
+    </div>
+    <div class="audio-row">
+      <button class="audio-btn word-audio" onclick="speakWord('${w.word.replace(/'/g,"\\'")}')">🔊 播放單字</button>
+      <button class="audio-btn sentence-audio" onclick="speakWord('${sents[0].split('(')[0].trim().replace(/'/g,"\\'")}')">🔊 播放例句</button>
+    </div>
+    <div class="section-title">中文釋義</div>
+    <div class="def-box"><div class="def-zh">${w.zh}</div><div class="def-en">${w.word} (${w.pos}) — 韓語第 ${w.id} 高頻單字</div></div>
+    <div class="section-title" style="margin-top:20px">例句 예문</div>
+    ${sents.map((s,i)=>{
+      const parts=s.match(/^(.+?)\((.+)\)\.?$/);
+      const kr_s=parts?parts[1].trim():s;
+      const zh_s=parts?parts[2].trim():'';
+      return `<div class="example-card">
+        <div class="ex-id">${kr_s}</div>
+        <div class="ex-zh">${zh_s}</div>
+        <div class="ex-audio" onclick="speakWord('${kr_s.replace(/'/g,"\\'")}')">▶ 播放例句 ${i+1}</div>
+      </div>`;
+    }).join('')}
+    <div class="section-title" style="margin-top:20px">相關單字</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      ${allWords.filter(r=>r.cat===w.cat&&r.id!==w.id).slice(0,6).map(r=>
+        `<span onclick="selectWord(${r.id})" style="padding:6px 14px;background:var(--surface);border:1px solid var(--border);border-radius:20px;cursor:pointer;font-size:0.82rem">${r.word} ${r.zh}</span>`
+      ).join('')}
+    </div>`;
+}
+
+function filterCat(cat,el){
+  currentCat=cat;
+  document.querySelectorAll('.cat-tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  applyFilters();
+}
+function applyFilters(){
+  const q=document.getElementById('searchInput').value.toLowerCase();
+  const pos=document.getElementById('posFilter').value;
+  const level=document.getElementById('levelFilter').value;
+  filtered=allWords.filter(w=>{
+    if(currentCat!=='all'&&w.cat!==currentCat) return false;
+    if(pos&&w.pos!==pos) return false;
+    if(level){const r={1:[1,1000],2:[1001,2000],3:[2001,3500],4:[3501,5000]}[level];if(w.id<r[0]||w.id>r[1]) return false;}
+    if(q) return w.word.includes(q)||w.zh.includes(q)||w.cat.includes(q);
+    return true;
+  });
+  currentPage=1;
+  renderList();
+  document.getElementById('totalCount').textContent=filtered.length;
+}
+document.getElementById('searchInput').addEventListener('input',applyFilters);
+document.getElementById('posFilter').addEventListener('change',applyFilters);
+document.getElementById('levelFilter').addEventListener('change',applyFilters);
+
+// AUDIO
+let currentAudio=null;
+function speakWord(text){
+  if(!text) return;
+  if(currentAudio){currentAudio.pause();currentAudio.currentTime=0;}
+  window.speechSynthesis&&window.speechSynthesis.cancel();
+  const speak=()=>{
+    const utt=new SpeechSynthesisUtterance(text);
+    utt.lang='ko-KR'; utt.rate=0.85;
+    const voices=window.speechSynthesis.getVoices();
+    const v=voices.find(v=>v.lang==='ko-KR')||voices.find(v=>v.lang.startsWith('ko'));
+    if(v) utt.voice=v;
+    window.speechSynthesis.speak(utt);
+  };
+  if(window.speechSynthesis.getVoices().length===0){window.speechSynthesis.onvoiceschanged=speak;setTimeout(speak,300);}
+  else speak();
+}
+function speakAll(){
+  const visible=filtered.slice((currentPage-1)*PAGE_SIZE,currentPage*PAGE_SIZE);
+  let i=0;
+  function next(){if(i>=visible.length) return;
+    const utt=new SpeechSynthesisUtterance(visible[i].word);
+    utt.lang='ko-KR';utt.rate=0.9;utt.onend=()=>{i++;setTimeout(next,400);};
+    const v=window.speechSynthesis.getVoices().find(v=>v.lang.startsWith('ko'));
+    if(v) utt.voice=v;
+    window.speechSynthesis.speak(utt);
+  }
+  next();
+}
+
+// QUIZ
+function quizSpeak(){if(currentQuizWord){const btn=document.getElementById('quizSpeakBtn');if(btn){btn.innerHTML='🔊 播放中...';setTimeout(()=>{btn.innerHTML='🔊 播放發音';},1000);}speakWord(currentQuizWord);}}
+function openQuiz(){quizRound=1;isRetryRound=false;document.getElementById('quizOverlay').classList.add('show');startNewQuiz();}
+function startNewQuiz(){const pool=[...filtered].sort(()=>Math.random()-0.5).slice(0,20);beginRound(pool,false);}
+function retryWrong(){if(quizWrongList.length===0) return;quizRound++;isRetryRound=true;beginRound([...quizWrongList],true);}
+function beginRound(pool,isRetry){quizPool=pool;quizIndex=0;quizCorrectList=[];quizWrongList=[];isRetryRound=isRetry;document.getElementById('quizQuestion').style.display='block';document.getElementById('quizResult').style.display='none';showQuestion();}
+function showQuestion(){
+  if(quizIndex>=quizPool.length){showResult();return;}
+  const target=quizPool[quizIndex];
+  currentQuizWord=target.word;
+  const total=quizPool.length,current=quizIndex+1;
+  document.getElementById('quizRound').textContent=isRetryRound?`🔁 重考第 ${quizRound} 輪`:`第 ${quizRound} 輪`;
+  document.getElementById('quizProgress').textContent=`${current} / ${total}`;
+  document.getElementById('quizBar').style.width=((quizIndex)/total*100)+'%';
+  document.getElementById('quizWord').textContent=target.word;
+  document.getElementById('quizPhonetic').textContent=toKrPhonetic(target.word);
+  document.getElementById('quizScore').textContent=`✅ ${quizCorrectList.length}  ❌ ${quizWrongList.length}`;
+  const wrongs=filtered.filter(w=>w.id!==target.id&&w.zh!==target.zh).sort(()=>Math.random()-0.5).slice(0,3);
+  const opts=[...wrongs,target].sort(()=>Math.random()-0.5);
+  document.getElementById('quizOptions').innerHTML=opts.map(o=>`<button class="quiz-opt" onclick="answerQuiz(this,'${o.id}','${target.id}','${target.word.replace(/'/g,"\\'")}','${target.zh.replace(/'/g,"\\'")}')"> ${o.zh}</button>`).join('');
+  setTimeout(()=>speakWord(target.word),350);
+}
+function answerQuiz(btn,chosenId,correctId,word,correctZh){
+  document.querySelectorAll('.quiz-opt').forEach(b=>b.onclick=null);
+  const target=quizPool[quizIndex];
+  const isCorrect=chosenId===correctId;
+  if(isCorrect){btn.classList.add('correct');quizCorrectList.push(target);}
+  else{btn.classList.add('wrong');quizWrongList.push(target);document.querySelectorAll('.quiz-opt').forEach(b=>{if(b.textContent.trim()===correctZh) b.classList.add('correct');});}
+  speakWord(word);
+  document.getElementById('quizScore').textContent=`✅ ${quizCorrectList.length}  ❌ ${quizWrongList.length}`;
+  document.getElementById('quizBar').style.width=((quizIndex+1)/quizPool.length*100)+'%';
+  quizIndex++;
+  setTimeout(showQuestion,isCorrect?1200:1800);
+}
+function showResult(){
+  document.getElementById('quizQuestion').style.display='none';
+  document.getElementById('quizResult').style.display='block';
+  const total=quizPool.length,correct=quizCorrectList.length,wrong=quizWrongList.length,pct=Math.round(correct/total*100);
+  const e=pct===100?'🏆':pct>=80?'🎉':pct>=60?'👍':pct>=40?'📖':'💪';
+  const t=pct===100?'完美！':pct>=80?'非常好！':pct>=60?'不錯喔！':pct>=40?'繼續努力！':'加油！';
+  document.getElementById('quizResultEmoji').textContent=e;
+  document.getElementById('quizResultTitle').textContent=t;
+  document.getElementById('quizResultMsg').textContent=`正確率 ${pct}%`;
+  document.getElementById('quizCorrectNum').textContent=correct;
+  document.getElementById('quizWrongNum').textContent=wrong;
+  document.getElementById('quizAccuracy').textContent=pct+'%';
+  const wl=document.getElementById('quizWrongList');
+  if(quizWrongList.length>0){
+    wl.innerHTML='<div style="font-size:0.72rem;color:var(--muted);margin-bottom:8px">❌ 答錯的單字</div>'+
+      quizWrongList.map(w=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:var(--surface2);border-radius:8px;margin-bottom:6px;border-left:3px solid var(--accent2)"><span style="font-weight:600;color:var(--text)">${w.word}</span><span style="color:var(--muted);font-size:0.82rem">${w.zh}</span><span onclick="speakWord('${w.word}')" style="cursor:pointer;color:var(--accent)">🔊</span></div>`).join('');
+    document.getElementById('quizRetryWrong').style.display='block';
+  } else {
+    wl.innerHTML='<div style="text-align:center;color:var(--green);padding:12px">🎊 沒有答錯的單字！</div>';
+    document.getElementById('quizRetryWrong').style.display='none';
+  }
+}
+function closeQuiz(){document.getElementById('quizOverlay').classList.remove('show');}
+
+if(window.speechSynthesis){window.speechSynthesis.getVoices();window.speechSynthesis.onvoiceschanged=()=>window.speechSynthesis.getVoices();}
+renderList();
+document.getElementById('totalCount').textContent=allWords.length;
+</script>
+</body>
+</html>
