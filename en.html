@@ -106,18 +106,18 @@
     <span>English High-Frequency Vocabulary</span>
   </div>
   <div class="stats-bar">
-    <div class="stat"><div class="stat-n" id="totalCount">5000</div><div class="stat-l">總單字數</div></div>
-    <div class="stat"><div class="stat-n" id="learnedCount">0</div><div class="stat-l">已學習</div></div>
+    <div class="stat"><div class="stat-n" id="totalCount">5000</div><div class="stat-l">Total Words</div></div>
+    <div class="stat"><div class="stat-n" id="learnedCount">0</div><div class="stat-l">Learned</div></div>
   </div>
 </header>
 
 <div class="controls">
   <div class="search-wrap">
     <span class="search-icon">🔍</span>
-    <input type="text" id="searchInput" placeholder="搜尋單字、中文、詞性…">
+    <input type="text" id="searchInput" placeholder="Search words, meaning, POS...">
   </div>
   <select id="posFilter">
-    <option value="">所有詞性</option>
+    <option value="">All POS</option>
     <option value="n.">名詞</option>
     <option value="v.">動詞</option>
     <option value="adj.">形容詞</option>
@@ -127,14 +127,14 @@
     <option value="num.">數詞</option>
   </select>
   <select id="levelFilter">
-    <option value="">所有等級</option>
-    <option value="1">基礎 (1-1000)</option>
-    <option value="2">初級 (1001-2000)</option>
-    <option value="3">中級 (2001-3500)</option>
-    <option value="4">進階 (3501-5000)</option>
+    <option value="">All Levels</option>
+    <option value="1">Basic (1-1000)</option>
+    <option value="2">Beginner (1001-2000)</option>
+    <option value="3">Intermediate (2001-3500)</option>
+    <option value="4">Advanced (3501-5000)</option>
   </select>
-  <button class="btn btn-primary" onclick="openQuiz()">📝 測驗模式</button>
-  <button class="btn btn-ghost" onclick="speakAll()">🔊 全部播放</button>
+  <button class="btn btn-primary" onclick="openQuiz()">📝 Quiz Mode</button>
+  <button class="btn btn-ghost" onclick="speakAll()">🔊 Play All</button>
 </div>
 
 <div class="cat-tabs" id="catTabs">
@@ -158,8 +158,8 @@
   <div class="detail" id="detail">
     <div class="detail-empty">
       <div style="font-size:3rem">🇰🇷</div>
-      <div style="font-size:1.1rem;color:var(--text)">Choose a word · 選擇單字開始學習</div>
-      <div>點擊左側單字查看詳細資訊、例句與音檔</div>
+      <div style="font-size:1.1rem;color:var(--text)">Choose a word · Select a word to start learning</div>
+      <div>Click a word to see details, examples & audio</div>
     </div>
   </div>
 </div>
@@ -169,14 +169,14 @@
 <div class="quiz-overlay" id="quizOverlay">
   <div class="quiz-card" id="quizQuestion">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-      <div style="font-size:0.78rem;color:var(--muted)" id="quizRound">第 1 輪</div>
+      <div style="font-size:0.78rem;color:var(--muted)" id="quizRound">Round 1</div>
       <div style="font-size:0.78rem;color:var(--muted)" id="quizProgress">1 / 20</div>
       <button onclick="closeQuiz()" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:0.85rem">✕ 離開</button>
     </div>
     <div style="background:var(--border);border-radius:4px;height:4px;margin-bottom:18px">
       <div id="quizBar" style="background:var(--accent);height:4px;border-radius:4px;width:0%;transition:width 0.3s"></div>
     </div>
-    <div style="font-size:0.85rem;color:var(--muted);margin-bottom:8px;text-align:center">這個單字的中文意思是？</div>
+    <div style="font-size:0.85rem;color:var(--muted);margin-bottom:8px;text-align:center">What's the Chinese meaning?</div>
     <div class="quiz-q" id="quizWord" onclick="quizSpeak()"></div>
     <div style="font-size:0.78rem;color:var(--muted);text-align:center;margin:6px 0 4px" id="quizPhonetic"></div>
     <button onclick="quizSpeak()" id="quizSpeakBtn" style="display:flex;align-items:center;gap:8px;margin:0 auto 16px;background:rgba(74,144,217,0.15);border:1.5px solid rgba(74,144,217,0.5);border-radius:30px;padding:9px 22px;cursor:pointer;color:var(--accent);font-size:0.88rem;font-weight:600;font-family:'DM Sans',sans-serif">🔊 播放發音</button>
@@ -188,15 +188,15 @@
     <div style="font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--accent);margin-bottom:8px" id="quizResultTitle"></div>
     <div style="font-size:0.9rem;color:var(--muted);margin-bottom:20px" id="quizResultMsg"></div>
     <div style="display:flex;justify-content:center;gap:24px;margin-bottom:24px">
-      <div style="text-align:center"><div style="font-size:2rem;font-weight:700;color:var(--green)" id="quizCorrectNum">0</div><div style="font-size:0.72rem;color:var(--muted)">答對</div></div>
-      <div style="text-align:center"><div style="font-size:2rem;font-weight:700;color:var(--accent2)" id="quizWrongNum">0</div><div style="font-size:0.72rem;color:var(--muted)">答錯</div></div>
-      <div style="text-align:center"><div style="font-size:2rem;font-weight:700;color:var(--accent)" id="quizAccuracy">0%</div><div style="font-size:0.72rem;color:var(--muted)">正確率</div></div>
+      <div style="text-align:center"><div style="font-size:2rem;font-weight:700;color:var(--green)" id="quizCorrectNum">0</div><div style="font-size:0.72rem;color:var(--muted)">Correct</div></div>
+      <div style="text-align:center"><div style="font-size:2rem;font-weight:700;color:var(--accent2)" id="quizWrongNum">0</div><div style="font-size:0.72rem;color:var(--muted)">Wrong</div></div>
+      <div style="text-align:center"><div style="font-size:2rem;font-weight:700;color:var(--accent)" id="quizAccuracy">0%</div><div style="font-size:0.72rem;color:var(--muted)">Accuracy</div></div>
     </div>
     <div id="quizWrongList" style="margin-bottom:20px;text-align:left;max-height:160px;overflow-y:auto"></div>
     <div style="display:flex;flex-direction:column;gap:10px">
-      <button id="quizRetryWrong" onclick="retryWrong()" style="display:none;padding:13px;border-radius:10px;border:none;cursor:pointer;background:var(--accent);color:#fff;font-size:0.95rem;font-weight:600;font-family:'DM Sans',sans-serif">🔁 重考錯誤單字</button>
-      <button onclick="startNewQuiz()" style="padding:13px;border-radius:10px;border:1px solid var(--border);cursor:pointer;background:var(--surface2);color:var(--text);font-size:0.9rem;font-family:'DM Sans',sans-serif">🎲 再來20題</button>
-      <button onclick="closeQuiz()" style="padding:13px;border-radius:10px;border:1px solid var(--border);cursor:pointer;background:transparent;color:var(--muted);font-size:0.9rem;font-family:'DM Sans',sans-serif">✕ 離開測驗</button>
+      <button id="quizRetryWrong" onclick="retryWrong()" style="display:none;padding:13px;border-radius:10px;border:none;cursor:pointer;background:var(--accent);color:#fff;font-size:0.95rem;font-weight:600;font-family:'DM Sans',sans-serif">🔁 Retry Wrong Words</button>
+      <button onclick="startNewQuiz()" style="padding:13px;border-radius:10px;border:1px solid var(--border);cursor:pointer;background:var(--surface2);color:var(--text);font-size:0.9rem;font-family:'DM Sans',sans-serif">🎲 New 20 Questions</button>
+      <button onclick="closeQuiz()" style="padding:13px;border-radius:10px;border:1px solid var(--border);cursor:pointer;background:transparent;color:var(--muted);font-size:0.9rem;font-family:'DM Sans',sans-serif">✕ Exit Quiz</button>
     </div>
   </div>
 </div>
@@ -1911,105 +1911,155 @@ for(const w of extWords){
 for(let i=0;i<allWords.length;i++) allWords[i].id=i+1;
 
 // Korean phonetic (hangul to Chinese approximation)
-const KR_PHONETIC = {
-  "나":"那","너":"呢爾","그":"克","우리":"烏里","이것":"伊格特","그것":"克格特",
-  "있다":"伊特答","없다":"唉普答","하다":"哈答","이다":"伊答","가다":"卡答","오다":"哦答",
-  "먹다":"莫克答","마시다":"馬西答","자다":"恰答","보다":"破答","듣다":"特特答","말하다":"馬拉答",
-  "알다":"阿爾答","모르다":"摩魯答","좋다":"喬答","나쁘다":"那布答","크다":"克答","작다":"恰克答",
-  "많다":"曼答","적다":"赤克答","높다":"諾普答","낮다":"那答","빠르다":"帕魯答","느리다":"呢里答",
-  "덥다":"特普答","춥다":"促普答","맛있다":"馬西答","맵다":"梅普答","달다":"答拉答","짜다":"恰答",
-  "사람":"沙拉姆","남자":"南加","여자":"唷加","아이":"阿伊","아버지":"阿波基","어머니":"哦莫妮",
-  "오빠":"哦爸","형":"咻恩","언니":"恩妮","누나":"努娜","남동생":"南東僧","여동생":"唷東僧",
-  "친구":"親古","선생님":"三僧尼姆","학생":"哈克僧","의사":"唷沙","집":"集普","학교":"哈克嬌",
-  "회사":"喚沙","병원":"碧恩哇恩","시장":"西將","식당":"西克唐","은행":"恩行","나라":"那拉",
-  "도시":"都西","길":"基爾","오늘":"哦呢爾","어제":"哦赤","내일":"內伊爾","지금":"基坎姆",
-  "아침":"阿七姆","점심":"赤姆心","저녁":"赤尼克","밤":"把姆","년":"尼恩","월":"哇爾",
-  "일":"伊爾","시간":"西幹","분":"本","일":"伊爾","이":"伊","삼":"三","사":"沙","오":"哦",
-  "육":"由克","칠":"七爾","팔":"帕爾","구":"古","십":"西普","백":"貝克","천":"清",
-  "밥":"把普","물":"木爾","커피":"可費","차":"恰","김치":"基姆七","불고기":"普爾孤基",
-  "비빔밥":"比比姆把普","삼겹살":"三給普沙爾","돈":"東","가격":"卡格克","책":"切克",
-  "이름":"伊魯姆","언어":"恩尼哦","한국어":"漢古克哦","영어":"英哦","중국어":"忠固克哦",
-  "일본어":"伊爾本哦","배우다":"貝吾答","가르치다":"卡魯七答","읽다":"伊爾克答","쓰다":"思答",
-  "일하다":"伊爾哈答","쉬다":"需伊答","운동하다":"翁東哈答","요리하다":"唷里哈答",
-  "쇼핑하다":"秀萍哈答","전화하다":"切恩話哈答","사랑하다":"沙浪哈答","좋아하다":"喬阿哈答",
-  "싫어하다":"西爾哦哈答","행복하다":"行波克哈答","슬프다":"思爾普答","화나다":"話那答",
-  "무섭다":"木色普答","피곤하다":"費坤哈答","배고프다":"貝孤普答","목마르다":"摩克馬魯答",
-  "아프다":"阿普答","건강하다":"肯幹哈答","예쁘다":"耶普答","안녕하세요":"安寧哈誰唷",
-  "감사합니다":"甘沙哈普尼答","죄송합니다":"赤松哈普尼答","괜찮아요":"誇恩查那唷",
-  "잠깐만요":"占幹曼唷","모르겠어요":"摩魯給錯唷","도와주세요":"都哇主誰唷",
-  "얼마예요":"哦爾馬唷","어디예요":"哦地唷","주세요":"主誰唷","맞아요":"馬加唷",
-  "아니에요":"阿尼唷","네":"內","아니요":"阿尼唷","그래요":"克萊唷","왜":"哇唷",
-  "어떻게":"哦特可","언제":"恩赤","어디":"哦地","누가":"努嘎","무엇":"木哦特",
-  "얼마나":"哦爾馬那","매우":"梅吾","정말":"切恩馬爾","아주":"阿主","너무":"呢木",
-  "조금":"喬坎姆","많이":"馬尼","빨리":"帕爾里",
+const EN_PHONETIC = {
+  "the":"ðə","be":"biː","to":"tuː","of":"ɒv","and":"ænd","a":"eɪ","in":"ɪn",
+  "that":"ðæt","have":"hæv","it":"ɪt","for":"fɔːr","not":"nɒt","on":"ɒn",
+  "you":"juː","do":"duː","he":"hiː","she":"ʃiː","we":"wiː","they":"ðeɪ",
+  "good":"ɡʊd","great":"ɡreɪt","bad":"bæd","big":"bɪɡ","small":"smɔːl",
+  "happy":"ˈhæpi","sad":"sæd","love":"lʌv","like":"laɪk","want":"wɒnt",
+  "food":"fuːd","water":"ˈwɔːtər","time":"taɪm","day":"deɪ","year":"jɪər",
+  "school":"skuːl","work":"wɜːrk","family":"ˈfæmɪli","friend":"frend",
+  "money":"ˈmʌni","beautiful":"ˈbjuːtɪfəl","important":"ɪmˈpɔːrtənt",
+  "hello":"həˈloʊ","goodbye":"ˌɡʊdˈbaɪ","please":"pliːz","sorry":"ˈsɒri",
+  "thank you":"θæŋk juː","yes":"jes","no":"nəʊ","maybe":"ˈmeɪbi",
+  "morning":"ˈmɔːrnɪŋ","night":"naɪt","today":"təˈdeɪ","tomorrow":"təˈmɒrəʊ",
+  "eat":"iːt","drink":"drɪŋk","sleep":"sliːp","run":"rʌn","walk":"wɔːk",
+  "speak":"spiːk","write":"raɪt","read":"riːd","buy":"baɪ","sell":"sel",
+  "come":"kʌm","go":"ɡəʊ","see":"siː","know":"nəʊ","think":"θɪŋk",
+  "doctor":"ˈdɒktər","hospital":"ˈhɒspɪtl","teacher":"ˈtiːtʃər","student":"ˈstjuːdənt",
+  "car":"kɑːr","bus":"bʌs","train":"treɪn","plane":"pleɪn","taxi":"ˈtæksi",
+  "hot":"hɒt","cold":"kəʊld","fast":"fɑːst","slow":"sləʊ","big":"bɪɡ",
+  "easy":"ˈiːzi","difficult":"ˈdɪfɪkəlt","expensive":"ɪkˈspensɪv","cheap":"tʃiːp",
+  "coffee":"ˈkɒfi","tea":"tiː","milk":"mɪlk","rice":"raɪs","bread":"bred",
 };
 
-function toKrPhonetic(word) {
-  return KR_PHONETIC[word] || word.split('').slice(0,4).join('·');
+
+
+function toEnPhonetic(word) {
+  if(!word) return '';
+  const w = word.toLowerCase();
+  // Check exact match first
+  if(EN_PHONETIC[w]) return EN_PHONETIC[w];
+  // Simple phonetic rules for English
+  return word
+    .replace(/tion/g,'shən').replace(/ture/g,'tʃər').replace(/ough/g,'ɔː')
+    .replace(/ight/g,'aɪt').replace(/tion/g,'ʃən').replace(/ph/g,'f')
+    .replace(/wh/g,'w').replace(/ck/g,'k').replace(/qu/g,'kw')
+    .replace(/ch/g,'tʃ').replace(/sh/g,'ʃ').replace(/th/g,'θ');
 }
 
 function buildPhoneticTable(sentence) {
-  return '<span style="font-size:0.82rem;color:#aaa">'+toKrPhonetic(sentence)+'</span>';
+  return '<span style="font-size:0.82rem;color:#74b9ff">' + toEnPhonetic(sentence) + '</span>';
 }
-function toChinesePhonetic(word) { return toKrPhonetic(word); }
+function toChinesePhonetic(word) { return toEnPhonetic(word); }
 
 // Sentences
 function getSentences(w) {
   const word = w.word;
-  const zh = w.zh.split('、')[0].split('（')[0].trim();
+  const zh = w.zh.split("、")[0].split("（")[0].replace(/[（）()]/g,"").trim();
   const pos = w.pos;
   const cat = w.cat;
+  const C = word.charAt(0).toUpperCase() + word.slice(1);
 
-  const templates = {
+  // Category-specific sentences
+  const catMap = {
+    "食物": [
+      `I love to eat ${word} — it's one of my favorites! (${zh}是我的最愛之一！)`,
+      `${C} is very popular in many countries around the world. (${zh}在世界各地都很受歡迎。)`
+    ],
+    "家庭": [
+      `My ${word} is very kind and always supportive. (我的${zh}非常善良，總是很支持我。)`,
+      `I call my ${word} every weekend to catch up. (我每個週末都打電話給${zh}敘舊。)`
+    ],
+    "情感": [
+      `I feel really ${word} when I spend time with friends. (和朋友在一起時，我感到非常${zh}。)`,
+      `It's normal to feel ${word} sometimes — everyone does. (有時感到${zh}是正常的，每個人都會這樣。)`
+    ],
+    "工作": [
+      `${C} is very important for professional success. (${zh}對職業成功非常重要。)`,
+      `Our team always focuses on improving ${word} at work. (我們團隊總是專注於在工作中提升${zh}。)`
+    ],
+    "教育": [
+      `${C} is one of the most important skills to develop. (${zh}是最重要的培養技能之一。)`,
+      `I spend a lot of time studying ${word} every day. (我每天花很多時間學習${zh}。)`
+    ],
+    "交通": [
+      `I take the ${word} to work every morning. (我每天早上搭${zh}去上班。)`,
+      `The ${word} here is very convenient and fast. (這裡的${zh}非常方便快速。)`
+    ],
+    "自然": [
+      `The ${word} here is absolutely breathtaking. (這裡的${zh}真是令人嘆為觀止。)`,
+      `We should all protect the ${word} for future generations. (我們都應該為下一代保護${zh}。)`
+    ],
+    "商業": [
+      `The ${word} has increased significantly this year. (今年${zh}大幅增加。)`,
+      `Understanding ${word} is essential for business success. (了解${zh}對商業成功至關重要。)`
+    ],
+    "身體": [
+      `Taking care of your ${word} is very important for overall health. (照顧好你的${zh}對整體健康非常重要。)`,
+      `The doctor checked my ${word} carefully during the examination. (醫生在檢查時仔細地檢查了我的${zh}。)`
+    ],
+    "地點": [
+      `The ${word} is one of the most popular spots in this city. (${zh}是這座城市最受歡迎的地點之一。)`,
+      `Let's meet at the ${word} at 3 PM this afternoon. (今天下午3點我們在${zh}見面吧。)`
+    ],
+    "時間": [
+      `I always check the ${word} before starting my day. (我每天開始前都會確認${zh}。)`,
+      `Time management includes planning ${word} carefully. (時間管理包括仔細規劃${zh}。)`
+    ],
+  };
+
+  if (catMap[cat]) return catMap[cat];
+
+  // POS-based fallback templates
+  const posMap = {
     "n.": [
-      `${word}은/는 정말 중요해요. (${zh}真的很重要。)`,
-      `저는 ${word}을/를 좋아해요. (我喜歡${zh}。)`
+      `${C} plays an important role in our daily lives. (${zh}在我們的日常生活中扮演重要角色。)`,
+      `Can you tell me more about ${word}? I'd love to learn. (你能告訴我更多關於${zh}的事嗎？我很想學習。)`
     ],
     "v.": [
-      `저는 매일 ${word}어요/아요. (我每天${zh}。)`,
-      `같이 ${word}을까요? (要一起${zh}嗎？)`
+      `I try to ${word} every day to improve my skills. (我每天都努力${zh}來提升我的技能。)`,
+      `Would you like to ${word} together this weekend? (這個週末你想一起${zh}嗎？)`
     ],
     "adj.": [
-      `이것은 정말 ${word}어요/아요. (這個真的很${zh}。)`,
-      `날씨가 너무 ${word}어요/아요. (天氣太${zh}了。)`
+      `This place is so ${word} — I really enjoy being here. (這個地方真的很${zh}，我非常喜歡在這裡。)`,
+      `She is one of the most ${word} people I have ever met. (她是我見過最${zh}的人之一。)`
     ],
     "adv.": [
-      `${word} 해 주세요. (請${zh}。)`,
-      `그는 ${word} 했어요. (他${zh}地做了。)`
+      `Please do this ${word} so we can get the best results. (請${zh}地做這件事，這樣才能得到最好的結果。)`,
+      `He ${word} completed all his tasks before the deadline. (他在截止日期前${zh}地完成了所有任務。)`
     ],
     "phr.": [
-      `한국에서는 "${word}"라고 해요. (在韓國說「${zh}」。)`,
-      `처음 만날 때 "${word}" 라고 해요. (第一次見面時說「${zh}」。)`
+      `In English, we say "${word}" to express ${zh}. (在英語中，我們說「${word}」來表示${zh}。)`,
+      `"${C}" is a very common expression used in daily conversation. (「${C}」是日常對話中非常常用的表達。)`
+    ],
+    "interj.": [
+      `"${C}!" is what we say when ${zh}. (當${zh}時，我們會說「${C}！」。)`,
+      `People often say "${word}" to greet others in English. (英語中人們常說「${word}」來問候別人。)`
     ],
     "num.": [
-      `${word}개 주세요. (請給我${zh}個。)`,
-      `${word}명이 왔어요. (來了${zh}個人。)`
+      `Please give me ${word} of these — that should be enough. (請給我${zh}個，那樣應該夠了。)`,
+      `There were ${word} people at the meeting yesterday. (昨天的會議上有${zh}個人。)`
     ],
-    "pron.": [
-      `${word}은/는 한국 사람이에요. (${zh}是韓國人。)`,
-      `${word}은/는 어디에 있어요? (${zh}在哪裡？)`
+    "prep.": [
+      `Put the book ${word} the table where everyone can see it. (把書放在桌子${zh}，讓大家都能看到。)`,
+      `She was standing ${word} the door waiting for her friend. (她站在門${zh}等她的朋友。)`
+    ],
+    "conj.": [
+      `I like coffee ${word} I also enjoy tea sometimes. (我喜歡咖啡，${zh}我有時也喜歡喝茶。)`,
+      `Study hard ${word} you will achieve your goals eventually. (努力學習，${zh}你終將實現你的目標。)`
+    ],
+    "art.": [
+      `"${C}" is used before nouns in English to mean ${zh}. (「${C}」在英語中用在名詞前，意思是${zh}。)`,
+      `Articles like "${word}" are essential building blocks of English grammar. (像「${word}」這樣的冠詞是英語語法的基本要素。)`
     ],
   };
 
-  const catExtra = {
-    "食物": [`${word}이/가 정말 맛있어요! (${zh}真的很好吃！)`, `오늘 ${word}을/를 먹었어요. (今天吃了${zh}。)`],
-    "家庭": [`우리 ${word}은/는 정말 좋아요. (我的${zh}真的很好。)`, `${word}에게 전화했어요. (打電話給${zh}了。)`],
-    "情感": [`지금 기분이 ${word}어요/아요. (現在心情很${zh}。)`, `그 소식을 듣고 ${word}었어요/았어요. (聽到那個消息後感到${zh}。)`],
-  };
-
-  if(catExtra[cat]) return catExtra[cat];
-  return templates[pos] || [`${word}에 대해 공부해요. (學習關於${zh}的知識。)`, `${word}은/는 한국어에서 자주 써요. (${zh}在韓語中常用。)`];
+  return posMap[pos] || [
+    `"${C}" is a very common English word meaning ${zh}. (「${C}」是一個非常常見的英語單字，意思是${zh}。)`,
+    `Try using "${word}" in a sentence today to practice your English. (今天試著用「${word}」造句來練習你的英語。)`
+  ];
 }
-
-// APP STATE
-let filtered = [...allWords];
-let currentWord = null;
-let currentPage = 1;
-const PAGE_SIZE = 50;
-let currentCat = 'all';
-let quizPool=[],quizIndex=0,quizCorrectList=[],quizWrongList=[],quizRound=1,isRetryRound=false;
-let currentQuizWord='';
-
 function renderList() {
   const list = document.getElementById('wordList');
   const start=(currentPage-1)*PAGE_SIZE;
@@ -2056,17 +2106,17 @@ function selectWord(id) {
     <div class="detail-phonetic-table"><div class="ph-row"><span class="ph-pair"><span class="ph-word">${w.word}</span><span class="ph-zn">${toKrPhonetic(w.word)}</span></span></div></div>
     <div class="detail-tags">
       <span class="tag tag-pos">${w.pos}</span>
-      <span class="tag tag-rank">第 ${w.id} 高頻</span>
+      <span class="tag tag-rank">Rank #${w.id}</span>
       <span class="tag tag-rank">${rankLabel}詞彙</span>
       <span class="tag tag-cat">${w.cat}</span>
     </div>
     <div class="audio-row">
-      <button class="audio-btn word-audio" onclick="speakWord('${w.word.replace(/'/g,"\\'")}')">🔊 播放單字</button>
-      <button class="audio-btn sentence-audio" onclick="speakWord('${sents[0].split('(')[0].trim().replace(/'/g,"\\'")}')">🔊 播放例句</button>
+      <button class="audio-btn word-audio" onclick="speakWord('${w.word.replace(/'/g,"\\'")}')">🔊 Play Word</button>
+      <button class="audio-btn sentence-audio" onclick="speakWord('${sents[0].split('(')[0].trim().replace(/'/g,"\\'")}')">🔊 Play Sentence</button>
     </div>
-    <div class="section-title">中文釋義</div>
-    <div class="def-box"><div class="def-zh">${w.zh}</div><div class="def-en">${w.word} (${w.pos}) — 英語第 ${w.id} 高頻單字</div></div>
-    <div class="section-title" style="margin-top:20px">例句 예문</div>
+    <div class="section-title">Chinese Meaning</div>
+    <div class="def-box"><div class="def-zh">${w.zh}</div><div class="def-en">${w.word} (${w.pos}) — English word #${w.id} by frequency</div></div>
+    <div class="section-title" style="margin-top:20px">例句 Example</div>
     ${sents.map((s,i)=>{
       const parts=s.match(/^(.+?)\((.+)\)\.?$/);
       const kr_s=parts?parts[1].trim():s;
@@ -2074,10 +2124,10 @@ function selectWord(id) {
       return `<div class="example-card">
         <div class="ex-id">${kr_s}</div>
         <div class="ex-zh">${zh_s}</div>
-        <div class="ex-audio" onclick="speakWord('${kr_s.replace(/'/g,"\\'")}')">▶ 播放例句 ${i+1}</div>
+        <div class="ex-audio" onclick="speakWord('${kr_s.replace(/'/g,"\\'")}')">▶ Play Sentence ${i+1}</div>
       </div>`;
     }).join('')}
-    <div class="section-title" style="margin-top:20px">相關單字</div>
+    <div class="section-title" style="margin-top:20px">Related Words</div>
     <div style="display:flex;gap:8px;flex-wrap:wrap">
       ${allWords.filter(r=>r.cat===w.cat&&r.id!==w.id).slice(0,6).map(r=>
         `<span onclick="selectWord(${r.id})" style="padding:6px 14px;background:var(--surface);border:1px solid var(--border);border-radius:20px;cursor:pointer;font-size:0.82rem">${r.word} ${r.zh}</span>`
@@ -2151,7 +2201,7 @@ function showQuestion(){
   const target=quizPool[quizIndex];
   currentQuizWord=target.word;
   const total=quizPool.length,current=quizIndex+1;
-  document.getElementById('quizRound').textContent=isRetryRound?`🔁 重考第 ${quizRound} 輪`:`第 ${quizRound} 輪`;
+  document.getElementById('quizRound').textContent=isRetryRound?`🔁 重考Round ${quizRound}`:`Round ${quizRound}`;
   document.getElementById('quizProgress').textContent=`${current} / ${total}`;
   document.getElementById('quizBar').style.width=((quizIndex)/total*100)+'%';
   document.getElementById('quizWord').textContent=target.word;
@@ -2179,20 +2229,20 @@ function showResult(){
   document.getElementById('quizResult').style.display='block';
   const total=quizPool.length,correct=quizCorrectList.length,wrong=quizWrongList.length,pct=Math.round(correct/total*100);
   const e=pct===100?'🏆':pct>=80?'🎉':pct>=60?'👍':pct>=40?'📖':'💪';
-  const t=pct===100?'完美！':pct>=80?'非常好！':pct>=60?'不錯喔！':pct>=40?'繼續努力！':'加油！';
+  const t=pct===100?'Perfect!':pct>=80?'Excellent!':pct>=60?'Good job!':pct>=40?'Keep going!':'Try harder!';
   document.getElementById('quizResultEmoji').textContent=e;
   document.getElementById('quizResultTitle').textContent=t;
-  document.getElementById('quizResultMsg').textContent=`正確率 ${pct}%`;
+  document.getElementById('quizResultMsg').textContent=`Accuracy ${pct}%`;
   document.getElementById('quizCorrectNum').textContent=correct;
   document.getElementById('quizWrongNum').textContent=wrong;
   document.getElementById('quizAccuracy').textContent=pct+'%';
   const wl=document.getElementById('quizWrongList');
   if(quizWrongList.length>0){
-    wl.innerHTML='<div style="font-size:0.72rem;color:var(--muted);margin-bottom:8px">❌ 答錯的單字</div>'+
+    wl.innerHTML='<div style="font-size:0.72rem;color:var(--muted);margin-bottom:8px">❌ Wrong的單字</div>'+
       quizWrongList.map(w=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:var(--surface2);border-radius:8px;margin-bottom:6px;border-left:3px solid var(--accent2)"><span style="font-weight:600;color:var(--text)">${w.word}</span><span style="color:var(--muted);font-size:0.82rem">${w.zh}</span><span onclick="speakWord('${w.word}')" style="cursor:pointer;color:var(--accent)">🔊</span></div>`).join('');
     document.getElementById('quizRetryWrong').style.display='block';
   } else {
-    wl.innerHTML='<div style="text-align:center;color:var(--green);padding:12px">🎊 沒有答錯的單字！</div>';
+    wl.innerHTML='<div style="text-align:center;color:var(--green);padding:12px">🎊 沒有Wrong的單字！</div>';
     document.getElementById('quizRetryWrong').style.display='none';
   }
 }
