@@ -1956,108 +1956,120 @@ function toChinesePhonetic(word) { return toEnPhonetic(word); }
 // Sentences
 function getSentences(w) {
   const word = w.word;
-  const zh = w.zh.split("、")[0].split("（")[0].replace(/[（）()]/g,"").trim();
+  const zh = w.zh.split("、")[0].split("/")[0].replace(/[（）()]/g,"").trim();
   const pos = w.pos;
   const cat = w.cat;
   const C = word.charAt(0).toUpperCase() + word.slice(1);
 
-  // Category-specific sentences
+  // Verb-specific food sentences (eat, drink, cook etc.)
+  if(cat === "食物" && pos === "v.") return [
+    `I like to ${word} with my family every evening. (我喜歡每天晚上和家人一起${zh}。)`,
+    `Learning how to ${word} properly takes practice and patience. (學習如何正確${zh}需要練習和耐心。)`
+  ];
+
+  // Noun-specific food sentences
+  if(cat === "食物" && pos === "n.") return [
+    `${C} is one of my favorite things to eat or drink. (${zh}是我最喜歡的食物或飲料之一。)`,
+    `Have you ever tried ${word}? It's delicious! (你試過${zh}嗎？非常好吃！)`
+  ];
+
+  // Category-based templates
   const catMap = {
-    "食物": [
-      `I love to eat ${word} — it's one of my favorites! (${zh}是我的最愛之一！)`,
-      `${C} is very popular in many countries around the world. (${zh}在世界各地都很受歡迎。)`
-    ],
     "家庭": [
       `My ${word} is very kind and always supportive. (我的${zh}非常善良，總是很支持我。)`,
-      `I call my ${word} every weekend to catch up. (我每個週末都打電話給${zh}敘舊。)`
+      `I always spend quality time with my ${word} on weekends. (我總是在週末與${zh}共度美好時光。)`
     ],
     "情感": [
-      `I feel really ${word} when I spend time with friends. (和朋友在一起時，我感到非常${zh}。)`,
-      `It's normal to feel ${word} sometimes — everyone does. (有時感到${zh}是正常的，每個人都會這樣。)`
+      `I feel ${word} when I spend time with the people I care about. (和我在乎的人在一起時，我感到${zh}。)`,
+      `It is perfectly normal to feel ${word} — everyone experiences this. (感到${zh}是完全正常的，每個人都會有這種感受。)`
     ],
     "工作": [
-      `${C} is very important for professional success. (${zh}對職業成功非常重要。)`,
-      `Our team always focuses on improving ${word} at work. (我們團隊總是專注於在工作中提升${zh}。)`
+      `${C} is essential for achieving professional success in any field. (${zh}對於在任何領域取得職業成功都是必不可少的。)`,
+      `Good ${word} skills can really help you stand out in the workplace. (良好的${zh}能力真的可以幫助你在職場中脫穎而出。)`
     ],
     "教育": [
-      `${C} is one of the most important skills to develop. (${zh}是最重要的培養技能之一。)`,
-      `I spend a lot of time studying ${word} every day. (我每天花很多時間學習${zh}。)`
+      `${C} is one of the most valuable things you can develop as a student. (${zh}是你作為學生可以培養的最有價值的東西之一。)`,
+      `I dedicate time every day to improving my understanding of ${word}. (我每天都花時間提升我對${zh}的理解。)`
     ],
     "交通": [
-      `I take the ${word} to work every morning. (我每天早上搭${zh}去上班。)`,
-      `The ${word} here is very convenient and fast. (這裡的${zh}非常方便快速。)`
+      `I take the ${word} to work every morning — it saves a lot of time. (我每天早上搭${zh}去上班，這樣可以節省很多時間。)`,
+      `The ${word} service here is very reliable and convenient. (這裡的${zh}服務非常可靠方便。)`
     ],
     "自然": [
-      `The ${word} here is absolutely breathtaking. (這裡的${zh}真是令人嘆為觀止。)`,
-      `We should all protect the ${word} for future generations. (我們都應該為下一代保護${zh}。)`
+      `The ${word} here is absolutely breathtaking and beautiful. (這裡的${zh}真是令人嘆為觀止，非常美麗。)`,
+      `We must all do our part to protect the ${word} for future generations. (我們都必須盡自己的一份力量，為子孫後代保護${zh}。)`
     ],
     "商業": [
-      `The ${word} has increased significantly this year. (今年${zh}大幅增加。)`,
-      `Understanding ${word} is essential for business success. (了解${zh}對商業成功至關重要。)`
+      `The ${word} has increased significantly over the past few years. (過去幾年，${zh}顯著增加。)`,
+      `Understanding ${word} is crucial for making good financial decisions. (了解${zh}對於做出明智的財務決策至關重要。)`
     ],
     "身體": [
-      `Taking care of your ${word} is very important for overall health. (照顧好你的${zh}對整體健康非常重要。)`,
-      `The doctor checked my ${word} carefully during the examination. (醫生在檢查時仔細地檢查了我的${zh}。)`
+      `Taking good care of your ${word} is essential for a healthy life. (好好照顧你的${zh}對健康生活至關重要。)`,
+      `The doctor checked my ${word} carefully and gave me useful advice. (醫生仔細檢查了我的${zh}，並給了我有用的建議。)`
     ],
     "地點": [
-      `The ${word} is one of the most popular spots in this city. (${zh}是這座城市最受歡迎的地點之一。)`,
-      `Let's meet at the ${word} at 3 PM this afternoon. (今天下午3點我們在${zh}見面吧。)`
+      `The ${word} is one of the most popular destinations in this area. (${zh}是這個地區最受歡迎的地點之一。)`,
+      `Let's meet at the ${word} at 3 PM — it's easy to find. (我們下午3點在${zh}見面吧，很容易找到。)`
     ],
     "時間": [
-      `I always check the ${word} before starting my day. (我每天開始前都會確認${zh}。)`,
-      `Time management includes planning ${word} carefully. (時間管理包括仔細規劃${zh}。)`
+      `I always plan my ${word} carefully to stay organized each day. (我每天都仔細規劃我的${zh}，以保持有條不紊。)`,
+      `Good ${word} management is one of the keys to a productive life. (良好的${zh}管理是充實生活的關鍵之一。)`
+    ],
+    "日常生活": [
+      `${C} is something I deal with every single day. (${zh}是我每天都要應對的事情。)`,
+      `Knowing how to handle ${word} well makes daily life much easier. (知道如何處理好${zh}讓日常生活輕鬆很多。)`
     ],
   };
 
-  if (catMap[cat]) return catMap[cat];
+  if(catMap[cat]) return catMap[cat];
 
-  // POS-based fallback templates
+  // POS-based fallback
   const posMap = {
     "n.": [
-      `${C} plays an important role in our daily lives. (${zh}在我們的日常生活中扮演重要角色。)`,
-      `Can you tell me more about ${word}? I'd love to learn. (你能告訴我更多關於${zh}的事嗎？我很想學習。)`
+      `${C} is an important part of everyday life for many people. (${zh}是許多人日常生活的重要組成部分。)`,
+      `Can you explain what ${word} means? I want to understand it better. (你能解釋一下${zh}是什麼意思嗎？我想更好地理解它。)`
     ],
     "v.": [
-      `I try to ${word} every day to improve my skills. (我每天都努力${zh}來提升我的技能。)`,
-      `Would you like to ${word} together this weekend? (這個週末你想一起${zh}嗎？)`
+      `I try to ${word} every day because it really helps me improve. (我每天都努力${zh}，因為這真的幫助我進步。)`,
+      `Would you like to ${word} together sometime? It would be fun! (你有時想一起${zh}嗎？那一定很有趣！)`
     ],
     "adj.": [
-      `This place is so ${word} — I really enjoy being here. (這個地方真的很${zh}，我非常喜歡在這裡。)`,
-      `She is one of the most ${word} people I have ever met. (她是我見過最${zh}的人之一。)`
+      `This is a very ${word} experience — I would highly recommend it. (這是一個非常${zh}的體驗，我強烈推薦。)`,
+      `She is one of the most ${word} people I have ever had the pleasure of meeting. (她是我有幸認識的最${zh}的人之一。)`
     ],
     "adv.": [
-      `Please do this ${word} so we can get the best results. (請${zh}地做這件事，這樣才能得到最好的結果。)`,
-      `He ${word} completed all his tasks before the deadline. (他在截止日期前${zh}地完成了所有任務。)`
+      `Please complete this task ${word} so we can move on to the next step. (請${zh}地完成這個任務，這樣我們就可以進行下一步了。)`,
+      `He ${word} finished all of his work and was ready to go home. (他${zh}地完成了所有工作，準備回家了。)`
     ],
     "phr.": [
-      `In English, we say "${word}" to express ${zh}. (在英語中，我們說「${word}」來表示${zh}。)`,
-      `"${C}" is a very common expression used in daily conversation. (「${C}」是日常對話中非常常用的表達。)`
+      `In English, we say "${word}" to mean ${zh}. (在英語中，「${word}」表示${zh}的意思。)`,
+      `"${C}" is a useful phrase you will hear very often in daily English conversation. (「${C}」是一個非常有用的表達，在日常英語對話中你會經常聽到。)`
     ],
     "interj.": [
-      `"${C}!" is what we say when ${zh}. (當${zh}時，我們會說「${C}！」。)`,
-      `People often say "${word}" to greet others in English. (英語中人們常說「${word}」來問候別人。)`
+      `"${C}!" is what we say when we want to express ${zh}. (當我們想表達${zh}時，我們會說「${C}！」。)`,
+      `People say "${word}" all the time in casual English conversation. (人們在輕鬆的英語對話中經常說「${word}」。)`
     ],
     "num.": [
-      `Please give me ${word} of these — that should be enough. (請給我${zh}個，那樣應該夠了。)`,
-      `There were ${word} people at the meeting yesterday. (昨天的會議上有${zh}個人。)`
+      `There are ${word} people waiting outside — please let them in. (外面有${zh}個人在等，請讓他們進來。)`,
+      `I need ${word} more minutes to finish this — please be patient. (我還需要${zh}分鐘完成這個，請耐心等待。)`
     ],
     "prep.": [
-      `Put the book ${word} the table where everyone can see it. (把書放在桌子${zh}，讓大家都能看到。)`,
-      `She was standing ${word} the door waiting for her friend. (她站在門${zh}等她的朋友。)`
+      `Place the item ${word} the box so it is easy to find later. (把東西放在盒子${zh}，這樣之後容易找到。)`,
+      `She sat ${word} her best friend during the entire movie. (整部電影她都坐在她最好的朋友${zh}。)`
     ],
     "conj.": [
-      `I like coffee ${word} I also enjoy tea sometimes. (我喜歡咖啡，${zh}我有時也喜歡喝茶。)`,
-      `Study hard ${word} you will achieve your goals eventually. (努力學習，${zh}你終將實現你的目標。)`
+      `I enjoy both coffee ${word} tea, depending on my mood. (我喜歡咖啡${zh}茶，取決於我的心情。)`,
+      `Work hard ${word} you will definitely achieve your dreams one day. (努力工作，${zh}你一定有一天會實現你的夢想。)`
     ],
     "art.": [
-      `"${C}" is used before nouns in English to mean ${zh}. (「${C}」在英語中用在名詞前，意思是${zh}。)`,
-      `Articles like "${word}" are essential building blocks of English grammar. (像「${word}」這樣的冠詞是英語語法的基本要素。)`
+      `"${C}" is placed before a noun to make it specific in English. (「${C}」放在名詞前面，使其在英語中更具體。)`,
+      `Using articles like "${word}" correctly is a key part of English grammar. (正確使用像「${word}」這樣的冠詞是英語語法的關鍵部分。)`
     ],
   };
 
   return posMap[pos] || [
-    `"${C}" is a very common English word meaning ${zh}. (「${C}」是一個非常常見的英語單字，意思是${zh}。)`,
-    `Try using "${word}" in a sentence today to practice your English. (今天試著用「${word}」造句來練習你的英語。)`
+    `"${C}" is a very common and useful English word meaning ${zh}. (「${C}」是一個非常常見且有用的英語單字，意思是${zh}。)`,
+    `Practice using "${word}" in different sentences to master its meaning. (練習在不同的句子中使用「${word}」來掌握它的意思。)`
   ];
 }
 function renderList() {
@@ -2069,7 +2081,7 @@ function renderList() {
       <div class="word-num">#${w.id}</div>
       <div class="word-main">
         <div class="word-id">${w.word}</div>
-        <div class="word-zh">${w.zh} <span style="color:#555;font-size:0.7rem">${toKrPhonetic(w.word)}</span></div>
+        <div class="word-zh">${w.zh} <span style="color:#555;font-size:0.7rem">${toEnPhonetic(w.word)}</span></div>
       </div>
       <div class="word-pos">${w.pos}</div>
       <div class="play-mini" onclick="event.stopPropagation();speakWord('${w.word}')">▶</div>
@@ -2100,14 +2112,14 @@ function selectWord(id) {
   renderList();
   const w=currentWord;
   const sents=getSentences(w);
-  const rankLabel=['','基礎','初級','中級','進階'][w.rank||1];
+  const rankLabel=['','Basic','Beginner','Intermediate','Advanced'][w.rank||1];
   document.getElementById('detail').innerHTML=`
     <div class="detail-word">${w.word}</div>
-    <div class="detail-phonetic-table"><div class="ph-row"><span class="ph-pair"><span class="ph-word">${w.word}</span><span class="ph-zn">${toKrPhonetic(w.word)}</span></span></div></div>
+    <div class="detail-phonetic-table"><div class="ph-row"><span class="ph-pair"><span class="ph-word">${w.word}</span><span class="ph-zn">${toEnPhonetic(w.word)}</span></span></div></div>
     <div class="detail-tags">
       <span class="tag tag-pos">${w.pos}</span>
       <span class="tag tag-rank">Rank #${w.id}</span>
-      <span class="tag tag-rank">${rankLabel}詞彙</span>
+      <span class="tag tag-rank">${rankLabel}</span>
       <span class="tag tag-cat">${w.cat}</span>
     </div>
     <div class="audio-row">
@@ -2116,15 +2128,15 @@ function selectWord(id) {
     </div>
     <div class="section-title">Chinese Meaning</div>
     <div class="def-box"><div class="def-zh">${w.zh}</div><div class="def-en">${w.word} (${w.pos}) — English word #${w.id} by frequency</div></div>
-    <div class="section-title" style="margin-top:20px">例句 Example</div>
+    <div class="section-title" style="margin-top:20px">Example Sentences</div>
     ${sents.map((s,i)=>{
       const parts=s.match(/^(.+?)\((.+)\)\.?$/);
-      const kr_s=parts?parts[1].trim():s;
+      const en_s=parts?parts[1].trim():s;
       const zh_s=parts?parts[2].trim():'';
       return `<div class="example-card">
-        <div class="ex-id">${kr_s}</div>
+        <div class="ex-id">${en_s}</div>
         <div class="ex-zh">${zh_s}</div>
-        <div class="ex-audio" onclick="speakWord('${kr_s.replace(/'/g,"\\'")}')">▶ Play Sentence ${i+1}</div>
+        <div class="ex-audio" onclick="speakWord('${en_s.replace(/'/g,"\\'")}')">▶ Play Sentence ${i+1}</div>
       </div>`;
     }).join('')}
     <div class="section-title" style="margin-top:20px">Related Words</div>
@@ -2205,7 +2217,7 @@ function showQuestion(){
   document.getElementById('quizProgress').textContent=`${current} / ${total}`;
   document.getElementById('quizBar').style.width=((quizIndex)/total*100)+'%';
   document.getElementById('quizWord').textContent=target.word;
-  document.getElementById('quizPhonetic').textContent=toKrPhonetic(target.word);
+  document.getElementById('quizPhonetic').textContent=toEnPhonetic(target.word);
   document.getElementById('quizScore').textContent=`✅ ${quizCorrectList.length}  ❌ ${quizWrongList.length}`;
   const wrongs=filtered.filter(w=>w.id!==target.id&&w.zh!==target.zh).sort(()=>Math.random()-0.5).slice(0,3);
   const opts=[...wrongs,target].sort(()=>Math.random()-0.5);
