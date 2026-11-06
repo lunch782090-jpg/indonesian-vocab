@@ -1,0 +1,1720 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🇪🇸 西班牙語高頻單字</title>
+<meta name="theme-color" content="#3a1a08">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;600&family=Noto+Sans+JP:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0d0d0f;--surface:#16161a;--surface2:#1e1e24;--border:#2a2a35;--accent:#e8772e;--text:#f0ede8;--muted:#8a8799;--green:#27ae60;--red:#c0392b;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'DM Sans','Noto Sans JP',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+header{background:linear-gradient(135deg,#3a1a08,#0d0d0f 70%);border-bottom:1px solid var(--border);padding:14px 20px;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:50;}
+.back{color:var(--muted);font-size:.8rem;text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:8px;flex-shrink:0;}
+.logo{font-family:'Playfair Display','Noto Sans JP',serif;font-size:1.3rem;color:var(--accent);flex:1;line-height:1.2;}
+.logo span{display:block;color:var(--text);font-size:.78rem;font-weight:400;font-family:'DM Sans',sans-serif;}
+.stats{display:flex;gap:14px;}
+.stat{text-align:center}.stat b{display:block;font-size:1.1rem;color:var(--accent)}.stat small{font-size:.6rem;color:var(--muted)}
+.controls{padding:12px 16px;display:flex;gap:10px;flex-wrap:wrap;background:var(--surface);border-bottom:1px solid var(--border);}
+.controls input{flex:1;min-width:160px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-size:.9rem;outline:none;}
+.controls input:focus{border-color:var(--accent);}
+select{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px;color:var(--text);font-size:.85rem;}
+.btn{padding:10px 14px;border-radius:8px;border:1px solid var(--border);cursor:pointer;font-size:.85rem;font-weight:500;background:transparent;color:var(--muted);}
+.btn.primary{background:var(--accent);color:#fff;border-color:var(--accent);}
+.cats{padding:10px 16px;display:flex;gap:8px;flex-wrap:wrap;background:var(--surface);border-bottom:1px solid var(--border);}
+.cat{padding:6px 13px;border-radius:20px;font-size:.8rem;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--muted);}
+.cat.active{background:var(--accent);color:#fff;border-color:var(--accent);}
+.main{display:flex;height:calc(100vh - 190px);min-height:420px;}
+.list{width:340px;min-width:280px;border-right:1px solid var(--border);overflow-y:auto;background:var(--surface);}
+.item{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--border);cursor:pointer;}
+.item:hover{background:var(--surface2);}
+.item.active{background:rgba(232,119,46,.12);border-left:3px solid var(--accent);}
+.num{font-size:.7rem;color:var(--muted);min-width:30px;text-align:right;}
+.wm{flex:1;min-width:0;}
+.w{font-size:1.05rem;font-weight:600;font-family:'Noto Sans JP',sans-serif;}
+.wr{font-size:.75rem;color:var(--accent);}
+.wz{font-size:.76rem;color:var(--muted);margin-top:1px;}
+.pos{font-size:.62rem;padding:2px 7px;border-radius:10px;border:1px solid rgba(232,119,46,.35);color:var(--accent);white-space:nowrap;}
+.play-mini{width:30px;height:30px;border-radius:50%;background:rgba(232,119,46,.15);border:1px solid rgba(232,119,46,.35);display:flex;align-items:center;justify-content:center;color:var(--accent);font-size:.7rem;flex-shrink:0;}
+.detail{flex:1;overflow-y:auto;padding:28px 30px;}
+.empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;color:var(--muted);gap:10px;text-align:center;}
+.dw{font-family:'Noto Sans JP',sans-serif;font-size:3rem;line-height:1.1;}
+.dr{font-size:1.1rem;color:var(--accent);margin:6px 0 2px;}
+.dh{font-size:.95rem;color:#ccc;margin-bottom:14px;letter-spacing:1px;}
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px;}
+.tag{padding:4px 12px;border-radius:20px;font-size:.76rem;border:1px solid var(--border);color:var(--muted);}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px;}
+.abtn{padding:10px 16px;border-radius:8px;border:1px solid var(--border);background:var(--surface2);color:var(--text);cursor:pointer;font-size:.85rem;}
+.abtn.main1{background:var(--accent);border-color:var(--accent);color:#fff;}
+.st{font-size:.7rem;text-transform:uppercase;letter-spacing:2px;color:var(--muted);margin:18px 0 10px;}
+.box{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px 18px;font-size:1.1rem;}
+.ex{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:12px;padding:14px 16px;margin-bottom:12px;}
+.ex-ja{font-family:'Noto Sans JP',sans-serif;font-size:1.05rem;line-height:1.5;}
+.ex-kana{font-size:.8rem;color:var(--accent);margin-top:4px;}
+.ex-zhy{font-size:.8rem;color:#bbb;margin-top:2px;letter-spacing:.5px;}
+.ex-zh{font-size:.88rem;color:#aaa;margin:6px 0 8px;}
+.ex-audio{display:inline-block;padding:5px 12px;border-radius:6px;background:rgba(232,119,46,.1);border:1px solid rgba(232,119,46,.3);color:var(--accent);font-size:.75rem;cursor:pointer;}
+.rel{display:flex;gap:8px;flex-wrap:wrap;}
+.rel span{padding:6px 12px;background:var(--surface);border:1px solid var(--border);border-radius:20px;cursor:pointer;font-size:.82rem;}
+.pager{padding:12px;display:flex;gap:6px;justify-content:center;flex-wrap:wrap;background:var(--surface);border-top:1px solid var(--border);}
+.pg{padding:6px 11px;border-radius:6px;font-size:.8rem;background:var(--surface2);color:var(--muted);border:1px solid var(--border);cursor:pointer;}
+.pg.active{background:var(--accent);color:#fff;border-color:var(--accent);}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:200;align-items:center;justify-content:center;}
+.overlay.show{display:flex;}
+.qcard{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px 22px;max-width:480px;width:92%;max-height:92vh;overflow-y:auto;}
+.qtop{display:flex;justify-content:space-between;align-items:center;font-size:.78rem;color:var(--muted);margin-bottom:10px;}
+.bar{background:var(--border);height:4px;border-radius:4px;margin-bottom:16px;}
+.bar div{background:var(--accent);height:4px;border-radius:4px;width:0;transition:width .3s;}
+.qw{font-family:'Noto Sans JP',sans-serif;font-size:2.4rem;text-align:center;color:var(--accent);cursor:pointer;}
+.qr{text-align:center;color:#ccc;font-size:.9rem;margin:4px 0;}
+.qh{text-align:center;color:var(--muted);font-size:.8rem;margin-bottom:10px;}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px;}
+.opt{padding:13px 8px;border-radius:8px;background:var(--surface2);color:var(--text);border:1px solid var(--border);cursor:pointer;font-size:.88rem;}
+.opt.correct{background:rgba(39,174,96,.2);border-color:var(--green);color:var(--green);}
+.opt.wrong{background:rgba(192,57,43,.2);border-color:var(--red);color:var(--red);}
+.score{text-align:center;color:var(--muted);font-size:.82rem;margin-top:12px;}
+.rbtn{display:block;width:100%;padding:12px;border-radius:10px;border:1px solid var(--border);background:var(--surface2);color:var(--text);cursor:pointer;font-size:.9rem;margin-top:10px;}
+.rbtn.primary{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600;}
+.wrongrow{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 12px;background:var(--surface2);border-radius:8px;margin-bottom:6px;border-left:3px solid var(--red);font-size:.88rem;}
+@media(max-width:768px){.main{flex-direction:column;height:auto;}.list{width:100%;height:46vh;min-width:0;}.detail{padding:18px 14px;}.dw{font-size:2.3rem;}.stats{display:none;}}
+</style>
+</head>
+<body>
+<!-- ES-VOCAB v1.0 -->
+<header>
+  <a class="back" href="index.html">‹ 返回</a>
+  <div class="logo">🇪🇸 西班牙語高頻單字<span>Vocabulario frecuente</span></div>
+  <div class="stats">
+    <div class="stat"><b id="totalCount">0</b><small>單字數</small></div>
+    <div class="stat"><b id="learnedCount">0</b><small>已學習</small></div>
+  </div>
+</header>
+
+<div class="controls">
+  <input id="search" type="text" placeholder="🔍 搜尋單字、中文…">
+  <select id="posFilter">
+    <option value="">所有詞性</option>
+    <option value="n.m.">陽性名詞</option>
+    <option value="n.f.">陰性名詞</option>
+    <option value="n.prop.">專有名詞</option>
+    <option value="v.">動詞</option>
+    <option value="adj.">形容詞</option>
+    <option value="adv.">副詞</option>
+    <option value="pron.">代名詞</option>
+    <option value="prep.">介系詞</option>
+    <option value="conj.">連接詞</option>
+    <option value="num.">數詞</option>
+    <option value="phr.">慣用語</option>
+  </select>
+  <select id="levelFilter">
+    <option value="">所有等級</option>
+    <option value="1">基礎</option>
+    <option value="2">初級</option>
+    <option value="3">中級</option>
+  </select>
+  <button class="btn primary" onclick="openQuiz()">📝 測驗模式</button>
+  <button class="btn" onclick="playPage()">🔊 全部播放</button>
+  <button class="btn" onclick="voiceCheck()">🎙️ 語音診斷</button>
+</div>
+<div class="cats" id="cats"></div>
+
+<div class="main">
+  <div class="list" id="list"></div>
+  <div class="detail" id="detail">
+    <div class="empty"><div style="font-size:3rem">🇪🇸</div><div style="font-size:1.1rem;color:var(--text)">選擇單字開始學習</div><div>點擊單字查看中文諧音、例句與音檔</div></div>
+  </div>
+</div>
+<div class="pager" id="pager"></div>
+
+<div class="overlay" id="quizOverlay">
+  <div class="qcard" id="quizQ">
+    <div class="qtop"><span id="qRound">第 1 輪</span><span id="qProg">1 / 20</span><span style="cursor:pointer" onclick="closeQuiz()">✕ 離開</span></div>
+    <div class="bar"><div id="qBar"></div></div>
+    <div class="qh">這個單字的中文意思是？</div>
+    <div class="qw" id="qWord" onclick="quizSpeak()"></div>
+    <div class="qr" id="qRead"></div>
+    <div class="qh" id="qZh"></div>
+    <button class="abtn" style="display:block;margin:0 auto" onclick="quizSpeak()">🔊 播放發音</button>
+    <div class="opts" id="qOpts"></div>
+    <div class="score" id="qScore"></div>
+  </div>
+  <div class="qcard" id="quizR" style="display:none;text-align:center">
+    <div style="font-size:2.4rem" id="rEmoji">🎉</div>
+    <div style="font-size:1.4rem;color:var(--accent);margin:6px 0" id="rTitle"></div>
+    <div style="display:flex;justify-content:center;gap:26px;margin:14px 0">
+      <div><b style="font-size:1.8rem;color:var(--green)" id="rOk">0</b><br><small style="color:var(--muted)">答對</small></div>
+      <div><b style="font-size:1.8rem;color:var(--red)" id="rNg">0</b><br><small style="color:var(--muted)">答錯</small></div>
+      <div><b style="font-size:1.8rem;color:var(--accent)" id="rPct">0%</b><br><small style="color:var(--muted)">正確率</small></div>
+    </div>
+    <div id="rWrong" style="text-align:left;max-height:170px;overflow-y:auto"></div>
+    <button class="rbtn primary" id="rRetry" onclick="retryWrong()">🔁 重考答錯的單字</button>
+    <button class="rbtn" onclick="newQuiz()">🎲 再來 20 題</button>
+    <button class="rbtn" onclick="closeQuiz()">✕ 離開測驗</button>
+  </div>
+</div>
+
+<script>
+/* ================== 資料 ================== */
+const CATS=['日常生活','食物','家庭','時間','地點','身體','健康','自然','交通','教育','工作','商業','情感','娛樂','社會'];
+const LEVEL={'日常生活':1,'食物':1,'家庭':1,'時間':1,'地點':1,'身體':2,'健康':2,'自然':2,'交通':2,'教育':2,'工作':3,'商業':2,'情感':2,'娛樂':2,'社會':3};
+const LEVELZH=['','基礎','初級','中級'];
+const POS={nm:'n.m.',nf:'n.f.',pm:'n.m.',pf:'n.f.',pn:'n.prop.',v:'v.',vm:'v.',a:'adj.',ao:'adj.',ae:'adj.',aeo:'adj.',adv:'adv.',pr:'pron.',prep:'prep.',cj:'conj.',ph:'phr.',num:'num.'};
+const EL_F=new Set(['agua','alma','águila','hambre','arma','aula','hada','hacha','área','ave']);
+/* 格式：單字|詞性代碼|中文 */
+const DATA={
+'日常生活':`
+yo|pr|我
+tú|pr|你
+él|pr|他
+ella|pr|她
+usted|pr|您
+nosotros|pr|我們
+ellos|pr|他們
+esto|pr|這個
+eso|pr|那個
+aquí|adv|這裡
+allí|adv|那裡
+allá|adv|那邊
+qué|pr|什麼
+quién|pr|誰
+dónde|adv|哪裡
+cuándo|adv|什麼時候
+cómo|adv|如何
+por qué|adv|為什麼
+cuánto|adv|多少
+cuál|pr|哪一個
+mi|pr|我的
+tu|pr|你的
+su|pr|他的、您的
+nuestro|pr|我們的
+alguien|pr|某人
+nadie|pr|沒有人
+algo|pr|某事
+nada|pr|沒有什麼
+todo|pr|全部
+todos|pr|所有人
+cada|pr|每個
+otro|pr|另一個
+mismo|pr|相同的
+mucho|adv|很多
+poco|adv|很少
+más|adv|更多
+menos|adv|更少
+muy|adv|非常
+bastante|adv|相當
+demasiado|adv|太
+casi|adv|幾乎
+solo|adv|只有
+también|adv|也
+tampoco|adv|也不
+siempre|adv|總是
+nunca|adv|從不
+a veces|adv|有時
+ya|adv|已經
+todavía|adv|仍然
+pronto|adv|很快
+ahora|adv|現在
+luego|adv|然後
+antes|adv|之前
+después|adv|之後
+entonces|adv|那麼
+así|adv|這樣
+bien|adv|好
+mal|adv|不好
+despacio|adv|慢慢地
+rápido|adv|快速地
+juntos|adv|一起
+quizás|adv|也許
+realmente|adv|真的
+exactamente|adv|確切地
+y|cj|和
+o|cj|或
+pero|cj|但是
+porque|cj|因為
+si|cj|如果
+que|cj|那個（連接詞）
+cuando|cj|當…的時候
+aunque|cj|雖然
+sin embargo|cj|然而
+por eso|cj|所以
+a|prep|到、在
+de|prep|的、從
+en|prep|在
+con|prep|和、用
+sin|prep|沒有
+para|prep|為了
+por|prep|因為、經過
+sobre|prep|關於、在…上
+entre|prep|在…之間
+hasta|prep|直到
+desde|prep|從
+hacia|prep|朝向
+contra|prep|對抗
+según|prep|根據
+durante|prep|在…期間
+hola|ph|你好
+adiós|ph|再見
+hasta luego|ph|待會見
+hasta mañana|ph|明天見
+buenos días|ph|早安
+buenas tardes|ph|午安
+buenas noches|ph|晚安
+gracias|ph|謝謝
+muchas gracias|ph|非常感謝
+de nada|ph|不客氣
+por favor|ph|請
+perdón|ph|對不起、借過
+lo siento|ph|我很抱歉
+con permiso|ph|借過、打擾一下
+sí|ph|是
+no|ph|不
+claro|ph|當然
+vale|ph|好的
+de acuerdo|ph|同意
+no pasa nada|ph|沒關係
+bienvenido|ph|歡迎
+felicidades|ph|恭喜
+salud|ph|乾杯、祝健康
+buen provecho|ph|請慢用
+mucho gusto|ph|很高興認識你
+encantado|ph|幸會
+cómo estás|ph|你好嗎
+no entiendo|ph|我不懂
+no sé|ph|我不知道
+cuánto cuesta|ph|多少錢
+la cuenta, por favor|ph|請結帳
+buena suerte|ph|祝好運
+cuídate|ph|保重
+feliz cumpleaños|ph|生日快樂
+feliz Navidad|ph|聖誕快樂
+ser|v|是
+estar|v|在、處於
+tener|v|有
+haber|v|有（助動詞）
+hacer|v|做
+ir|v|去
+venir|v|來
+poder|v|能夠
+querer|v|想要、愛
+deber|v|應該、必須
+saber|v|知道
+conocer|v|認識
+decir|v|說
+hablar|v|說話
+ver|v|看見
+mirar|v|看
+oír|v|聽見
+escuchar|v|聽
+dar|v|給
+tomar|v|拿、喝
+poner|v|放置
+salir|v|出去
+entrar|v|進入
+llegar|v|到達
+volver|v|返回
+quedar|v|留、剩
+seguir|v|繼續、跟隨
+pensar|v|想
+creer|v|相信、認為
+sentir|v|感覺
+parecer|vm|似乎
+necesitar|v|需要
+llevar|v|帶、穿
+traer|v|帶來
+buscar|v|尋找
+encontrar|v|找到
+esperar|v|等待、希望
+empezar|v|開始
+terminar|v|結束
+comenzar|v|開始
+continuar|v|繼續
+usar|v|使用
+trabajar|v|工作
+estudiar|v|學習
+aprender|v|學習
+enseñar|v|教
+leer|v|閱讀
+escribir|v|寫
+comer|v|吃
+beber|v|喝
+cocinar|v|烹飪
+comprar|v|買
+vender|v|賣
+pagar|v|付款
+abrir|v|打開
+cerrar|v|關閉
+vivir|v|居住、生活
+dormir|v|睡覺
+despertar|v|叫醒
+caminar|v|走路
+correr|v|跑
+saltar|v|跳
+nadar|v|游泳
+jugar|v|玩
+bailar|v|跳舞
+cantar|v|唱歌
+reír|v|笑
+llorar|v|哭
+amar|v|愛
+gustar|v|喜歡（使…喜歡）
+ayudar|v|幫助
+preguntar|v|詢問
+responder|v|回答
+explicar|v|解釋
+entender|v|理解
+recordar|v|記得
+olvidar|v|忘記
+pedir|v|要求、點（餐）
+mandar|v|寄送、命令
+recibir|v|收到
+enviar|v|寄送
+cambiar|v|改變、更換
+mover|v|移動
+subir|v|上升、上去
+bajar|v|下降、下去
+levantar|v|舉起
+caer|vm|掉落
+morir|vm|死亡
+nacer|vm|出生
+crecer|vm|成長
+ganar|v|贏、賺
+perder|v|輸、失去
+elegir|v|選擇
+decidir|v|決定
+intentar|v|嘗試
+preparar|v|準備
+mostrar|v|展示
+pasar|v|經過、發生
+parar|v|停止
+ocurrir|vm|發生
+llover|vm|下雨
+nevar|vm|下雪
+importar|vm|重要
+faltar|vm|缺少
+bastar|vm|足夠
+costar|vm|花費（價錢）
+valer|vm|值、有價值
+durar|vm|持續
+existir|vm|存在
+depender|vm|取決於
+llamar|v|呼叫、打電話
+llamarse|v|名叫
+levantarse|v|起床
+ducharse|v|淋浴
+sentarse|v|坐下
+acostarse|v|躺下、睡覺
+bueno|a|好的
+malo|a|壞的
+grande|ao|大的
+pequeño|ao|小的
+nuevo|ao|新的
+viejo|ao|舊的、老的
+joven|a|年輕的
+alto|a|高的
+bajo|a|矮的、低的
+largo|ao|長的
+corto|ao|短的
+ancho|ao|寬的
+estrecho|ao|窄的
+gordo|a|胖的
+delgado|a|瘦的
+fuerte|a|強壯的
+débil|a|虛弱的
+rápido|ao|快的
+lento|ao|慢的
+fácil|ao|容易的
+difícil|ao|困難的
+caro|ao|貴的
+barato|ao|便宜的
+bonito|a|漂亮的
+feo|a|醜的
+hermoso|a|美麗的
+guapo|a|帥氣的
+simpático|a|親切的
+amable|a|友善的
+inteligente|a|聰明的
+tonto|a|笨的
+divertido|a|有趣的
+aburrido|a|無聊的
+serio|a|嚴肅的
+tranquilo|a|平靜的
+libre|a|自由的、有空的
+limpio|aeo|乾淨
+sucio|aeo|髒
+lleno|aeo|滿
+vacío|aeo|空
+abierto|aeo|開著
+cerrado|aeo|關著
+pesado|ao|重的
+ligero|ao|輕的
+duro|ao|硬的
+suave|ao|柔軟的
+claro|ao|清楚的、明亮的
+oscuro|ao|黑暗的
+importante|ao|重要的
+necesario|ao|必要的
+posible|ao|可能的
+imposible|ao|不可能的
+verdadero|ao|真實的
+falso|ao|假的
+diferente|ao|不同的
+igual|pr|相同的
+mejor|pr|更好的
+peor|pr|更差的
+mayor|pr|較年長的、較大的
+menor|pr|較年幼的、較小的
+primero|pr|第一的
+último|pr|最後的
+próximo|pr|下一個的
+cierto|pr|確定的、某個
+cosa|nf|東西
+persona|nf|人
+gente|nf|人們
+hombre|nm|男人
+mujer|nf|女人
+niño|pm|男孩
+niña|pf|女孩
+nombre|nm|名字
+vida|nf|生命、生活
+mundo|nm|世界
+casa|nf|房子、家
+cuarto|nm|房間
+cocina|nf|廚房
+baño|nm|浴室
+cama|nf|床
+mesa|nf|桌子
+silla|nf|椅子
+puerta|nf|門
+ventana|nf|窗戶
+llave|nf|鑰匙
+teléfono|nm|電話
+celular|nm|手機
+computadora|nf|電腦
+televisión|nf|電視
+radio|nf|收音機
+reloj|nm|手錶、時鐘
+espejo|nm|鏡子
+luz|nf|燈、光
+agua|nf|水
+fuego|nm|火
+objeto|nm|物品
+caja|nf|箱子
+bolsa|nf|袋子
+papel|nm|紙
+toalla|nf|毛巾
+jabón|nm|肥皂
+cepillo|nm|刷子
+basura|nf|垃圾
+paraguas|nm|雨傘
+sofá|nm|沙發
+escalera|nf|樓梯
+pared|nf|牆壁
+suelo|nm|地板
+techo|nm|天花板
+piso|nm|樓層、公寓
+habitación|nf|房間、臥室
+`,
+'食物':`
+comida|nf|食物、餐點
+desayuno|nm|早餐
+almuerzo|nm|午餐
+cena|nf|晚餐
+merienda|nf|點心
+pan|nm|麵包
+arroz|nm|米飯
+pasta|nf|義大利麵
+sopa|nf|湯
+ensalada|nf|沙拉
+carne|nf|肉
+pollo|nm|雞肉
+cerdo|nm|豬肉
+bistec|nm|牛排
+pescado|nm|魚（食用）
+camarón|nm|蝦
+huevo|nm|蛋
+queso|nm|起司
+leche|nf|牛奶
+mantequilla|nf|奶油
+yogur|nm|優格
+jamón|nm|火腿
+salchicha|nf|香腸
+hamburguesa|nf|漢堡
+pizza|nf|披薩
+sándwich|nm|三明治
+taco|nm|塔可餅
+tortilla|nf|薄餅、烘蛋
+empanada|nf|餡餅
+paella|nf|西班牙海鮮飯
+tapa|nf|小菜
+fruta|nf|水果
+manzana|nf|蘋果
+plátano|nm|香蕉
+naranja|nf|柳橙
+limón|nm|檸檬
+fresa|nf|草莓
+uva|nf|葡萄
+sandía|nf|西瓜
+piña|nf|鳳梨
+mango|nm|芒果
+melocotón|nm|桃子
+pera|nf|梨子
+cereza|nf|櫻桃
+aguacate|nm|酪梨
+tomate|nm|番茄
+cebolla|nf|洋蔥
+ajo|nm|大蒜
+papa|nf|馬鈴薯
+patata|nf|馬鈴薯（西班牙）
+zanahoria|nf|紅蘿蔔
+lechuga|nf|萵苣
+pepino|nm|小黃瓜
+maíz|nm|玉米
+frijol|nm|豆子
+champiñón|nm|蘑菇
+verdura|nf|蔬菜
+sal|nf|鹽
+azúcar|nm|糖
+aceite|nm|油
+vinagre|nm|醋
+pimienta|nf|胡椒
+salsa|nf|醬汁
+chile|nm|辣椒
+miel|nf|蜂蜜
+mermelada|nf|果醬
+galleta|nf|餅乾
+pastel|nm|蛋糕
+helado|nm|冰淇淋
+chocolate|nm|巧克力
+caramelo|nm|糖果
+postre|nm|甜點
+café|nm|咖啡
+té|nm|茶
+jugo|nm|果汁
+refresco|nm|汽水
+cerveza|nf|啤酒
+vino|nm|葡萄酒
+cóctel|nm|雞尾酒
+vaso|nm|杯子
+taza|nf|茶杯
+copa|nf|高腳杯
+botella|nf|瓶子
+plato|nm|盤子
+tazón|nm|碗
+cuchara|nf|湯匙
+tenedor|nm|叉子
+cuchillo|nm|刀子
+servilleta|nf|餐巾
+menú|nm|菜單
+restaurante|nm|餐廳
+mesero|pm|服務生
+propina|nf|小費
+sabor|nm|味道
+delicioso|ao|美味的
+rico|ao|好吃的
+dulce|ao|甜的
+salado|ao|鹹的
+picante|ao|辣的
+amargo|ao|苦的
+ácido|ao|酸的
+fresco|ao|新鮮的、涼的
+`,
+'家庭':`
+familia|nf|家庭
+padre|pm|父親
+madre|pf|母親
+papá|pm|爸爸
+mamá|pf|媽媽
+hijo|pm|兒子
+hija|pf|女兒
+hermano|pm|哥哥、弟弟
+hermana|pf|姊姊、妹妹
+abuelo|pm|祖父
+abuela|pf|祖母
+tío|pm|叔叔、舅舅
+tía|pf|阿姨、姑姑
+primo|pm|堂表兄弟
+prima|pf|堂表姊妹
+sobrino|pm|姪子、外甥
+sobrina|pf|姪女、外甥女
+nieto|pm|孫子
+nieta|pf|孫女
+esposo|pm|丈夫
+esposa|pf|妻子
+marido|pm|丈夫
+novio|pm|男朋友
+novia|pf|女朋友
+pareja|pf|伴侶
+suegro|pm|岳父、公公
+suegra|pf|岳母、婆婆
+cuñado|pm|姐夫、妹夫
+amigo|pm|朋友（男）
+amiga|pf|朋友（女）
+vecino|pm|鄰居
+bebé|nm|嬰兒
+adulto|pm|成人
+anciano|pm|老人
+compañero|pm|同伴、同事
+invitado|pm|客人
+boda|nf|婚禮
+matrimonio|nm|婚姻
+divorcio|nm|離婚
+cumpleaños|nm|生日
+`,
+'時間':`
+tiempo|nm|時間、天氣
+hora|nf|小時、時間
+minuto|nm|分鐘
+segundo|nm|秒
+día|nm|天
+semana|nf|週
+mes|nm|月
+año|nm|年
+hoy|adv|今天
+ayer|adv|昨天
+mañana|adv|明天
+mañana|nf|早上
+tarde|nf|下午
+tarde|adv|晚
+noche|nf|晚上
+mediodía|nm|中午
+medianoche|nf|午夜
+amanecer|nm|黎明
+atardecer|nm|黃昏
+temprano|adv|早
+fin de semana|nm|週末
+lunes|nm|星期一
+martes|nm|星期二
+miércoles|nm|星期三
+jueves|nm|星期四
+viernes|nm|星期五
+sábado|nm|星期六
+domingo|nm|星期日
+enero|nm|一月
+febrero|nm|二月
+marzo|nm|三月
+abril|nm|四月
+mayo|nm|五月
+junio|nm|六月
+julio|nm|七月
+agosto|nm|八月
+septiembre|nm|九月
+octubre|nm|十月
+noviembre|nm|十一月
+diciembre|nm|十二月
+primavera|nf|春天
+verano|nm|夏天
+otoño|nm|秋天
+invierno|nm|冬天
+fecha|nf|日期
+calendario|nm|日曆
+pasado|nm|過去
+presente|nm|現在
+futuro|nm|未來
+momento|nm|時刻
+vez|nf|次
+época|nf|時代
+siglo|nm|世紀
+cero|num|零
+uno|num|一
+dos|num|二
+tres|num|三
+cuatro|num|四
+cinco|num|五
+seis|num|六
+siete|num|七
+ocho|num|八
+nueve|num|九
+diez|num|十
+once|num|十一
+doce|num|十二
+trece|num|十三
+catorce|num|十四
+quince|num|十五
+dieciséis|num|十六
+diecisiete|num|十七
+dieciocho|num|十八
+diecinueve|num|十九
+veinte|num|二十
+treinta|num|三十
+cuarenta|num|四十
+cincuenta|num|五十
+sesenta|num|六十
+setenta|num|七十
+ochenta|num|八十
+noventa|num|九十
+cien|num|一百
+mil|num|一千
+millón|num|百萬
+`,
+'地點':`
+lugar|nm|地方
+ciudad|nf|城市
+pueblo|nm|小鎮、村
+país|nm|國家
+calle|nf|街道
+avenida|nf|大道
+plaza|nf|廣場
+parque|nm|公園
+jardín|nm|花園
+edificio|nm|建築物
+tienda|nf|商店
+mercado|nm|市場
+supermercado|nm|超市
+banco|nm|銀行
+hospital|nm|醫院
+farmacia|nf|藥局
+escuela|nf|學校
+universidad|nf|大學
+biblioteca|nf|圖書館
+museo|nm|博物館
+iglesia|nf|教堂
+teatro|nm|劇院
+cine|nm|電影院
+hotel|nm|飯店
+cafetería|nf|咖啡廳
+panadería|nf|麵包店
+librería|nf|書店
+oficina|nf|辦公室
+fábrica|nf|工廠
+playa|nf|海灘
+montaña|nf|山
+estadio|nm|體育場
+puente|nm|橋
+centro|nm|市中心
+barrio|nm|社區
+campo|nm|鄉下、田野
+frontera|nf|邊界
+mapa|nm|地圖
+dirección|nf|地址、方向
+derecha|nf|右邊
+izquierda|nf|左邊
+arriba|adv|上面
+abajo|adv|下面
+cerca|adv|近
+lejos|adv|遠
+dentro|adv|裡面
+fuera|adv|外面
+delante|adv|前面
+detrás|adv|後面
+al lado|adv|旁邊
+enfrente|adv|對面
+norte|nm|北
+sur|nm|南
+este|nm|東
+oeste|nm|西
+España|pn|西班牙
+México|pn|墨西哥
+Argentina|pn|阿根廷
+Colombia|pn|哥倫比亞
+Chile|pn|智利
+Perú|pn|秘魯
+Venezuela|pn|委內瑞拉
+Cuba|pn|古巴
+Brasil|pn|巴西
+Estados Unidos|pn|美國
+China|pn|中國
+Taiwán|pn|台灣
+Japón|pn|日本
+Corea|pn|韓國
+Francia|pn|法國
+Italia|pn|義大利
+Alemania|pn|德國
+Inglaterra|pn|英格蘭
+Madrid|pn|馬德里
+Barcelona|pn|巴塞隆納
+Buenos Aires|pn|布宜諾斯艾利斯
+Ciudad de México|pn|墨西哥城
+Lima|pn|利馬
+Bogotá|pn|波哥大
+Santiago|pn|聖地牙哥
+La Habana|pn|哈瓦那
+Europa|pn|歐洲
+Asia|pn|亞洲
+América|pn|美洲
+África|pn|非洲
+`,
+'身體':`
+cuerpo|nm|身體
+cabeza|nf|頭
+cara|nf|臉
+ojo|nm|眼睛
+oreja|nf|耳朵
+nariz|nf|鼻子
+boca|nf|嘴巴
+diente|nm|牙齒
+lengua|nf|舌頭
+labio|nm|嘴唇
+pelo|nm|頭髮
+cuello|nm|脖子
+hombro|nm|肩膀
+brazo|nm|手臂
+mano|nf|手
+dedo|nm|手指
+uña|nf|指甲
+pecho|nm|胸部
+espalda|nf|背
+estómago|nm|胃、肚子
+cintura|nf|腰
+pierna|nf|腿
+rodilla|nf|膝蓋
+pie|nm|腳
+corazón|nm|心臟
+cerebro|nm|大腦
+hueso|nm|骨頭
+piel|nf|皮膚
+sangre|nf|血
+`,
+'健康':`
+salud|nf|健康
+enfermedad|nf|疾病
+médico|pm|醫生
+enfermero|pm|護理師
+dentista|pm|牙醫
+paciente|pm|病人
+medicina|nf|藥、醫學
+pastilla|nf|藥丸
+receta|nf|處方、食譜
+dolor|nm|疼痛
+fiebre|nf|發燒
+tos|nf|咳嗽
+resfriado|nm|感冒
+gripe|nf|流感
+alergia|nf|過敏
+herida|nf|傷口
+accidente|nm|意外
+emergencia|nf|緊急狀況
+ambulancia|nf|救護車
+examen|nm|檢查、考試
+cirugía|nf|手術
+vacuna|nf|疫苗
+dieta|nf|飲食
+ejercicio|nm|運動
+descanso|nm|休息
+sueño|nm|睡眠、夢
+estrés|nm|壓力
+vitamina|nf|維他命
+temperatura|nf|溫度、體溫
+peso|nm|體重、比索
+sano|ae|健康的
+curar|v|治療
+doler|vm|痛
+toser|v|咳嗽
+respirar|v|呼吸
+`,
+'自然':`
+naturaleza|nf|自然
+tierra|nf|地球、土地
+cielo|nm|天空
+sol|nm|太陽
+luna|nf|月亮
+estrella|nf|星星
+nube|nf|雲
+lluvia|nf|雨
+nieve|nf|雪
+viento|nm|風
+tormenta|nf|暴風雨
+trueno|nm|雷
+rayo|nm|閃電
+niebla|nf|霧
+hielo|nm|冰
+clima|nm|氣候
+calor|nm|熱
+frío|nm|冷
+mar|nm|海
+océano|nm|海洋
+río|nm|河
+lago|nm|湖
+isla|nf|島
+bosque|nm|森林
+selva|nf|叢林
+desierto|nm|沙漠
+valle|nm|山谷
+volcán|nm|火山
+cueva|nf|洞穴
+piedra|nf|石頭
+arena|nf|沙子
+árbol|nm|樹
+flor|nf|花
+hoja|nf|葉子
+raíz|nf|根
+hierba|nf|草
+semilla|nf|種子
+planta|nf|植物
+animal|nm|動物
+perro|nm|狗
+gato|nm|貓
+pájaro|nm|鳥
+caballo|nm|馬
+vaca|nf|母牛
+toro|nm|公牛
+oveja|nf|綿羊
+gallina|nf|母雞
+pato|nm|鴨子
+conejo|nm|兔子
+ratón|nm|老鼠
+mono|nm|猴子
+león|nm|獅子
+tigre|nm|老虎
+oso|nm|熊
+elefante|nm|大象
+lobo|nm|狼
+zorro|nm|狐狸
+serpiente|nf|蛇
+rana|nf|青蛙
+tortuga|nf|烏龜
+ballena|nf|鯨魚
+delfín|nm|海豚
+tiburón|nm|鯊魚
+mariposa|nf|蝴蝶
+abeja|nf|蜜蜂
+hormiga|nf|螞蟻
+mosquito|nm|蚊子
+araña|nf|蜘蛛
+mosca|nf|蒼蠅
+medio ambiente|nm|環境
+contaminación|nf|污染
+energía|nf|能源
+`,
+'交通':`
+transporte|nm|交通、運輸
+coche|nm|汽車
+carro|nm|汽車（拉美）
+autobús|nm|公車
+tren|nm|火車
+metro|nm|地鐵
+avión|nm|飛機
+barco|nm|船
+bicicleta|nf|腳踏車
+moto|nf|摩托車
+taxi|nm|計程車
+camión|nm|卡車
+aeropuerto|nm|機場
+estación|nf|車站
+parada|nf|公車站
+terminal|nf|總站
+puerto|nm|港口
+boleto|nm|車票
+billete|nm|車票（西班牙）
+pasaje|nm|票、船票
+pasaporte|nm|護照
+visa|nf|簽證
+equipaje|nm|行李
+maleta|nf|行李箱
+mochila|nf|背包
+vuelo|nm|航班
+viaje|nm|旅行
+turista|pm|觀光客
+tráfico|nm|交通、車流
+semáforo|nm|紅綠燈
+carretera|nf|公路
+autopista|nf|高速公路
+esquina|nf|街角
+camino|nm|道路
+ruta|nf|路線
+gasolina|nf|汽油
+licencia|nf|執照
+conductor|pm|駕駛
+pasajero|pm|乘客
+llegada|nf|抵達
+salida|nf|出發、出口
+reserva|nf|預訂
+destino|nm|目的地
+conducir|v|駕駛
+viajar|v|旅行
+volar|v|飛
+aparcar|v|停車
+`,
+'教育':`
+educación|nf|教育
+colegio|nm|學校
+clase|nf|課、班級
+maestro|pm|老師
+maestra|pf|女老師
+profesor|pm|教授、老師
+estudiante|pm|學生
+alumno|pm|學生
+tarea|nf|作業
+prueba|nf|測驗
+nota|nf|成績、筆記
+libro|nm|書
+cuaderno|nm|筆記本
+lápiz|nm|鉛筆
+bolígrafo|nm|原子筆
+diccionario|nm|字典
+pizarra|nf|黑板
+idioma|nm|語言
+palabra|nf|單字
+frase|nf|句子
+oración|nf|句子
+texto|nm|文章
+página|nf|頁
+pregunta|nf|問題
+respuesta|nf|答案
+lección|nf|課程
+curso|nm|課程
+tema|nm|主題
+ejemplo|nm|例子
+error|nm|錯誤
+verbo|nm|動詞
+gramática|nf|文法
+pronunciación|nf|發音
+historia|nf|歷史、故事
+matemática|nf|數學
+ciencia|nf|科學
+física|nf|物理
+química|nf|化學
+biología|nf|生物學
+geografía|nf|地理
+literatura|nf|文學
+arte|nm|藝術
+filosofía|nf|哲學
+título|nm|學位、標題
+beca|nf|獎學金
+conocimiento|nm|知識
+información|nf|資訊
+memoria|nf|記憶
+idea|nf|想法
+pensamiento|nm|思想
+`,
+'工作':`
+trabajo|nm|工作
+empleo|nm|職位
+empresa|nf|公司
+compañía|nf|公司
+jefe|pm|老闆
+empleado|pm|員工
+colega|pm|同事
+cliente|pm|客戶
+director|pm|主管
+gerente|pm|經理
+secretario|pm|祕書
+ingeniero|pm|工程師
+abogado|pm|律師
+arquitecto|pm|建築師
+contador|pm|會計
+programador|pm|程式設計師
+diseñador|pm|設計師
+cocinero|pm|廚師
+camarero|pm|服務生
+cajero|pm|收銀員
+vendedor|pm|銷售員
+policía|pm|警察
+bombero|pm|消防員
+soldado|pm|軍人
+piloto|pm|飛行員
+agricultor|pm|農夫
+carpintero|pm|木匠
+mecánico|pm|技工
+periodista|pm|記者
+artista|pm|藝術家
+escritor|pm|作家
+cantante|pm|歌手
+actor|pm|演員
+reunión|nf|會議
+proyecto|nm|專案
+horario|nm|時間表
+salario|nm|薪水
+sueldo|nm|薪資
+contrato|nm|合約
+entrevista|nf|面試
+currículum|nm|履歷
+experiencia|nf|經驗
+negocio|nm|生意
+industria|nf|產業
+producto|nm|產品
+servicio|nm|服務
+jubilación|nf|退休
+desempleo|nm|失業
+ocupación|nf|職業
+profesión|nf|職業
+puesto|nm|職位
+equipo|nm|團隊
+informe|nm|報告
+correo|nm|郵件
+documento|nm|文件
+firma|nf|簽名
+agricultura|nf|農業
+cosecha|nf|收成
+`,
+'商業':`
+dinero|nm|錢
+precio|nm|價格
+costo|nm|成本
+pago|nm|付款
+cuenta|nf|帳戶、帳單
+tarjeta|nf|卡
+efectivo|nm|現金
+cambio|nm|零錢、變化
+moneda|nf|硬幣、貨幣
+cartera|nf|錢包
+préstamo|nm|貸款
+deuda|nf|債務
+ahorro|nm|儲蓄
+inversión|nf|投資
+impuesto|nm|稅
+descuento|nm|折扣
+oferta|nf|優惠、報價
+venta|nf|銷售
+compra|nf|購買
+recibo|nm|收據
+factura|nf|發票
+ropa|nf|衣服
+camisa|nf|襯衫
+camiseta|nf|T恤
+pantalón|nm|褲子
+falda|nf|裙子
+vestido|nm|洋裝
+abrigo|nm|大衣
+chaqueta|nf|夾克
+zapato|nm|鞋子
+calcetín|nm|襪子
+sombrero|nm|帽子
+bolso|nm|包包
+collar|nm|項鍊
+anillo|nm|戒指
+regalo|nm|禮物
+talla|nf|尺寸
+color|nm|顏色
+rojo|ao|紅色的
+azul|ao|藍色的
+verde|ao|綠色的
+amarillo|ao|黃色的
+negro|ao|黑色的
+blanco|ao|白色的
+gris|ao|灰色的
+marrón|ao|棕色的
+rosa|ao|粉紅色的
+morado|ao|紫色的
+pobre|a|貧窮的
+gratis|ao|免費的
+valor|nm|價值
+economía|nf|經濟
+comercio|nm|貿易、商業
+mercancía|nf|商品
+cantidad|nf|數量
+`,
+'情感':`
+amor|nm|愛
+cariño|nm|疼愛、情感
+amistad|nf|友誼
+alegría|nf|喜悅
+tristeza|nf|悲傷
+miedo|nm|恐懼
+rabia|nf|憤怒
+enojo|nm|生氣
+sorpresa|nf|驚喜
+esperanza|nf|希望
+confianza|nf|信任、信心
+orgullo|nm|驕傲
+vergüenza|nf|羞愧
+envidia|nf|嫉妒
+preocupación|nf|擔憂
+paz|nf|和平
+felicidad|nf|幸福
+soledad|nf|孤獨
+sentimiento|nm|感情
+emoción|nf|情緒、激動
+sonrisa|nf|微笑
+lágrima|nf|眼淚
+beso|nm|吻
+abrazo|nm|擁抱
+deseo|nm|願望
+recuerdo|nm|回憶
+alma|nf|靈魂
+sincero|a|真誠的
+honesto|a|誠實的
+generoso|a|慷慨的
+paciente|a|有耐心的
+valiente|a|勇敢的
+tímido|a|害羞的
+nervioso|ae|緊張的
+cansado|ae|疲倦的
+enfermo|ae|生病的
+contento|ae|高興的
+feliz|ae|快樂的
+triste|ae|悲傷的
+enojado|ae|生氣的
+ocupado|ae|忙碌的
+orgulloso|ae|驕傲的
+sorprendido|ae|驚訝的
+asustado|ae|害怕的
+preocupado|ae|擔心的
+emocionado|ae|興奮的
+enamorado|ae|戀愛中的
+confundido|ae|困惑的
+agradecido|ae|感激的
+molesto|ae|生氣的、惱人的
+decepcionado|ae|失望的
+relajado|ae|放鬆的
+seguro|ae|確定的、安全的
+extrañar|v|想念
+odiar|v|討厭
+sonreír|v|微笑
+abrazar|v|擁抱
+besar|v|親吻
+perdonar|v|原諒
+confiar|v|信任
+disfrutar|v|享受
+sorprender|v|使驚訝
+`,
+'娛樂':`
+música|nf|音樂
+canción|nf|歌曲
+película|nf|電影
+serie|nf|影集
+programa|nm|節目
+juego|nm|遊戲
+deporte|nm|運動
+fútbol|nm|足球
+baloncesto|nm|籃球
+béisbol|nm|棒球
+tenis|nm|網球
+natación|nf|游泳
+carrera|nf|賽跑、職業
+partido|nm|比賽
+jugador|pm|球員
+campeón|pm|冠軍
+premio|nm|獎
+fiesta|nf|派對、節日
+concierto|nm|演唱會
+baile|nm|舞蹈
+guitarra|nf|吉他
+piano|nm|鋼琴
+violín|nm|小提琴
+tambor|nm|鼓
+instrumento|nm|樂器
+foto|nf|照片
+cámara|nf|相機
+video|nm|影片
+revista|nf|雜誌
+periódico|nm|報紙
+novela|nf|小說
+poema|nm|詩
+cuento|nm|故事
+pintura|nf|繪畫
+dibujo|nm|素描
+hobby|nm|嗜好
+pasatiempo|nm|消遣
+camping|nm|露營
+pesca|nf|釣魚
+senderismo|nm|健行
+excursión|nf|郊遊
+juguete|nm|玩具
+carnaval|nm|嘉年華
+feria|nf|市集、展覽
+`,
+'社會':`
+sociedad|nf|社會
+gobierno|nm|政府
+presidente|pm|總統
+ministro|pm|部長
+ley|nf|法律
+derecho|nm|權利、法律
+justicia|nf|正義
+libertad|nf|自由
+igualdad|nf|平等
+democracia|nf|民主
+política|nf|政治
+elección|nf|選舉
+voto|nm|投票
+ciudadano|pm|公民
+población|nf|人口
+cultura|nf|文化
+tradición|nf|傳統
+religión|nf|宗教
+costumbre|nf|習俗
+guerra|nf|戰爭
+crimen|nm|犯罪
+ladrón|pm|小偷
+juez|pm|法官
+tribunal|nm|法院
+cárcel|nf|監獄
+seguridad|nf|安全
+peligro|nm|危險
+problema|nm|問題
+solución|nf|解決方案
+causa|nf|原因
+resultado|nm|結果
+razón|nf|理由
+progreso|nm|進步
+desarrollo|nm|發展
+tecnología|nf|科技
+internet|nm|網際網路
+red|nf|網路
+noticia|nf|新聞
+medio|nm|媒體、中間
+opinión|nf|意見
+debate|nm|辯論
+pobreza|nf|貧窮
+riqueza|nf|財富
+desigualdad|nf|不平等
+inmigrante|pm|移民
+extranjero|pm|外國人
+turismo|nm|旅遊業
+comunidad|nf|社區
+organización|nf|組織
+ayuda|nf|幫助
+`
+};
+
+/* ================== 建立單字表 ================== */
+const allWords=[];
+(function(){
+  const seen=new Set();
+  CATS.forEach(function(cat){
+    (DATA[cat]||'').trim().split('\n').forEach(function(line){
+      const a=line.trim().split('|');
+      if(a.length<3)return;
+      const key=a[0]+'|'+a[1];
+      if(seen.has(key))return;
+      seen.add(key);
+      allWords.push({id:allWords.length+1,word:a[0],code:a[1],pos:POS[a[1]]||a[1],zh:a[2],cat:cat,rank:LEVEL[cat],person:(a[1]==='pm'||a[1]==='pf'),meta:(a[1]==='vm')});
+    });
+  });
+})();
+
+/* ================== 中文諧音（拉丁美洲發音，近似） ================== */
+const CV={b:'巴貝比波布',k:'卡凱奇科庫',d:'達德迪多杜',f:'法費菲佛福',g:'嘎給吉哥古',j:'哈黑希霍胡',l:'拉勒里洛盧',m:'瑪梅米莫木',n:'那內尼諾努',p:'帕佩皮波普',r:'拉雷里羅魯',R:'啦累哩囉嚕',s:'薩塞西索蘇',t:'塔特提托圖',y:'亞耶伊優尤',c:'恰切奇喬丘',w:'瓦威威沃烏'};
+const NARR=['尼亞','尼耶','尼','尼歐','尼烏'];
+const CODA={b:'布',k:'克',d:'德',f:'夫',g:'格',j:'赫',l:'爾',m:'姆',n:'恩',N:'尼',p:'普',r:'爾',R:'爾',s:'斯',t:'特',y:'伊',c:'奇',w:'烏'};
+const VOW={a:'阿',e:'欸',i:'伊',o:'歐',u:'烏'};
+const YG={a:'亞',e:'耶',i:'伊',o:'優',u:'尤'};
+const WG={a:'瓦',e:'威',i:'伊',o:'沃',u:'烏'};
+function wordToZh(w){
+  w=w.toLowerCase().replace(/ü/g,'U').replace(/á/g,'a').replace(/é/g,'e').replace(/í/g,'i').replace(/ó/g,'o').replace(/ú/g,'u');
+  const isV=function(c){return c&&'aeiouU'.indexOf(c)>=0;};
+  const t=[];
+  for(let i=0;i<w.length;){
+    const c=w[i],n=w[i+1]||'',n2=w[i+2]||'';
+    if(isV(c)){t.push({v:c==='U'?'u':c});i++;continue;}
+    if(c==='c'&&n==='h'){t.push({c:'c'});i+=2;continue;}
+    if(c==='l'&&n==='l'){t.push({c:'y'});i+=2;continue;}
+    if(c==='r'&&n==='r'){t.push({c:'R'});i+=2;continue;}
+    if(c==='q'&&n==='u'){t.push({c:'k'});i+=2;continue;}
+    if(c==='g'&&n==='u'&&'ei'.indexOf(n2)>=0&&n2){t.push({c:'g'});i+=2;continue;}
+    if(c==='g'&&n&&'ei'.indexOf(n)>=0){t.push({c:'j'});i++;continue;}
+    if(c==='c'&&n&&'ei'.indexOf(n)>=0){t.push({c:'s'});i++;continue;}
+    if(c==='c'||c==='k'||c==='q'){t.push({c:'k'});i++;continue;}
+    if(c==='z'){t.push({c:'s'});i++;continue;}
+    if(c==='v'){t.push({c:'b'});i++;continue;}
+    if(c==='h'){i++;continue;}
+    if(c==='x'){t.push({c:'k'});t.push({c:'s'});i++;continue;}
+    if(c==='y'){if(isV(n))t.push({c:'y'});else t.push({v:'i'});i++;continue;}
+    if(c==='ñ'){t.push({c:'N'});i++;continue;}
+    if('bdfgjlmnprstw'.indexOf(c)>=0){t.push({c:c});i++;continue;}
+    i++;
+  }
+  let out='',prevV=null;
+  for(let k=0;k<t.length;k++){
+    const x=t[k];
+    if(x.v){
+      let ch;
+      if(prevV==='i'&&'aeou'.indexOf(x.v)>=0)ch=YG[x.v];
+      else if(prevV==='u'&&'aeio'.indexOf(x.v)>=0)ch=WG[x.v];
+      else ch=VOW[x.v];
+      out+=ch;prevV=x.v;continue;
+    }
+    const nx=t[k+1];
+    if(nx&&nx.v){
+      const vi='aeiou'.indexOf(nx.v);
+      out+=(x.c==='N')?NARR[vi]:CV[x.c][vi];
+      prevV=nx.v;k++;continue;
+    }
+    out+=CODA[x.c];prevV=null;
+  }
+  return out;
+}
+function toZh(s){
+  return s.replace(/[¿¡?!.,;:«»"“”()\u2014\u2013]/g,' ').split(/\s+/).filter(function(x){return x&&!/^[\d-]+$/.test(x);}).map(wordToZh).join(' ');
+}
+function norm(s){return s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();}
+
+/* ================== 例句 ================== */
+const SPECIAL={
+'hola':[['¡Hola! ¿Cómo estás?','你好！你好嗎？'],['Hola, me llamo Ana.','你好，我叫安娜。']],
+'adiós':[['Adiós, hasta mañana.','再見，明天見。'],['Ella dice adiós con la mano.','她揮手說再見。']],
+'gracias':[['Muchas gracias por tu ayuda.','非常感謝你的幫忙。'],['Gracias, está muy rico.','謝謝，非常好吃。']],
+'por favor':[['Un café, por favor.','請給我一杯咖啡。'],['¿Me ayudas, por favor?','可以請你幫我嗎？']],
+'de nada':[['—Gracias. —De nada.','「謝謝。」「不客氣。」'],['De nada, es un placer.','不客氣，這是我的榮幸。']],
+'perdón':[['Perdón, ¿dónde está el baño?','不好意思，廁所在哪裡？'],['Perdón por llegar tarde.','抱歉我遲到了。']],
+'lo siento':[['Lo siento mucho.','我非常抱歉。'],['Lo siento, no entiendo.','抱歉，我不懂。']],
+'sí':[['Sí, claro.','是的，當然。'],['Sí, me gusta mucho.','是的，我非常喜歡。']],
+'no':[['No, gracias.','不用了，謝謝。'],['No tengo tiempo.','我沒有時間。']],
+'buenos días':[['Buenos días, señor García.','早安，賈西亞先生。'],['Buenos días, ¿qué desea?','早安，您需要什麼？']],
+'buenas noches':[['Buenas noches, que descanses.','晚安，好好休息。'],['Buenas noches a todos.','大家晚安。']],
+'mucho gusto':[['Mucho gusto, me llamo Pedro.','很高興認識你，我叫佩德羅。'],['Mucho gusto en conocerte.','很高興認識你。']],
+'de acuerdo':[['Sí, estoy de acuerdo contigo.','是的，我同意你。'],['De acuerdo, nos vemos mañana.','好，明天見。']],
+'bienvenido':[['Bienvenido a mi casa.','歡迎來到我家。'],['Bienvenidos a México.','歡迎來到墨西哥。']],
+'yo':[['Yo soy estudiante.','我是學生。'],['Yo vivo en Taiwán.','我住在台灣。']],
+'tú':[['¿Tú eres de México?','你是墨西哥人嗎？'],['Tú hablas muy bien español.','你的西班牙語說得很好。']],
+'él':[['Él es mi amigo.','他是我的朋友。'],['Él trabaja en un banco.','他在銀行工作。']],
+'ella':[['Ella es profesora.','她是老師。'],['Ella canta muy bien.','她唱歌唱得很好。']],
+'nosotros':[['Nosotros somos amigos.','我們是朋友。'],['Nosotros vamos al parque.','我們去公園。']],
+'ellos':[['Ellos viven en Madrid.','他們住在馬德里。'],['Ellos tienen dos hijos.','他們有兩個孩子。']],
+'ser':[['Yo soy de Taiwán.','我來自台灣。'],['Mi casa es grande.','我的家很大。']],
+'estar':[['Estoy en casa.','我在家。'],['¿Cómo estás hoy?','你今天好嗎？']],
+'tener':[['Tengo dos hermanos.','我有兩個兄弟姊妹。'],['¿Tienes hambre?','你餓嗎？']],
+'haber':[['Hay un libro en la mesa.','桌上有一本書。'],['¿Hay un banco cerca?','附近有銀行嗎？']],
+'hacer':[['¿Qué haces hoy?','你今天做什麼？'],['Hace mucho calor.','天氣很熱。']],
+'ir':[['Voy al mercado.','我去市場。'],['¿Vamos juntos?','我們一起去好嗎？']],
+'venir':[['¿Vienes a la fiesta?','你要來派對嗎？'],['Mi amigo viene mañana.','我的朋友明天來。']],
+'poder':[['¿Puedo pasar?','我可以進來嗎？'],['No puedo hablar ahora.','我現在不能說話。']],
+'querer':[['Quiero un café.','我想要一杯咖啡。'],['Te quiero mucho.','我很愛你。']],
+'deber':[['Debes estudiar más.','你應該多讀書。'],['Debo irme ahora.','我現在該走了。']],
+'saber':[['No sé la respuesta.','我不知道答案。'],['¿Sabes nadar?','你會游泳嗎？']],
+'conocer':[['Quiero conocer México.','我想認識（遊覽）墨西哥。'],['¿Conoces a Pedro?','你認識佩德羅嗎？']],
+'decir':[['¿Qué dices?','你說什麼？'],['Dime tu nombre.','告訴我你的名字。']],
+'ver':[['Quiero ver una película.','我想看電影。'],['Nos vemos mañana.','明天見。']],
+'dar':[['¿Me das un poco de agua?','可以給我一點水嗎？'],['Te doy mi número.','我給你我的號碼。']],
+'llamar':[['Te llamo mañana.','我明天打電話給你。'],['Llamo a mi madre.','我打電話給媽媽。']],
+'llamarse':[['Me llamo Ana.','我叫安娜。'],['¿Cómo te llamas?','你叫什麼名字？']],
+'levantarse':[['Me levanto a las siete.','我七點起床。'],['Mañana me levanto temprano.','明天我要早起。']],
+'ducharse':[['Me ducho por la mañana.','我早上淋浴。'],['Ella se ducha todos los días.','她每天淋浴。']],
+'sentarse':[['Por favor, siéntese.','請坐。'],['Me siento aquí.','我坐在這裡。']],
+'acostarse':[['Me acuesto a las once.','我十一點睡覺。'],['Los niños se acuestan temprano.','孩子們很早睡覺。']],
+'gustar':[['Me gusta el café.','我喜歡咖啡。'],['¿Te gustan los gatos?','你喜歡貓嗎？']],
+'qué':[['¿Qué es esto?','這是什麼？'],['¿Qué quieres comer?','你想吃什麼？']],
+'quién':[['¿Quién es ella?','她是誰？'],['¿Quién viene hoy?','今天誰要來？']],
+'dónde':[['¿Dónde está el baño?','廁所在哪裡？'],['¿Dónde vives?','你住在哪裡？']],
+'cuándo':[['¿Cuándo llegas?','你什麼時候到？'],['¿Cuándo es tu cumpleaños?','你的生日是什麼時候？']],
+'cómo':[['¿Cómo te llamas?','你叫什麼名字？'],['¿Cómo se dice «gracias» en chino?','「謝謝」中文怎麼說？']],
+'por qué':[['¿Por qué estudias español?','你為什麼學西班牙語？'],['¿Por qué llegas tarde?','你為什麼遲到？']],
+'cuánto':[['¿Cuánto cuesta esto?','這個多少錢？'],['¿Cuánto tiempo falta?','還要多久？']],
+'cuánto cuesta':[['¿Cuánto cuesta este libro?','這本書多少錢？'],['¿Cuánto cuesta una habitación?','一間房間多少錢？']],
+'cómo estás':[['Hola, ¿cómo estás?','你好，你好嗎？'],['—¿Cómo estás? —Muy bien, gracias.','「你好嗎？」「很好，謝謝。」']],
+'no entiendo':[['Perdón, no entiendo.','抱歉，我不懂。'],['No entiendo esta palabra.','我不懂這個單字。']],
+'no sé':[['No sé dónde está.','我不知道它在哪裡。'],['Lo siento, no sé.','抱歉，我不知道。']],
+'la cuenta, por favor':[['La cuenta, por favor.','請結帳。'],['¿Puede traer la cuenta, por favor?','可以請您拿帳單來嗎？']]
+};
+function firstZh(z){return z.split(/[、（(]/)[0].replace(/的$/,'').trim();}
+function arts(w){
+  if(w.code==='nm'||w.code==='pm')return{d:'el',i:'un',a:'al',de:'del'};
+  if(w.code==='nf'||w.code==='pf'){
+    if(EL_F.has(w.word))return{d:'el',i:'un',a:'al',de:'del'};
+    return{d:'la',i:'una',a:'a la',de:'de la'};
+  }
+  return null;
+}
+function artPhrase(w){const A=arts(w);return A?(A.d+' '+w.word):'';}
+function getSentences(w){
+  if(SPECIAL[w.word])return SPECIAL[w.word].map(function(t){return{es:t[0],zh:t[1]};});
+  const W=w.word,zh=firstZh(w.zh),A=arts(w);
+  let r;
+  if(A){
+    if(w.person)r=[['Mi '+W+' es muy amable.','我的'+zh+'很親切。'],['Hablo con '+A.d+' '+W+' todos los días.','我每天都和'+zh+'說話。']];
+    else if(w.cat==='食物')r=[['Me gusta '+A.d+' '+W+'.','我喜歡'+zh+'。'],['Quiero probar '+A.d+' '+W+'.','我想嚐嚐'+zh+'。']];
+    else if(w.cat==='身體')r=[['Me duele '+A.d+' '+W+'.','我的'+zh+'會痛。'],['Tengo que cuidar mi '+W+'.','我得照顧好我的'+zh+'。']];
+    else if(w.cat==='地點'||w.cat==='交通')r=[['¿Dónde está '+A.d+' '+W+'?',zh+'在哪裡？'],['Hablemos '+A.de+' '+W+'.','我們來聊聊'+zh+'吧。']];
+    else r=[['Me gusta '+A.d+' '+W+'.','我喜歡'+zh+'。'],['Hablemos '+A.de+' '+W+'.','我們來聊聊'+zh+'吧。']];
+  }else if(w.code==='pn'){
+    r=[['Quiero viajar a '+W+'.','我想去'+zh+'旅行。'],[W+' es un lugar muy interesante.',zh+'是個非常有趣的地方。']];
+  }else if(w.code==='v'){
+    r=[['Me gusta '+W+'.','我喜歡'+zh+'。'],['Es difícil '+W+'.',zh+'很難。']];
+  }else if(w.code==='a'){
+    r=[['Él es muy '+W+'.','他非常'+zh+'。'],['Mi amigo es '+W+'.','我的朋友很'+zh+'。']];
+  }else if(w.code==='ao'){
+    r=[['Esto es muy '+W+'.','這個非常'+zh+'。'],['Es demasiado '+W+'.','太'+zh+'了。']];
+  }else if(w.code==='ae'){
+    r=[['Hoy estoy muy '+W+'.','我今天非常'+zh+'。'],['Mi hermano está '+W+'.','我哥哥很'+zh+'。']];
+  }else if(w.code==='aeo'){
+    r=[['El banco está '+W+'.','銀行是'+zh+'的。'],['El cuarto está '+W+'.','房間是'+zh+'的。']];
+  }else{
+    r=[['Uso mucho la palabra «'+W+'».','我常用「'+zh+'」這個詞。'],['¿Qué significa «'+W+'» en español?','「'+W+'」在西班牙語中是什麼意思？']];
+  }
+  return r.map(function(t){return{es:t[0],zh:t[1]};});
+}
+
+/* ================== 語音 ================== */
+function getEsVoice(){
+  if(!window.speechSynthesis)return null;
+  const vs=speechSynthesis.getVoices();
+  return vs.find(function(v){return v.lang==='es-MX';})||vs.find(function(v){return v.lang==='es-US';})||vs.find(function(v){return v.lang==='es-ES';})||vs.find(function(v){return v.lang.toLowerCase().indexOf('es')===0;})||null;
+}
+function speak(text,done){
+  if(!window.speechSynthesis||!text)return;
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(text);
+  const v=getEsVoice();
+  u.lang=v?v.lang:'es-ES';u.rate=0.85;
+  if(v)u.voice=v;
+  if(done)u.onend=done;
+  speechSynthesis.speak(u);
+}
+function speakId(id){const w=allWords[id-1];if(w)speak(w.word);}
+function voiceCheck(){
+  const vs=window.speechSynthesis?speechSynthesis.getVoices():[];
+  const es=vs.filter(function(v){return v.lang.toLowerCase().indexOf('es')===0;});
+  if(es.length){alert('找到 '+es.length+' 個西班牙語語音：\n'+es.map(function(v){return v.name+' ('+v.lang+')';}).join('\n'));}
+  else{alert('找不到西班牙語語音。\n\nAndroid：設定 → 一般管理 → 文字轉語音（TTS）→ 下載西班牙語語音資料。\n未安裝時會用預設語音，發音可能不準。');}
+  speak('Hola, ¿cómo estás?');
+}
+if(window.speechSynthesis){speechSynthesis.getVoices();speechSynthesis.onvoiceschanged=function(){speechSynthesis.getVoices();};}
+
+/* ================== 列表 / 篩選 ================== */
+const PAGE=50;
+let filtered=allWords.slice(),page=1,curCat='all',cur=null,curSents=[];
+function buildCats(){
+  const el=document.getElementById('cats');
+  el.innerHTML=['all'].concat(CATS).map(function(c){return '<button class="cat'+(c==='all'?' active':'')+'" data-cat="'+c+'">'+(c==='all'?'全部':c)+'</button>';}).join('');
+  el.onclick=function(e){
+    const b=e.target.closest('.cat');if(!b)return;
+    curCat=b.getAttribute('data-cat');
+    el.querySelectorAll('.cat').forEach(function(x){x.classList.toggle('active',x===b);});
+    applyFilters();
+  };
+}
+function applyFilters(){
+  const q=norm(document.getElementById('search').value.trim());
+  const pos=document.getElementById('posFilter').value;
+  const lv=document.getElementById('levelFilter').value;
+  filtered=allWords.filter(function(w){
+    if(curCat!=='all'&&w.cat!==curCat)return false;
+    if(pos&&w.pos!==pos)return false;
+    if(lv&&String(w.rank)!==lv)return false;
+    if(q&&norm(w.word).indexOf(q)<0&&w.zh.indexOf(q)<0)return false;
+    return true;
+  });
+  page=1;renderList();
+}
+function renderList(){
+  const list=document.getElementById('list');
+  const vis=filtered.slice((page-1)*PAGE,page*PAGE);
+  list.innerHTML=vis.map(function(w){
+    return '<div class="item'+(cur&&cur.id===w.id?' active':'')+'" data-id="'+w.id+'">'+
+      '<div class="num">#'+w.id+'</div>'+
+      '<div class="wm"><div class="w">'+w.word+'</div><div class="wz">'+w.zh+' <span style="color:#777">'+toZh(w.word)+'</span></div></div>'+
+      '<div class="pos">'+w.pos+'</div>'+
+      '<div class="play-mini" data-play="'+w.id+'">▶</div></div>';
+  }).join('')||'<div style="padding:20px;color:var(--muted);text-align:center">沒有符合的單字</div>';
+  document.getElementById('totalCount').textContent=filtered.length;
+  renderPager();
+}
+document.getElementById('list').addEventListener('click',function(e){
+  const p=e.target.closest('.play-mini');
+  if(p){e.stopPropagation();speakId(parseInt(p.getAttribute('data-play'),10));return;}
+  const it=e.target.closest('.item');
+  if(it)selectWord(parseInt(it.getAttribute('data-id'),10));
+});
+function renderPager(){
+  const total=Math.ceil(filtered.length/PAGE),el=document.getElementById('pager');
+  if(total<=1){el.innerHTML='';return;}
+  const show=[];
+  for(let i=1;i<=total;i++){if(i===1||i===total||Math.abs(i-page)<=2)show.push(i);}
+  let h='',last=0;
+  show.forEach(function(i){
+    if(i-last>1)h+='<span style="color:var(--muted);padding:0 2px">…</span>';
+    h+='<button class="pg'+(i===page?' active':'')+'" onclick="goPage('+i+')">'+i+'</button>';
+    last=i;
+  });
+  el.innerHTML=h;
+}
+function goPage(p){page=p;renderList();document.getElementById('list').scrollTop=0;}
+function playPage(){
+  const vis=filtered.slice((page-1)*PAGE,page*PAGE);let i=0;
+  (function next(){if(i>=vis.length)return;const w=vis[i++];speak(w.word,function(){setTimeout(next,350);});})();
+}
+
+/* ================== 詳細頁 ================== */
+function selectWord(id){
+  cur=allWords[id-1];if(!cur)return;
+  cur._learned=true;
+  document.getElementById('learnedCount').textContent=allWords.filter(function(w){return w._learned;}).length;
+  curSents=getSentences(cur);
+  const w=cur;
+  const ap=artPhrase(w);
+  const rel=allWords.filter(function(r){return r.cat===w.cat&&r.id!==w.id;}).slice(0,8);
+  document.getElementById('detail').innerHTML=
+    '<div class="dw">'+w.word+'</div>'+
+    (ap?'<div class="dr">'+ap+'</div>':'')+
+    '<div class="dh">中文諧音：'+toZh(w.word)+'</div>'+
+    '<div class="tags"><span class="tag">'+w.pos+'</span><span class="tag">#'+w.id+'</span><span class="tag">'+LEVELZH[w.rank]+'</span><span class="tag">'+w.cat+'</span></div>'+
+    '<div class="row"><button class="abtn main1" onclick="speakId('+w.id+')">🔊 播放單字</button><button class="abtn" onclick="speakSent(0)">🔊 播放例句</button></div>'+
+    '<div class="st">中文釋義</div><div class="box">'+w.zh+'</div>'+
+    '<div class="st">例句 Ejemplos</div>'+
+    curSents.map(function(s,i){
+      return '<div class="ex"><div class="ex-ja">'+s.es+'</div><div class="ex-zhy">'+toZh(s.es)+'</div><div class="ex-zh">'+s.zh+'</div><span class="ex-audio" onclick="speakSent('+i+')">▶ 播放例句 '+(i+1)+'</span></div>';
+    }).join('')+
+    '<div class="st">相關單字</div><div class="rel">'+rel.map(function(r){return '<span data-rel="'+r.id+'">'+r.word+' '+firstZh(r.zh)+'</span>';}).join('')+'</div>';
+  document.querySelectorAll('.rel span').forEach(function(s){s.onclick=function(){selectWord(parseInt(s.getAttribute('data-rel'),10));};});
+  document.querySelectorAll('.item').forEach(function(x){x.classList.toggle('active',parseInt(x.getAttribute('data-id'),10)===id);});
+  document.getElementById('detail').scrollTop=0;
+}
+function speakSent(i){if(curSents[i])speak(curSents[i].es);}
+
+/* ================== 測驗 ================== */
+let Q={pool:[],i:0,ok:[],ng:[],round:1,retry:false,locked:false};
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));const t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function openQuiz(){Q.round=1;document.getElementById('quizOverlay').classList.add('show');newQuiz();}
+function closeQuiz(){document.getElementById('quizOverlay').classList.remove('show');if(window.speechSynthesis)speechSynthesis.cancel();}
+function newQuiz(){Q.round=1;beginRound(shuffle(filtered.length>=4?filtered:allWords).slice(0,20),false);}
+function retryWrong(){if(!Q.ng.length)return;Q.round++;beginRound(Q.ng.slice(),true);}
+function beginRound(pool,retry){
+  Q.pool=pool;Q.i=0;Q.ok=[];Q.ng=[];Q.retry=retry;
+  document.getElementById('quizQ').style.display='block';
+  document.getElementById('quizR').style.display='none';
+  showQ();
+}
+function showQ(){
+  Q.locked=false;
+  if(Q.i>=Q.pool.length){showResult();return;}
+  const t=Q.pool[Q.i];
+  document.getElementById('qRound').textContent=Q.retry?('🔁 重考第 '+Q.round+' 輪'):('第 '+Q.round+' 輪');
+  document.getElementById('qProg').textContent=(Q.i+1)+' / '+Q.pool.length;
+  document.getElementById('qBar').style.width=(Q.i/Q.pool.length*100)+'%';
+  document.getElementById('qWord').textContent=t.word;
+  document.getElementById('qRead').textContent=artPhrase(t);
+  document.getElementById('qZh').textContent='諧音：'+toZh(t.word);
+  document.getElementById('qScore').textContent='✅ '+Q.ok.length+'　❌ '+Q.ng.length;
+  const wrongs=shuffle(allWords.filter(function(w){return w.id!==t.id&&firstZh(w.zh)!==firstZh(t.zh);})).slice(0,3);
+  const opts=shuffle(wrongs.concat([t]));
+  const box=document.getElementById('qOpts');
+  box.innerHTML=opts.map(function(o){return '<button class="opt" data-id="'+o.id+'">'+o.zh+'</button>';}).join('');
+  box.onclick=function(e){const b=e.target.closest('.opt');if(b)answer(b,parseInt(b.getAttribute('data-id'),10));};
+  setTimeout(function(){speakId(t.id);},300);
+}
+function answer(btn,id){
+  if(Q.locked)return;Q.locked=true;
+  const t=Q.pool[Q.i];
+  const good=(id===t.id);
+  if(good){btn.classList.add('correct');Q.ok.push(t);}
+  else{
+    btn.classList.add('wrong');Q.ng.push(t);
+    document.querySelectorAll('#qOpts .opt').forEach(function(b){if(parseInt(b.getAttribute('data-id'),10)===t.id)b.classList.add('correct');});
+  }
+  speakId(t.id);
+  document.getElementById('qScore').textContent='✅ '+Q.ok.length+'　❌ '+Q.ng.length;
+  document.getElementById('qBar').style.width=((Q.i+1)/Q.pool.length*100)+'%';
+  Q.i++;
+  setTimeout(showQ,good?1100:1900);
+}
+function quizSpeak(){const t=Q.pool[Q.i];if(t)speakId(t.id);}
+function showResult(){
+  document.getElementById('quizQ').style.display='none';
+  document.getElementById('quizR').style.display='block';
+  const n=Q.pool.length,ok=Q.ok.length,ng=Q.ng.length,pct=n?Math.round(ok/n*100):0;
+  document.getElementById('rEmoji').textContent=pct===100?'🏆':pct>=80?'🎉':pct>=60?'👍':pct>=40?'📖':'💪';
+  document.getElementById('rTitle').textContent=pct===100?'完美！':pct>=80?'非常好！':pct>=60?'不錯喔！':pct>=40?'繼續努力！':'加油！';
+  document.getElementById('rOk').textContent=ok;
+  document.getElementById('rNg').textContent=ng;
+  document.getElementById('rPct').textContent=pct+'%';
+  const wl=document.getElementById('rWrong');
+  if(ng){
+    wl.innerHTML='<div style="font-size:.72rem;color:var(--muted);margin-bottom:6px">❌ 答錯的單字</div>'+Q.ng.map(function(w){return '<div class="wrongrow"><b>'+w.word+'</b><span style="color:var(--muted)">'+firstZh(w.zh)+'</span><span style="cursor:pointer" onclick="speakId('+w.id+')">🔊</span></div>';}).join('');
+    document.getElementById('rRetry').style.display='block';
+  }else{
+    wl.innerHTML='<div style="text-align:center;color:var(--green);padding:10px">🎊 沒有答錯的單字！</div>';
+    document.getElementById('rRetry').style.display='none';
+  }
+}
+
+/* ================== 啟動 ================== */
+document.getElementById('search').addEventListener('input',applyFilters);
+document.getElementById('posFilter').addEventListener('change',applyFilters);
+document.getElementById('levelFilter').addEventListener('change',applyFilters);
+buildCats();
+renderList();
+
+</script>
+</body>
+</html>
